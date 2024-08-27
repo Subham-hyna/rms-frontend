@@ -1,38 +1,31 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+:root{
+  --darkviolet2: #604BE8; 
+  --darkviolet: #4c33ee;
+  --violet: #604BE8;
+  --lightViolet: #f3f6ff;
+  --lightViolet2: #f1f3ff;
+  --lightViolet3:rgb(195, 185, 255);
+  --white: #ffffff;
+  --lightwhite: #f3f3f3;
+  --lightwhite2: #ffffff;
+  --lightgrey: #f4f7ff;
+  --lightgrey2: #C3CDE4;
+  --lightgrey3: #626573;
+  --black: #302D3D;
+  --orange: #ff9f01;
+  --green: #03d7a0;
+  --darkgreen: #06ca96;
+  --yellow: #FDD36D;
+  --red: #FF7A7E;
+  --blue: #4B76E6;
+  --darkgrey: #8b8f9c;
+  --darkgrey2: #585858;
 }
