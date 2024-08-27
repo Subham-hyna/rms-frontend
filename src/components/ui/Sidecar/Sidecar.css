@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-top: 40px;
     min-height: 93vh;
     padding: 1vh 10px 2vh 15px;
     width: 200px;

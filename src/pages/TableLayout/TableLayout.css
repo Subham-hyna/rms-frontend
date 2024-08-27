@@ -5,7 +5,7 @@
 
 .layout-left{
     transition: 0.5s ease-in-out;
-    
+    background-color: var(--white);
 }
 
 .layout-right{
@@ -33,6 +33,7 @@
 .layout-right-main{
     padding: 20px;
     overflow-y: scroll;
+    margin-top: 40px;
 }
 
 @media screen and (max-width: 728px) {

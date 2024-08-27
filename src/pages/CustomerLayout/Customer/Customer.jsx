@@ -156,20 +156,22 @@ const Customer = () => {
         button={<AddCustomerModal buttonIcon={<AddCircleOutlineIcon/>} buttonText={"Add Customer"} />}
         tooltip={"Add Table"}
          /> 
-         <div className='right-page-middle'>
+         <div className='right-page-middle' style={{gap:"10px"}}>
             <div>
                 <div className='right-page-middle-category'>
-                    <div className='right-page-middle-category-items' style={{paddingTop:"20px"}}>
+                    <div className='right-page-middle-category-items'>
                         <span>    
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                 label="From"
                                 value={startValue && startValue}
+                                onChange={(startValue)=>{setStartValue(startValue)}}
                                 />
                                 <p> - </p>
                                 <DatePicker 
                                 value={endValue && endValue}
                                 label="To"
+                                onChange={(endValue)=>{setEndValue(endValue)}}
                                 />
                             </LocalizationProvider>
                         </span>
@@ -222,7 +224,7 @@ const Customer = () => {
                 </div>
 
         <div className='right-page-middle-footer'>
-        <Pagination count={10} variant="outlined" shape="rounded" />
+        <Pagination count={10} variant="outlined" shape="rounded" showFirstButton showLastButton />
         </div>
          </div>
     </main>

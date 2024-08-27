@@ -38,6 +38,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    color: var(--lightgrey3);
 }
 
 .right-page-middle-category-items>span>div{
@@ -46,16 +47,23 @@
 
 .right-page-middle-category-items>span>div>label{
     font-size: 14px;
+    color: var(--lightgrey3);
+}
+
+.right-page-middle-category-items>span>div>div>fieldset{
+    border-color: var(--black);
 }
 
 .right-page-middle-category-items>span>div>div>input{
     font-size: 11px !important;
     height: 0.8em !important;
     padding: 12px;
+    color: var(--lightgrey3);
 }
 
 .right-page-middle-category-items>span>div>div>div>button>svg{
     font-size: 12px;
+    color: var(--lightgrey3);
 }
 
 .right-page-middle-category-items>li{
@@ -266,6 +274,24 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.right-page-middle-footer>nav>ul>li>button{
+    border-color: var(--black);
+    color: var(--black);
+}
+.right-page-middle-footer>nav>ul>li>button:hover{
+    background-color:var(--lightViolet3) !important;
+    color: var(--lightwhite);
+    border-color: var(--violet);
+}
+.right-page-middle-footer>nav>ul>li>div{
+    color: var(--black) !important;
+}
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+    background-color:var(--lightViolet3) !important;
+    color: var(--lightwhite);
+    border-color: var(--violet);
 }
 
 .category-active-tab{

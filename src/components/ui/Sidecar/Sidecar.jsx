@@ -108,7 +108,7 @@ const Sidecar = () => {
           </Link>
           </Tooltip>
           <Tooltip title="Customers">
-          <Link to={`/customers/${shop.name}/${shop._id}`} className={activeTab === "customers" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("customers")}}>
+          <Link to={`/customers/customer/${shop.name}/${shop._id}`} className={activeTab === "customers" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("customers")}}>
             <GroupsIcon />
             <h2 style={hideSidebar?{display:"none"}:{}}>Customers</h2>
           </Link>
