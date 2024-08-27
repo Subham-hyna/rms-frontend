@@ -224,7 +224,7 @@ const Customer = () => {
                 </div>
 
         <div className='right-page-middle-footer'>
-        <Pagination count={10} variant="outlined" shape="rounded" showFirstButton showLastButton />
+        <Pagination count={10} variant="outlined" shape="rounded" />
         </div>
          </div>
     </main>

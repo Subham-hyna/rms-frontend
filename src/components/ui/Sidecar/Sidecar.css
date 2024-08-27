@@ -4,11 +4,11 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 40px;
-    min-height: 93vh;
+    min-height: 102vh;
     padding: 1vh 10px 2vh 15px;
     width: 200px;
     position: relative;
-    gap: 2vh;
+    gap: 4vh;
     transition: 0.5s ease-in-out;
     background-color: var(--white);
 }
