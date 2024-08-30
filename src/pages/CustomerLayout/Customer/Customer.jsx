@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import AddCustomerModal from '../../../components/modals/AddCustomerModal/AddCustomerModal'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PageHeading from '../../../components/ui/pageHeading/pageHeading';
@@ -17,12 +17,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 
 const Customer = () => {
-
-    const rowInput = useRef(null);
-
-    const inputFocus = () => {
-        rowInput.current.focus();
-    }
 
     const shop = {
         name : "Desi Eshas",
@@ -117,7 +111,6 @@ const Customer = () => {
         },
         {
             name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
             phoneNo: "9365765523",
             totalSpending: "123123",
             lastVisited: "12/09/23"
@@ -125,12 +118,10 @@ const Customer = () => {
         {
             name:"Subham",
             email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
             totalSpending: "123123",
             lastVisited: "12/09/23"
         },
         {
-            name:"Subham",
             email: "dsfsdfjm @hsdf.com",
             phoneNo: "9365765523",
             totalSpending: "123123",
@@ -158,7 +149,7 @@ const Customer = () => {
          /> 
          <div className='right-page-middle' style={{gap:"10px"}}>
             <div>
-                <div className='right-page-middle-category'>
+                <div className='right-page-middle-category' >
                     <div className='right-page-middle-category-items'>
                         <span>    
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -185,6 +176,9 @@ const Customer = () => {
                     <Tooltip title="Refresh"><RefreshIcon /></Tooltip>
                 </div>
             </div>
+            {<div className='showing-result'>
+                        <p>Showing Result for : {`From ${startValue} to ${endValue}`}</p>
+                </div>}
             <div className='right-page-content-row'>
                     {customers.length > 0 ?
                         <>
@@ -202,10 +196,10 @@ const Customer = () => {
                                 <tbody>
                                     {
                                     customers.map((c,index)=>(
-                                      <tr onClick={inputFocus} ref={rowInput} tabIndex={index} key={index}>
-                                        <td>{c.name}</td>
-                                        {<td><pre>{c.email}</pre></td>}
-                                        <td>{c.phoneNo}</td>
+                                      <tr key={index}>
+                                        <td>{c?.name}</td>
+                                        {<td><pre>{c?.email}</pre></td>}
+                                        <td>{c?.phoneNo}</td>
                                         <td><pre>Rs. {c.totalSpending}</pre></td>
                                         <td>{c.lastVisited}</td>
                                         <td>
@@ -219,7 +213,7 @@ const Customer = () => {
                                 </table>
                         </>
                         :
-                        <h1>No Tables</h1>
+                        <h1>No Customers</h1>
                     }
                 </div>
 

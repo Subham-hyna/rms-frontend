@@ -2,7 +2,6 @@ import React, {  useEffect, useState } from 'react'
 import './Sidecar.css'
 import logo from '../../../assets/logo.svg'
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import GradingIcon from '@mui/icons-material/Grading';
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import { Link, useLocation } from 'react-router-dom';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -12,7 +11,6 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import GroupsIcon from '@mui/icons-material/Groups';
 import GroupIcon from '@mui/icons-material/Group';
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import Tooltip from '@mui/material/Tooltip';
 import ChangePasswordModal from '../../modals/ChangePasswordModal/ChangePasswordModal';
@@ -78,19 +76,13 @@ const Sidecar = () => {
           </Link>
           </Tooltip>
           <Tooltip title="Items">
-          <Link to={`/items/${shop.name}/${shop._id}`} className={activeTab === "items" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("items")}}>
+          <Link to={`/items/item/${shop.name}/${shop._id}`} className={activeTab === "items" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("items")}}>
             <RestaurantIcon />
             <h2 style={hideSidebar?{display:"none"}:{}} >Items</h2>
           </Link>
           </Tooltip>
-          <Tooltip title="Kitchen Order Token">
-          <Link to={`/kot/${shop.name}/${shop._id}`} className={activeTab === "kot" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("kot")}}>
-            <GradingIcon />
-            <h2 style={hideSidebar?{display:"none"}:{}} >KOT</h2>
-          </Link>
-          </Tooltip>
           <Tooltip title="Invoices">
-          <Link to={`/invoices/${shop.name}/${shop._id}`} className={activeTab === "invoices" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("invoices")}}>
+          <Link to={`/invoices/invoice/${shop.name}/${shop._id}`} className={activeTab === "invoices" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("invoices")}}>
             <ReceiptIcon />
             <h2 style={hideSidebar?{display:"none"}:{}} >Invoives</h2>
           </Link>
@@ -102,7 +94,7 @@ const Sidecar = () => {
           </Link>
           </Tooltip>
           <Tooltip title="Employees">
-          <Link to={`/employees/${shop.name}/${shop._id}`} className={activeTab === "employees" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("employees")}}>
+          <Link to={`/employees/employee/${shop.name}/${shop._id}`} className={activeTab === "employees" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("employees")}}>
             <GroupIcon />
             <h2 style={hideSidebar?{display:"none"}:{}}>Employees</h2>
           </Link>
@@ -111,12 +103,6 @@ const Sidecar = () => {
           <Link to={`/customers/customer/${shop.name}/${shop._id}`} className={activeTab === "customers" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("customers")}}>
             <GroupsIcon />
             <h2 style={hideSidebar?{display:"none"}:{}}>Customers</h2>
-          </Link>
-          </Tooltip>
-          <Tooltip title="Vouchers">
-          <Link to={`/vouchers/${shop.name}/${shop._id}`} className={activeTab === "vouchers" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("vouchers")}}>
-            <ReceiptLongIcon />
-            <h2 style={hideSidebar?{display:"none"}:{}}>Vouchers</h2>
           </Link>
           </Tooltip>
         </ul>

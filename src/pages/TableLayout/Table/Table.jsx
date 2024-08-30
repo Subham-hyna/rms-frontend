@@ -46,39 +46,84 @@ const Table = () => {
             noOfTables: 5,
             priority: 4
         },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
+        // {
+        //     name:"Swimming ool",
+        //     noOfTables: 5,
+        //     priority: 4
+        // },
     ]
 
     const tables = [
-        {
-            name: "1",
-            noOfSeats: "4",
-            areaId : { name : "swimming pool"},
-            shape: "RECTANGLE"
-        },
-        {
-            name: "1",
-            noOfSeats: "4",
-            areaId : { name : "swimming pool"},
-            shape: "RECTANGLE"
-        },
-        {
-            name: "1",
-            noOfSeats: "4",
-            areaId : { name : "swimming pool"},
-            shape: "RECTANGLE"
-        },
-        {
-            name: "1",
-            noOfSeats: "4",
-            areaId : { name : "swimming pool"},
-            shape: "RECTANGLE"
-        },
-        {
-            name: "1",
-            noOfSeats: "4",
-            areaId : { name : "swimming pool"},
-            shape: "RECTANGLE"
-        },
+        // {
+        //     name: "1",
+        //     noOfSeats: "4",
+        //     areaId : { name : "swimming pool"},
+        //     shape: "RECTANGLE"
+        // },
+        // {
+        //     name: "1",
+        //     noOfSeats: "4",
+        //     areaId : { name : "swimming pool"},
+        //     shape: "RECTANGLE"
+        // },
+        // {
+        //     name: "1",
+        //     noOfSeats: "4",
+        //     areaId : { name : "swimming pool"},
+        //     shape: "RECTANGLE"
+        // },
+        // {
+        //     name: "1",
+        //     noOfSeats: "4",
+        //     areaId : { name : "swimming pool"},
+        //     shape: "RECTANGLE"
+        // },
+        // {
+        //     name: "1",
+        //     noOfSeats: "4",
+        //     areaId : { name : "swimming pool"},
+        //     shape: "RECTANGLE"
+        // },
         {
             name: "1",
             noOfSeats: "4",
@@ -103,30 +148,30 @@ const Table = () => {
             areaId : { name : "ground"},
             shape: "CIRCLE"
         },
-        {
-            name: "3",
-            noOfSeats: "4",
-            areaId : { name : "ground"},
-            shape: "RECTANGLE"
-        },
-        {
-            name: "4",
-            noOfSeats: "6",
-            areaId : { name : "ground"},
-            shape: "CIRCLE"
-        },
-        {
-            name: "5",
-            noOfSeats: "6",
-            areaId : { name : "ground"},
-            shape: "CIRCLE"
-        },
-        {
-            name: "6",
-            noOfSeats: "2",
-            areaId : { name : "ground"},
-            shape: "RECTANGLE"
-        },
+        // {
+        //     name: "3",
+        //     noOfSeats: "4",
+        //     areaId : { name : "ground"},
+        //     shape: "RECTANGLE"
+        // },
+        // {
+        //     name: "4",
+        //     noOfSeats: "6",
+        //     areaId : { name : "ground"},
+        //     shape: "CIRCLE"
+        // },
+        // {
+        //     name: "5",
+        //     noOfSeats: "6",
+        //     areaId : { name : "ground"},
+        //     shape: "CIRCLE"
+        // },
+        // {
+        //     name: "6",
+        //     noOfSeats: "2",
+        //     areaId : { name : "ground"},
+        //     shape: "RECTANGLE"
+        // },
     ]
 
     // const tables = []
@@ -146,7 +191,6 @@ const Table = () => {
          <div className='right-page-middle'>
             <div>
             <div className='right-page-middle-category'>
-                {/* {areas.length > 0 && <h2>Areas</h2>} */}
                 {areas && areas.length > 0 && <div className='right-page-middle-category-items'>
                     <li onClick={(e)=>{setActiveTab("ALL")}} className={activeTab === "ALL" ? "category-active-tab" : ""} ><pre>ALL</pre></li>
                     {areas.map((m)=>(
@@ -166,8 +210,11 @@ const Table = () => {
                     <Tooltip title="Row"><TableRowsIcon onClick={()=>setGridView(false)} style={gridView ? {} : {color: "var(--violet)"}} /></Tooltip>
                     </div>
                 </div>
+                {activeTab && <div className='showing-result'>
+                        <p>Showing Result for : Tables in {activeTab.toUpperCase()} areaa </p>
+                      </div>}
                 {gridView ? 
-                <div className='right-page-content-grid'>
+                <div className='right-page-content-grid' style={tables?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{}}>
                     {tables.length > 0 ?
                         <>
                             {tables.map((t,i)=>(

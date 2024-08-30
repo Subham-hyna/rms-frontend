@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 40px;
-    min-height: 102vh;
+    min-height: 87vh;
     padding: 1vh 10px 2vh 15px;
     width: 200px;
     position: relative;
@@ -72,7 +72,7 @@
 }
 
 .sidecar-center>a>svg{
-    width: 1rem;
+    width: 0.9rem;
     color: var(--lightgrey3);
 }
 

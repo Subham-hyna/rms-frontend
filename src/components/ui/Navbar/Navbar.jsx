@@ -51,8 +51,8 @@ const Navbar = ({listOfTabs,activeTab}) => {
     <>
     <nav className='navbar'>
        <ul className='navbar-left'>
-       {listOfTabs.map((m)=>
-            <Link className={activeTab === m.title.toLowerCase() ? "nav-active-tab" : ""} to={m.link} >{m.title}</Link>
+       {listOfTabs.map((m,i)=>
+            <Link key={i} className={activeTab === m.title.toLowerCase() ? "nav-active-tab" : ""} to={m.link} >{m.title}</Link>
         )}
        </ul>
        <div className='navbar-right'>
@@ -66,8 +66,8 @@ const Navbar = ({listOfTabs,activeTab}) => {
             <Link to={"/orders/dfh/dsg"}><pre>New Order</pre></Link>
             <select onChange={(e)=>handleChange(e.target.value)}>
                 <option value={""}>Print Bills</option>
-                {tables.map((m)=>(
-                <option value={m._id}>{m.name}</option>
+                {tables.map((m,i)=>(
+                <option key={i} value={m._id}>{m.name}</option>
                 ))}
             </select>
        </div>

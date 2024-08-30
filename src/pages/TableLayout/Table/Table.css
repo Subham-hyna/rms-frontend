@@ -6,10 +6,6 @@
     gap: 20px;
 }
 
-.right-page-middle>div{
-    width: 100%;
-}
-
 .right-page-middle-category{
     display: flex;
     justify-content: flex-start;
@@ -46,7 +42,7 @@
 }
 
 .right-page-middle-category-items>span>div>label{
-    font-size: 14px;
+    font-size: 16px;
     color: var(--lightgrey3);
 }
 
@@ -55,14 +51,14 @@
 }
 
 .right-page-middle-category-items>span>div>div>input{
-    font-size: 11px !important;
+    font-size: 12px !important;
     height: 0.8em !important;
-    padding: 12px;
+    padding: 14px;
     color: var(--lightgrey3);
 }
 
 .right-page-middle-category-items>span>div>div>div>button>svg{
-    font-size: 12px;
+    font-size: 14px;
     color: var(--lightgrey3);
 }
 
@@ -71,11 +67,12 @@
     background-color: var(--lightViolet);
     color: var(--violet);
     border: 1px solid var(--violet);
-    padding: 3px 12px;
+    padding: 5px 10px;
     font-size: 12px;
     font-weight: 500;
-    border-radius: 20px;
+    border-radius: 8px;
     font-weight: 200;
+    font-size: 12px;
     cursor: pointer;
 }
 
@@ -120,7 +117,7 @@
 }
 
 .right-page-content-viewBy>svg{
-    font-size: 16px;
+    font-size: 24px;
     color: var(--black);
     cursor: pointer;
 }
@@ -129,6 +126,47 @@
     font-size: 14px;
     color: var(--darkgrey);
     cursor: pointer;
+}
+
+.right-page-content-viewBy>form>select{
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--darkgrey);
+    outline: none;
+    border: none;
+}
+
+.right-page-content-viewBy>span{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--lightwhite2);
+    padding: 2px 10px;
+    border-radius: 20px;
+    box-shadow: 0px 1px 3px 0px var(--darkgrey);
+    cursor: pointer;
+}
+
+.right-page-content-viewBy>span:hover{
+    transform: translateY(1);
+}
+
+.right-page-content-viewBy>span>div{
+    width: 20px;
+    height: 20px;
+    background-color: var(--darkgrey);
+    border-radius: 100%;
+}
+
+.right-page-content-viewBy>span>p{
+    font-size: 14px;
+    color: var(--darkgrey);
+}
+
+.showing-result{
+    color: var(--darkgrey2);
 }
 
 .right-page-content-row{
@@ -177,10 +215,10 @@
 }
 
 .table>tbody>tr>td{
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     text-align: left;
-    padding: 8px 12px;
+    padding: 6px 12px;
     color: var(--lightgrey3);
 }
 
@@ -222,8 +260,8 @@
 .right-page-content-grid{
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
     flex-wrap: wrap;
     gap: 10px;
@@ -243,8 +281,8 @@
     flex-direction: column;
     gap: 10px;
     padding: 10px;
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    min-height: 110px;
     background-color: var(--lightwhite);
     border-radius: 6px;
 }
@@ -257,11 +295,12 @@
 
 .table-grid>h3{
     font-size: 15px;
+    text-align: center;
     color: var(--darkgrey2);
 }
 
 .table-grid>p{
-    font-size: 8px;
+    font-size: 10px;
     color: var(--darkgrey2);
 }
 
@@ -277,6 +316,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .right-page-middle-footer>nav>ul>li>button{
@@ -297,20 +337,39 @@
     border-color: var(--violet);
 }
 
+.css-byenzh-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked{
+    color:var(--violet) !important;
+}
+
 .category-active-tab{
     background-color: var(--violet) !important;
     color: var(--lightwhite) !important;
 }
 
 @media screen and (max-width: 728px) {
+    .right-page-middle>div{
+        width: 100%;
+        overflow-x: scroll;
+    }
     .right-page-middle-category-items{
         flex-wrap: nowrap;
         width: 100%;
+    }
+    .right-page-content-viewBy{
+        justify-content: flex-start;
+        overflow-x: scroll;
     }
     .right-page-content-row{
         justify-content: flex-start;
     }
     .right-page-content-grid{
         justify-content: flex-start;
+    }
+    .table-grid{
+        width: 90px;
+        height: 90px;
+    }
+    .table-grid>p{
+        font-size: 8px;
     }
 }

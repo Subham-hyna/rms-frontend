@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import Invoice from './Invoice/Invoice';
 import Sidecar from '../../components/ui/Sidecar/Sidecar';
-import Navbar from '../../components/ui/Navbar/Navbar';
-import Items from './Items/Items'
-import Categories from './Categories/Categories'
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useLocation } from 'react-router-dom';
+import Navbar from '../../components/ui/Navbar/Navbar';
 
-const ItemsLayout = () => {
-  const [sidebarMobileview, setSidebarMobileview] = useState(false)
-  const [activeTab, setActiveTab] = useState("item");
+const InvoiceLayout = () => {
+    const [sidebarMobileview, setSidebarMobileview] = useState(false)
+    const [activeTab, setActiveTab] = useState("invoice");
 
-  const { pathname } = useLocation();
+    const { pathname } = useLocation();
+
+    const shop = {
+        name : "Desi Eshas",
+        _id : "sdjhvfdsjhfsdgb"
+    }
+    const listOfTabs = [
+        {
+            title: "Invoice",
+            link: `/invoices/invoice/${shop.name}/${shop._id}`
+        }
+    ]
 
   useEffect(()=>{
     const uri = pathname.split("/");
@@ -19,22 +29,6 @@ const ItemsLayout = () => {
     window.scrollTo(0, 0);
 
   },[activeTab,pathname]);
-
-  const shop = {
-    name : "Desi Eshas",
-    _id : "sdjhvfdsjhfsdgb"
-   }
-
-  const listOfTabs = [
-    {
-        title: "Item",
-        link: `/items/item/${shop.name}/${shop._id}`
-    },
-    {
-        title: "Category",
-        link: `/items/category/${shop.name}/${shop._id}`
-    }
-]
 
   return (
     <>
@@ -47,7 +41,7 @@ const ItemsLayout = () => {
      <main className='layout-right' onClick={()=>{setSidebarMobileview(false)}}>
          <Navbar listOfTabs={listOfTabs} activeTab={activeTab} />
          <div className='layout-right-main'>
-           {activeTab === "item" ? <Items/> : <Categories />}
+           {activeTab === "invoice" && <Invoice />}
          </div>
      
      
@@ -61,4 +55,4 @@ const ItemsLayout = () => {
   )
 }
 
-export default ItemsLayout
+export default InvoiceLayout

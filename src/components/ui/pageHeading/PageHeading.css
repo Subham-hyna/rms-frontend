@@ -17,7 +17,7 @@
 }
 
 .page-heading-left>p:nth-child(1){
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
     color: var(--black);
 }

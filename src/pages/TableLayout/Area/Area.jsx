@@ -14,86 +14,86 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 const Area = () => {
 
   const areas = [
-    {
-        name:"Ground",
-        noOfTables: 10,
-        priority: 1
-    },
-    {
-        name:"First",
-        noOfTables: 5,
-        priority: 2
-    },
-    {
-        name:"Swimming Pool",
-        noOfTables: 5,
-        priority: 3
-    },
-    {
-        name:"Swimming ool",
-        noOfTables: 5,
-        priority: 4
-    },
-    {
-        name:"Ground",
-        noOfTables: 10,
-        priority: 1
-    },
-    {
-        name:"First",
-        noOfTables: 5,
-        priority: 2
-    },
-    {
-        name:"Swimming Pool",
-        noOfTables: 5,
-        priority: 3
-    },
-    {
-        name:"Swimming ool",
-        noOfTables: 5,
-        priority: 4
-    },
-    {
-        name:"Ground",
-        noOfTables: 10,
-        priority: 1
-    },
-    {
-        name:"First",
-        noOfTables: 5,
-        priority: 2
-    },
-    {
-        name:"Swimming Pool",
-        noOfTables: 5,
-        priority: 3
-    },
-    {
-        name:"Swimming ool",
-        noOfTables: 5,
-        priority: 4
-    },
-    {
-        name:"Ground",
-        noOfTables: 10,
-        priority: 1
-    },
-    {
-        name:"First",
-        noOfTables: 5,
-        priority: 2
-    },
-    {
-        name:"Swimming Pool",
-        noOfTables: 5,
-        priority: 3
-    },
-    {
-        name:"Swimming ool",
-        noOfTables: 5,
-        priority: 4
-    },
+    // {
+    //     name:"Ground",
+    //     noOfTables: 10,
+    //     priority: 1
+    // },
+    // {
+    //     name:"First",
+    //     noOfTables: 5,
+    //     priority: 2
+    // },
+    // {
+    //     name:"Swimming Pool",
+    //     noOfTables: 5,
+    //     priority: 3
+    // },
+    // {
+    //     name:"Swimming ool",
+    //     noOfTables: 5,
+    //     priority: 4
+    // },
+    // {
+    //     name:"Ground",
+    //     noOfTables: 10,
+    //     priority: 1
+    // },
+    // {
+    //     name:"First",
+    //     noOfTables: 5,
+    //     priority: 2
+    // },
+    // {
+    //     name:"Swimming Pool",
+    //     noOfTables: 5,
+    //     priority: 3
+    // },
+    // {
+    //     name:"Swimming ool",
+    //     noOfTables: 5,
+    //     priority: 4
+    // },
+    // {
+    //     name:"Ground",
+    //     noOfTables: 10,
+    //     priority: 1
+    // },
+    // {
+    //     name:"First",
+    //     noOfTables: 5,
+    //     priority: 2
+    // },
+    // {
+    //     name:"Swimming Pool",
+    //     noOfTables: 5,
+    //     priority: 3
+    // },
+    // {
+    //     name:"Swimming ool",
+    //     noOfTables: 5,
+    //     priority: 4
+    // },
+    // {
+    //     name:"Ground",
+    //     noOfTables: 10,
+    //     priority: 1
+    // },
+    // {
+    //     name:"First",
+    //     noOfTables: 5,
+    //     priority: 2
+    // },
+    // {
+    //     name:"Swimming Pool",
+    //     noOfTables: 5,
+    //     priority: 3
+    // },
+    // {
+    //     name:"Swimming ool",
+    //     noOfTables: 5,
+    //     priority: 4
+    // },
   ]
 
   const areaSearch = (value) => {
@@ -112,12 +112,11 @@ const Area = () => {
          />
 
          <div className='right-page-middle'>
-           <div style={{overflow:"hidden"}}>
            <div className='right-page-content'>
            <div className='right-page-content-viewBy' style={{padding:"30px 0"}}>
                     <Tooltip title="Refresh"><RefreshIcon /></Tooltip>
                 </div>
-              <div className='right-page-content-grid'>
+              <div className='right-page-content-grid' style={areas.length === 0 ?{justifyContent:"center", alignItems:"center"}:{}}>
                 {areas.length > 0 ?
                 <>
                   {areas.map((a,i)=>(
@@ -136,7 +135,6 @@ const Area = () => {
                 <h1>No Areas</h1>}
               </div>
             </div>
-           </div>
          </div>
     </main>
   )
