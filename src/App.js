@@ -11,11 +11,11 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import TableLayout from './pages/TableLayout/TableLayout';
 import Shops from './pages/Shops/Shops';
 import Dashboard from './pages/Dashboard/Dashboard';
-import Orders from './pages/Orders/Orders';
 import CustomerLayout from './pages/CustomerLayout/CustomerLayout';
 import ItemsLayout from './pages/ItemsLayout/ItemsLayout';
 import EmployeesLayout from './pages/EmployeesLayout/EmployeesLayout';
 import InvoiceLayout from './pages/InvoiceLayout/InvoiceLayout';
+import OrderLayout from './pages/OrderLayout/OrderLayout';
 
 function App() {
   return (
@@ -42,7 +42,9 @@ function App() {
          <Route exact={true} path='/items/category/:shopName/:shopId' element={<ItemsLayout />} />
          <Route exact={true} path='/invoices/invoice/:shopName/:shopId' element={<InvoiceLayout />} />
          <Route exact={true} path='/dashboard/:shopName/:shopId' element={<Dashboard />} />
-         <Route exact={true} path='/orders/:shopName/:shopId' element={<Orders />} />
+         <Route exact={true} path='/orders/order/:shopName/:shopId' element={<OrderLayout />} />
+         <Route exact={true} path='/orders/manage/:shopName/:shopId' element={<OrderLayout />} />
+         <Route exact={true} path='/orders/table/:shopName/:shopId' element={<OrderLayout />} />
          </Routes>
      </div>
      </Router>

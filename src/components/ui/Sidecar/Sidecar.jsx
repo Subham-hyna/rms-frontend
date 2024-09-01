@@ -40,6 +40,7 @@ const Sidecar = () => {
   useEffect(()=>{
     const uri = pathname.split("/");
     setActiveTab(uri[1]);
+    if(activeTab === "orders") setHideSidebar(true)
     window.scrollTo(0, 0);
 
   },[activeTab,pathname]);
@@ -70,7 +71,7 @@ const Sidecar = () => {
           </Link>
           </Tooltip>
           <Tooltip title="Orders">
-          <Link to={`/orders/${shop.name}/${shop._id}`} className={activeTab === "orders" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("orders")}}>
+          <Link to={`/orders/order/${shop.name}/${shop._id}`} className={activeTab === "orders" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("orders")}}>
             <BorderColorIcon />
             <h2 style={hideSidebar?{display:"none"}:{}} >Order</h2>
           </Link>
@@ -114,8 +115,8 @@ const Sidecar = () => {
           <h2>{user?.name.split(" ")[0]}</h2>
           <p>{user?.role}</p>
         </div>
-        <button onClick={()=>{setSeeDropdown(!seeDropdown)}}>Open Profile</button>
-       {seeDropdown && <menu className='sidecar-profile' >
+        <button>Open Profile</button>
+       {<menu className='sidecar-profile' >
           <li>My Account</li>
           <ChangePasswordModal onClick={()=>{console.log("first")}} >Change Password</ChangePasswordModal>
           <li >Update Avatar</li>

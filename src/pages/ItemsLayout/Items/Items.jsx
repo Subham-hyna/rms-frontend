@@ -465,7 +465,7 @@ const Items = () => {
                                         </td>
                                         <td>{t.shortCode}</td>
                                         <td onClick={()=>changeStarStatus(t.name)}>{t.isStar ? <StarIcon style={{fontSize:"20px",color:"var(--violet)"}} /> : <StarBorderIcon style={{fontSize:"20px",color:"var(--darkgrey)"}} /> }</td>
-                                        <td><Switch size="small" checked={t.isAvailable} onChange={changeAvailbilityStatus} /></td>
+                                        <td><Switch size="small" checked={t.isAvailable} onChange={()=>changeAvailbilityStatus(t)} /></td>
                                         <td>
                                             <ViewTableDetailsModal><VisibilityIcon /></ViewTableDetailsModal>
                                             <EditTableDetailsModal><EditIcon /></EditTableDetailsModal>

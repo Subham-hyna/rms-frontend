@@ -63,7 +63,7 @@ const Navbar = ({listOfTabs,activeTab}) => {
             <Tooltip title={"Switch"}>
             <ToggleMode />
             </Tooltip>
-            <Link to={"/orders/dfh/dsg"}><pre>New Order</pre></Link>
+            <Link to={"/orders/order/dfh/dsg?newOrder=true"}><pre>New Order</pre></Link>
             <select onChange={(e)=>handleChange(e.target.value)}>
                 <option value={""}>Print Bills</option>
                 {tables.map((m,i)=>(

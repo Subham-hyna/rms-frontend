@@ -240,5 +240,6 @@
         border-radius: 0 0 10px 0;
         gap: 10px;
         padding-top: 44px;
+        width: 200px !important;
     }
 }
