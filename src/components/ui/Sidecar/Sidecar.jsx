@@ -32,7 +32,6 @@ const Sidecar = () => {
 
   const [activeTab, setActiveTab] = useState("");
   const [hideSidebar, setHideSidebar] = useState(false);
-  const [seeDropdown, setSeeDropdown] = useState(false)
 
 
   const { pathname } = useLocation();
