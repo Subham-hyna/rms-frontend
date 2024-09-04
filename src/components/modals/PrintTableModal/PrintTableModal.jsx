@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './PrintTableModal.css'
 import { Modal, Tooltip } from '@mui/material'
 import logo from '../../../assets/logo.svg'
 import QRCode from 'qrcode'
 import { frontend } from '../../../constanst'
+import html2canvas from "html2canvas"
 
 const PrintTableModal = ({table,children}) => {
 
@@ -11,6 +12,8 @@ const PrintTableModal = ({table,children}) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const qrRef = useRef();
 
   const shop = 
 {
@@ -41,6 +44,20 @@ const generateQR = async (text) => {
   }
 }
 
+const handleQrDownload = async () => {
+  if (qrRef.current) {
+    const canvas = await html2canvas(qrRef.current);
+    const imgData = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.href = imgData;
+    link.download = `tableNo-${table.name}-details.png`;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+};
+
   useEffect(()=>{
     generateQR(`${frontend}/${shop?.name}/${shop?._id}/${table?.name}`)
   },[generateQR,shop.name,shop._id,table.name])
@@ -59,7 +76,7 @@ const generateQR = async (text) => {
             <p>To Edit Book with name, seats, shape</p>
         </div>
         <div className='modal-content'>
-          <div className='modal-print-url'>
+          <div className='modal-print-url' ref = {qrRef}>
             <header>
             <img src={logo} alt='logo' />
             <h1>restura.</h1>
@@ -68,14 +85,14 @@ const generateQR = async (text) => {
               <h1>Scan to Place Order</h1>
             </span>
             <h3>Table No. {table.name}</h3>
-            <p>{shop.name}</p>
+            <h2>{shop.name}</h2>
             <div className='qr-img'>
               <img src={src} alt="qrcode" />
             </div>
-            <p>PS: Open Google Lens to scan the code</p>
+            <p>Please Open Google Lens to scan the code</p>
           </div>
         <div className='modal-button-group'>
-            <button className='success-button' >Download</button>
+            <button className='success-button' onClick={handleQrDownload} >Download</button>
             <button onClick={handleClose} className='close-button'>Close</button>
           </div>
         </div>

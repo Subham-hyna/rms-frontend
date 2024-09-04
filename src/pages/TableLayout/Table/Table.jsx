@@ -89,7 +89,7 @@ const Table = () => {
         setSearchValue("");
         setActiveTab("ALL")
         navigate(`/tables/table/${shop.name}/${shop._id}`)
-      }
+    }
 
     useEffect(()=>{
         dispatch(getTables(q,shop._id))

@@ -7,8 +7,6 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Switch, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ViewTableDetailsModal from '../../../components/modals/ViewTableDetailsModal/ViewTableDetailsModal';
 import EditTableDetailsModal from '../../../components/modals/EditTableDetailsModal/EditTableDetailsModal';
 import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -18,7 +16,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 const Items = () => {
 
-  const [activeTab, setActiveTab] = useState("MOST SOLD");
+  const [activeTab, setActiveTab] = useState("ALL");
   const [gridView, setGridView] = useState(true);    
   const [vegTab, setVegTab] = useState(false);
   const [nonVegTab, setNonVegTab] = useState(false);
@@ -57,287 +55,77 @@ const Items = () => {
 
   const items = [
     {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
+        "_id": "66d8a4cd2cc63ecd1b1554bc",
+        "name": "Baby Corn",
+        "categoryId": {
+            "_id": "66d88d16e2beb007cffa2c84",
+            "name": "STARTERS"
         },
-      ]
+        "price": 180,
+        "mealType": "VEG",
+        "isAvailable": false,
+        "isStar": false,
+        "shopId": "66d7375fb62d65233df4ce36",
+        "__v": 0,
+        "shortCode": "BC"
     },
     {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
+        "_id": "66d8a4fa2cc63ecd1b1554d0",
+        "name": "Chicken Pakora",
+        "categoryId": {
+            "_id": "66d88d16e2beb007cffa2c84",
+            "name": "STARTERS"
         },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
+        "price": 120,
+        "mealType": "NONVEG",
+        "isAvailable": true,
+        "isStar": false,
+        "shopId": "66d7375fb62d65233df4ce36",
+        "__v": 0
     },
     {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: false,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
+        "_id": "66d8a5112cc63ecd1b1554d7",
+        "name": "Dal Makhani",
+        "categoryId": {
+            "_id": "66d88d2de2beb007cffa2c94",
+            "name": "DAL"
         },
-        {
-          type : "FULL",
-          price : 200
-        },
-        {
-          type : "QUATER",
-          price : 200
-        },
-      ]
+        "price": 120,
+        "mealType": "VEG",
+        "isAvailable": true,
+        "isStar": false,
+        "shopId": "66d7375fb62d65233df4ce36",
+        "__v": 0
     },
     {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
+        "_id": "66d8a51c2cc63ecd1b1554de",
+        "name": "Dal Tarke",
+        "categoryId": {
+            "_id": "66d88d2de2beb007cffa2c94",
+            "name": "DAL"
         },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
+        "price": 100,
+        "mealType": "VEG",
+        "isAvailable": true,
+        "isStar": false,
+        "shopId": "66d7375fb62d65233df4ce36",
+        "__v": 0
     },
     {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
+        "_id": "66d8a5272cc63ecd1b1554e5",
+        "name": "Chicken Tarke",
+        "categoryId": {
+            "_id": "66d88d2de2beb007cffa2c94",
+            "name": "DAL"
         },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: true,
-      isStar: true,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-    {
-      name: "Chicken Lolipop",
-      shortCode: "CL",
-      categoryId : {
-        name : "Starter"
-      },
-      isVeg: false,
-      isAvailable: false,
-      isStar: false,
-      prices: [
-        {
-          type : "HALF",
-          price : 110
-        },
-        {
-          type : "FULL",
-          price : 200
-        },
-      ]
-    },
-
-  ]
+        "price": 130,
+        "mealType": "NONVEG",
+        "isAvailable": true,
+        "isStar": false,
+        "shopId": "66d7375fb62d65233df4ce36",
+        "__v": 0
+    }
+]
 
   const changeStarStatus = (_id) => {
     console.log("hi");
@@ -372,7 +160,7 @@ const Items = () => {
             <div>
             <div className='right-page-middle-category'>
                 {categories && categories.length > 0 && <div className='right-page-middle-category-items'>
-                    <li onClick={(e)=>{setActiveTab("MOST SOLD")}} className={activeTab === "MOST SOLD" ? "category-active-tab" : ""} ><pre>MOST SOLD</pre></li>
+                    <li onClick={(e)=>{setActiveTab("ALL")}} className={activeTab === "ALL" ? "category-active-tab" : ""} ><pre>ALL</pre></li>
                     <li onClick={(e)=>{setActiveTab("STARRED")}} className={activeTab === "STARRED" ? "category-active-tab" : ""} ><pre>STARRED</pre></li>
                     {categories.map((m,i)=>(
                     <li key={i} onClick={(e)=>{setActiveTab(m.name.toLowerCase())}} className={activeTab === m.name.toLowerCase() ? "category-active-tab" : ""} ><pre>{m.name}</pre></li>
@@ -423,9 +211,8 @@ const Items = () => {
                                 <div className='table-grid' key={i} style={t.shape === "CIRCLE" ? {borderRadius:"100%"}:{}}>
                                     <h3>{t.name}</h3>
                                     <p>{t.categoryId.name}</p>
-                                    <p><pre>{t.prices.map((m,i)=>(<span key={i}>{`${m.price}/- `}</span>)) }</pre></p>
+                                    <p><pre>{t.price}</pre></p>
                                     <span>
-                                            <ViewTableDetailsModal><VisibilityIcon style={{fontSize: "10px"}} /></ViewTableDetailsModal>
                                             <EditTableDetailsModal><EditIcon style={{fontSize: "10px"}} /></EditTableDetailsModal>
                                             <ConfirmationModal><DeleteIcon style={{fontSize: "10px"}} /></ConfirmationModal>
                                     </span>
@@ -445,7 +232,7 @@ const Items = () => {
                                   <tr>
                                     <th><pre>Item</pre></th>
                                     {categories.length > 0 && <th>Category</th>}
-                                    <th><pre>Prices</pre></th>
+                                    <th><pre>Price</pre></th>
                                     <th><pre>Short Code</pre></th>
                                     <th>Star</th>
                                     <th>Avaiable</th>
@@ -459,15 +246,12 @@ const Items = () => {
                                         <td>{t.name}</td>
                                         {categories.length > 0 && <td><pre>{t.categoryId.name}</pre></td>}
                                         <td>
-                                          {t.prices.map((p,i)=>(
-                                            <pre key={i}>{p.type} - {p.price}/-</pre>
-                                          ))}
+                                          {t.price}
                                         </td>
                                         <td>{t.shortCode}</td>
                                         <td onClick={()=>changeStarStatus(t.name)}>{t.isStar ? <StarIcon style={{fontSize:"20px",color:"var(--violet)"}} /> : <StarBorderIcon style={{fontSize:"20px",color:"var(--darkgrey)"}} /> }</td>
                                         <td><Switch size="small" checked={t.isAvailable} onChange={()=>changeAvailbilityStatus(t)} /></td>
                                         <td>
-                                            <ViewTableDetailsModal><VisibilityIcon /></ViewTableDetailsModal>
                                             <EditTableDetailsModal><EditIcon /></EditTableDetailsModal>
                                             <ConfirmationModal><DeleteIcon /></ConfirmationModal>
                                         </td>
