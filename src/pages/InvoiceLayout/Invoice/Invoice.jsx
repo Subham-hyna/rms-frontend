@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PageHeading from '../../../components/ui/pageHeading/pageHeading';
-import DeleteTableModal from '../../../components/modals/DeleteTableModal/DeleteTableModal';
 import ViewCustomerDetailsModal from '../../../components/modals/ViewCustomerDetailsModal/ViewCustomerDetailsModal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -13,8 +12,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { transactionMode } from '../../../constanst';
 import PrintTableModal from '../../../components/modals/PrintTableModal/PrintTableModal';
-
 import PrintIcon from '@mui/icons-material/Print';
+import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 
 const Invoice = () => {
     const [paymentMode, setPaymentMode] = useState("");
@@ -378,7 +377,7 @@ const Invoice = () => {
                                         <td>
                                             <ViewCustomerDetailsModal><VisibilityIcon /></ViewCustomerDetailsModal>
                                             <PrintTableModal><PrintIcon /></PrintTableModal>
-                                            <DeleteTableModal><DeleteIcon /></DeleteTableModal>
+                                            <ConfirmationModal><DeleteIcon /></ConfirmationModal>
                                         </td>
                                       </tr>
                                     ))}

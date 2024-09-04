@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AddEmployeeModal from '../../../components/modals/AddEmployeeModal/AddEmployeeModal'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PageHeading from '../../../components/ui/pageHeading/pageHeading';
-import DeleteTableModal from '../../../components/modals/DeleteTableModal/DeleteTableModal';
+import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 import ViewCustomerDetailsModal from '../../../components/modals/ViewCustomerDetailsModal/ViewCustomerDetailsModal';
 import EditCustomerDetailsModal from '../../../components/modals/EditCustomerDetailsModal/EditCustomerDetailsModal';
 import EditIcon from '@mui/icons-material/Edit';
@@ -251,7 +251,7 @@ const Employee = () => {
                                         <td>
                                             <ViewCustomerDetailsModal><VisibilityIcon /></ViewCustomerDetailsModal>
                                             <EditCustomerDetailsModal><EditIcon /></EditCustomerDetailsModal>
-                                            <DeleteTableModal><DeleteIcon /></DeleteTableModal>
+                                            <ConfirmationModal><DeleteIcon /></ConfirmationModal>
                                         </td>
                                       </tr>
                                     ))}

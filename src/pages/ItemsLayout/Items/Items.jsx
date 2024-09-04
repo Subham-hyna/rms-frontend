@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ViewTableDetailsModal from '../../../components/modals/ViewTableDetailsModal/ViewTableDetailsModal';
 import EditTableDetailsModal from '../../../components/modals/EditTableDetailsModal/EditTableDetailsModal';
-import DeleteTableModal from '../../../components/modals/DeleteTableModal/DeleteTableModal';
+import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DownloadIcon from '@mui/icons-material/Download';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -427,7 +427,7 @@ const Items = () => {
                                     <span>
                                             <ViewTableDetailsModal><VisibilityIcon style={{fontSize: "10px"}} /></ViewTableDetailsModal>
                                             <EditTableDetailsModal><EditIcon style={{fontSize: "10px"}} /></EditTableDetailsModal>
-                                            <DeleteTableModal><DeleteIcon style={{fontSize: "10px"}} /></DeleteTableModal>
+                                            <ConfirmationModal><DeleteIcon style={{fontSize: "10px"}} /></ConfirmationModal>
                                     </span>
                                 </div>
                             ))}
@@ -469,7 +469,7 @@ const Items = () => {
                                         <td>
                                             <ViewTableDetailsModal><VisibilityIcon /></ViewTableDetailsModal>
                                             <EditTableDetailsModal><EditIcon /></EditTableDetailsModal>
-                                            <DeleteTableModal><DeleteIcon /></DeleteTableModal>
+                                            <ConfirmationModal><DeleteIcon /></ConfirmationModal>
                                         </td>
                                       </tr>
                                     ))}

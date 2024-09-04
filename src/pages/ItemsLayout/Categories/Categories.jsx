@@ -7,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ViewAreaDetailsModal from '../../../components/modals/ViewAreaDetailsModal/ViewAreaDetailsModal';
 import EditAreaDetailsModal from '../../../components/modals/EditAreaDetailsModal/EditAreaDetailsModal';
-import DeleteTableModal from '../../../components/modals/DeleteTableModal/DeleteTableModal';
+import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 import { Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
@@ -70,7 +70,7 @@ const Categories = () => {
                      <span>
                              <ViewAreaDetailsModal><VisibilityIcon/></ViewAreaDetailsModal>
                              <EditAreaDetailsModal><EditIcon /></EditAreaDetailsModal>
-                             <DeleteTableModal><DeleteIcon /></DeleteTableModal>
+                             <ConfirmationModal><DeleteIcon /></ConfirmationModal>
                      </span>
                  </div>
                   ))}

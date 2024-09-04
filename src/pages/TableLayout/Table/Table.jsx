@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Table.css'
 import PageHeading from '../../../components/ui/pageHeading/pageHeading'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -8,173 +8,110 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import PrintIcon from '@mui/icons-material/Print';
-import ViewTableDetailsModal from '../../../components/modals/ViewTableDetailsModal/ViewTableDetailsModal';
 import EditTableDetailsModal from '../../../components/modals/EditTableDetailsModal/EditTableDetailsModal';
-import DeleteTableModal from '../../../components/modals/DeleteTableModal/DeleteTableModal';
+import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 import PrintTableModal from '../../../components/modals/PrintTableModal/PrintTableModal';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DownloadIcon from '@mui/icons-material/Download';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { clearErrors, clearMessages, deleteTable, getTables } from '../../../redux/actions/tableAction';
+import toast from 'react-hot-toast';
+import { getAreas } from '../../../redux/actions/areaAction';
 
 const Table = () => {
 
     const [activeTab, setActiveTab] = useState("ALL");
     const [gridView, setGridView] = useState(true);
-    const tableSearch = (value) => {
-        console.log(value)
+    const [searchValue, setSearchValue] = useState("");
+    
+    const { areas } = useSelector((state)=>state.area);
+    const { tables , tableLoading, tableError, tableMessage } =useSelector((state) => state.table)
+    const [showTables, setShowTables] = useState(tables && tables);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { q } = useParams();
+
+    const shop = 
+    {
+    "_id": "66d7375fb62d65233df4ce36",
+    "name": "Desi Eshas",
+    "ownerId": "66d6d7070daa1cc6896b5aae",
+    "phoneNo": 6002576479,
+    "email": "dsubham490@gmail.com",
+    "gstIn": "1234567890224",
+    "shopType": "DHABA",
+    "employeesId": [],
+    "noOfemployees": 0,
+    "status": "ACTIVE",
+    "address": [
+        "sdgds"
+    ],
+    "createdAt": "2024-09-03T16:20:47.623Z",
+    "updatedAt": "2024-09-03T16:20:47.623Z",
+    "__v": 0
     }
 
-    const areas = [
-        {
-            name:"Ground",
-            noOfTables: 10,
-            priority: 1
-        },
-        {
-            name:"First",
-            noOfTables: 5,
-            priority: 2
-        },
-        {
-            name:"Swimming Pool",
-            noOfTables: 5,
-            priority: 3
-        },
-        {
-            name:"Swimming ool",
-            noOfTables: 5,
-            priority: 4
-        },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-        // {
-        //     name:"Swimming ool",
-        //     noOfTables: 5,
-        //     priority: 4
-        // },
-    ]
+    const approveHandler = (id) => {
+        dispatch(deleteTable(id,shop._id));
+      }
 
-    const tables = [
-        // {
-        //     name: "1",
-        //     noOfSeats: "4",
-        //     areaId : { name : "swimming pool"},
-        //     shape: "RECTANGLE"
-        // },
-        // {
-        //     name: "1",
-        //     noOfSeats: "4",
-        //     areaId : { name : "swimming pool"},
-        //     shape: "RECTANGLE"
-        // },
-        // {
-        //     name: "1",
-        //     noOfSeats: "4",
-        //     areaId : { name : "swimming pool"},
-        //     shape: "RECTANGLE"
-        // },
-        // {
-        //     name: "1",
-        //     noOfSeats: "4",
-        //     areaId : { name : "swimming pool"},
-        //     shape: "RECTANGLE"
-        // },
-        // {
-        //     name: "1",
-        //     noOfSeats: "4",
-        //     areaId : { name : "swimming pool"},
-        //     shape: "RECTANGLE"
-        // },
-        {
-            name: "1",
-            noOfSeats: "4",
-            areaId : { name : "swimming pool"},
-            shape: "RECTANGLE"
-        },
-        {
-            name: "1",
-            noOfSeats: "4",
-            areaId : { name : "swimming pool"},
-            shape: "RECTANGLE"
-        },
-        {
-            name: "1",
-            noOfSeats: "4",
-            areaId : { name : "swimming pool"},
-            shape: "RECTANGLE"
-        },
-        {
-            name: "2",
-            noOfSeats: "2",
-            areaId : { name : "ground"},
-            shape: "CIRCLE"
-        },
-        // {
-        //     name: "3",
-        //     noOfSeats: "4",
-        //     areaId : { name : "ground"},
-        //     shape: "RECTANGLE"
-        // },
-        // {
-        //     name: "4",
-        //     noOfSeats: "6",
-        //     areaId : { name : "ground"},
-        //     shape: "CIRCLE"
-        // },
-        // {
-        //     name: "5",
-        //     noOfSeats: "6",
-        //     areaId : { name : "ground"},
-        //     shape: "CIRCLE"
-        // },
-        // {
-        //     name: "6",
-        //     noOfSeats: "2",
-        //     areaId : { name : "ground"},
-        //     shape: "RECTANGLE"
-        // },
-    ]
+    const tableSearch = (value) => {
+        setSearchValue(value);
+    if(value === ""){
+      return
+    }
+    if(value.length > 0){
+        setActiveTab("ALL")
+        navigate(`/tables/table/${shop.name}/${shop._id}/${value.trim()}`)
+      }
+      else{
+        navigate(`/tables/table/${shop.name}/${shop._id}`)
+    }
+    }
 
-    // const tables = []
+    const areaSorting = (tab) => {
+        setActiveTab(tab);
+        if(tab === "ALL"){
+            setShowTables(tables);
+        }
+        else{
+            setShowTables(tables?.filter((t)=>{
+                return tab === t?.areaId?.name.toLowerCase()
+            }))
+        }
+    }
+
+    const resetHandler = () => {
+        dispatch(getTables(q,shop._id))
+        setSearchValue("");
+        setActiveTab("ALL")
+        navigate(`/tables/table/${shop.name}/${shop._id}`)
+      }
+
+    useEffect(()=>{
+        dispatch(getTables(q,shop._id))
+        dispatch(getAreas(shop._id))
+        setActiveTab("ALL")
+      },[dispatch,shop._id,q,tableMessage,tableError])
+
+    useEffect(()=>{
+        setShowTables(tables)
+    },[tables])
+
+    useEffect(()=>{
+        if(tableError){
+          toast.error(tableError);
+          dispatch(clearErrors());
+        }
+        if(tableMessage){
+            toast.success(tableMessage);
+            dispatch(clearMessages());
+        }
+        
+    },[dispatch,tableError,tableMessage])
 
 
   return (
@@ -192,9 +129,9 @@ const Table = () => {
             <div>
             <div className='right-page-middle-category'>
                 {areas && areas.length > 0 && <div className='right-page-middle-category-items'>
-                    <li onClick={(e)=>{setActiveTab("ALL")}} className={activeTab === "ALL" ? "category-active-tab" : ""} ><pre>ALL</pre></li>
+                    <li onClick={(e)=>{areaSorting("ALL")}} className={activeTab === "ALL" ? "category-active-tab" : ""} ><pre>ALL</pre></li>
                     {areas.map((m)=>(
-                    <li onClick={(e)=>{setActiveTab(m.name.toLowerCase())}} className={activeTab === m.name.toLowerCase() ? "category-active-tab" : ""} ><pre>{m.name}</pre></li>
+                    <li onClick={(e)=>{areaSorting(m.name.toLowerCase())}} className={activeTab === m.name.toLowerCase() ? "category-active-tab" : ""} ><pre>{m.name}</pre></li>
                 ))}
                 </div>}
             </div>
@@ -203,7 +140,7 @@ const Table = () => {
             <div className='right-page-content'>
                 <div className='right-page-content-viewBy'>
                     <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
-                    <Tooltip title="Refresh"><RefreshIcon /></Tooltip>
+                    <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                     <p>View by </p>
                     <div>
                     <Tooltip title="Grid"><GridViewIcon onClick={()=>setGridView(true)} style={gridView ? {color: "var(--violet)"} : {}} /></Tooltip>
@@ -211,22 +148,25 @@ const Table = () => {
                     </div>
                 </div>
                 {activeTab && <div className='showing-result'>
-                        <p>Showing Result for : Tables in {activeTab.toUpperCase()} areaa </p>
+                        <p>Showing Result for : Tables in {activeTab.toUpperCase()} area {searchValue && searchValue}</p>
                       </div>}
+               {tableLoading ? 
+                <h1>Loading</h1>
+                :
+                <>
                 {gridView ? 
                 <div className='right-page-content-grid' style={tables?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{}}>
-                    {tables.length > 0 ?
+                    {showTables?.length > 0 ?
                         <>
-                            {tables.map((t,i)=>(
+                            {showTables.map((t,i)=>(
                                 <div className='table-grid' key={i} style={t.shape === "CIRCLE" ? {borderRadius:"100%"}:{}}>
                                     <h3>{t.name}</h3>
                                     <p>{t.areaId.name}</p>
                                     <p>{t.noOfSeats} seats</p>
                                     <span>
-                                            <ViewTableDetailsModal><VisibilityIcon style={{fontSize: "10px"}} /></ViewTableDetailsModal>
-                                            <EditTableDetailsModal><EditIcon style={{fontSize: "10px"}} /></EditTableDetailsModal>
-                                            <DeleteTableModal><DeleteIcon style={{fontSize: "10px"}} /></DeleteTableModal>
-                                            <PrintTableModal><PrintIcon style={{fontSize: "10px"}} /></PrintTableModal>
+                                            <EditTableDetailsModal table={t}><EditIcon style={{fontSize: "10px"}} /></EditTableDetailsModal>
+                                            <ConfirmationModal heading={"Confirmation"} subHeading={"Are you sure to delete this table"} data={t} confirmationHandler={approveHandler}><DeleteIcon style={{fontSize: "10px"}} /></ConfirmationModal>
+                                            <PrintTableModal table={t}><PrintIcon  style={{fontSize: "10px"}} /></PrintTableModal>
                                     </span>
                                 </div>
                             ))}
@@ -237,7 +177,7 @@ const Table = () => {
                 </div>
                 :
                 <div className='right-page-content-row'>
-                    {tables.length > 0 ?
+                    {showTables?.length > 0 ?
                         <>
                             <table className='table'>
                                 <thead>
@@ -250,16 +190,15 @@ const Table = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                    tables.map((t,index)=>(
+                                    showTables.map((t,index)=>(
                                       <tr key={index}>
                                         <td>{t.name}</td>
                                         {areas.length > 0 && <td><pre>{t.areaId.name}</pre></td>}
                                         <td>{t.noOfSeats}</td>
                                         <td>
-                                            <ViewTableDetailsModal><VisibilityIcon /></ViewTableDetailsModal>
-                                            <EditTableDetailsModal><EditIcon /></EditTableDetailsModal>
-                                            <DeleteTableModal><DeleteIcon /></DeleteTableModal>
-                                            <PrintTableModal><PrintIcon /></PrintTableModal>
+                                            <EditTableDetailsModal table={t} ><EditIcon /></EditTableDetailsModal>
+                                            <ConfirmationModal heading={"Confirmation"} subHeading={"Are you sure to delete this table"} data={t} confirmationHandler={approveHandler}><DeleteIcon /></ConfirmationModal>
+                                            <PrintTableModal table={t} ><PrintIcon /></PrintTableModal>
                                         </td>
                                       </tr>
                                     ))}
@@ -270,6 +209,7 @@ const Table = () => {
                         <h1>No Tables</h1>
                     }
                 </div>}
+                </>}
             </div>
          </div>
     </main>

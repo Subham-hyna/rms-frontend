@@ -16,6 +16,7 @@ import ItemsLayout from './pages/ItemsLayout/ItemsLayout';
 import EmployeesLayout from './pages/EmployeesLayout/EmployeesLayout';
 import InvoiceLayout from './pages/InvoiceLayout/InvoiceLayout';
 import OrderLayout from './pages/OrderLayout/OrderLayout';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
 
          <Route exact={true} path='/shops' element={<Shops />} />
          <Route exact={true} path='/tables/table/:shopName/:shopId' element={<TableLayout />} />
+         <Route exact={true} path='/tables/table/:shopName/:shopId/:q' element={<TableLayout />} />
          <Route exact={true} path='/tables/area/:shopName/:shopId' element={<TableLayout />} />
          <Route exact={true} path='/customers/customer/:shopName/:shopId' element={<CustomerLayout />} />
          <Route exact={true} path='/employees/employee/:shopName/:shopId' element={<EmployeesLayout />} />
@@ -48,9 +50,9 @@ function App() {
          </Routes>
      </div>
      </Router>
-       {/* <Toaster 
+       <Toaster 
        position='top-right'
-       /> */}
+       />
    </>
   );
 }
