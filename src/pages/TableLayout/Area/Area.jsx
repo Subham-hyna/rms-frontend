@@ -15,7 +15,7 @@ import { deleteArea } from "../../../redux/actions/areaAction.js"
 
 const Area = () => {
 
-  const { areas, areaLoading, areaError, areaMessage } = useSelector((state)=>state.area);
+const { areas, areaLoading, areaError, areaMessage } = useSelector((state)=>state.area);
 
 const shop = 
   {

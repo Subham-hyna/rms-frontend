@@ -29,7 +29,7 @@ const ConfirmationModal = ({heading, subHeading, confirmationHandler,data, child
         </div>
         <div className='modal-content'>
             <div className='modal-button-group'>
-            <button onClick={submitHandler} className='danger-button' >{areaLoading?<span className='loader'>"sgfhf"</span>:"Confirm"}</button>
+            <button onClick={submitHandler} className='danger-button' >{areaLoading?<span className='loader'>"sgfhf"</span>:"Delete"}</button>
             <button onClick={handleClose} className='close-button'>Close</button>
             </div>
 

@@ -38,14 +38,14 @@ const AddAreaModal = ({buttonIcon,buttonText}) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(name === "" || priority === ""){
+    if(name === ""){
         return toast.error("Fill all the fields");
     }
 
     const formData = new FormData();
 
     formData.append("name",name.trim())
-    formData.append("priority",priority.trim())
+    formData.append("priority",priority)
 
     dispatch(addArea(formData,shop._id));
 
@@ -76,7 +76,7 @@ const AddAreaModal = ({buttonIcon,buttonText}) => {
                 </div>
                 <div>
                     <p>Priority</p>
-                    <input type="number" onChange={(e)=>(setPriority(e.target.value)) } value={priority} required={true} />
+                    <input type="number" onChange={(e)=>(setPriority(e.target.value)) } value={priority}/>
                 </div>
                 <button type='submit' className='success-button'>{areaLoading?<span className='loader'>sdf</span>:"Submit"}</button>
             </form>

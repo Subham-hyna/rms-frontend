@@ -56,7 +56,7 @@ const Table = () => {
 
     const approveHandler = (id) => {
         dispatch(deleteTable(id,shop._id));
-      }
+    }
 
     const tableSearch = (value) => {
         setSearchValue(value);

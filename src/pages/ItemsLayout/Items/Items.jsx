@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageHeading from '../../../components/ui/pageHeading/pageHeading'
 import AddItemModal from '../../../components/modals/AddItemModal/AddItemModal'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -7,143 +7,144 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Switch, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditTableDetailsModal from '../../../components/modals/EditTableDetailsModal/EditTableDetailsModal';
 import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DownloadIcon from '@mui/icons-material/Download';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { clearErrors, clearMessages, deleteItem, editItem, getItems } from '../../../redux/actions/itemAction';
+import { getCategories } from '../../../redux/actions/categoryAction';
+import EditItemDetailsModal from '../../../components/modals/EditItemDetailsModal/EditItemDetailsModal';
 
 const Items = () => {
 
   const [activeTab, setActiveTab] = useState("ALL");
   const [gridView, setGridView] = useState(true);    
-  const [vegTab, setVegTab] = useState(false);
-  const [nonVegTab, setNonVegTab] = useState(false);
+  const [mealType, setMealType] = useState("");
   const [available, setAvailable] = useState("");
+  const [isStar, setIsStar] = useState("")
+  const [categoryId, setCategoryId] = useState("")
+  const [searchValue, setSearchValue] = useState("");
+
+  const { categories } = useSelector((state)=>state.category);
+  const { items , itemLoading, itemError, itemMessage } =useSelector((state) => state.item)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { q } = useParams();
+
+  const shop = 
+  {
+  "_id": "66d7375fb62d65233df4ce36",
+  "name": "Desi Eshas",
+  "ownerId": "66d6d7070daa1cc6896b5aae",
+  "phoneNo": 6002576479,
+  "email": "dsubham490@gmail.com",
+  "gstIn": "1234567890224",
+  "shopType": "DHABA",
+  "employeesId": [],
+  "noOfemployees": 0,
+  "status": "ACTIVE",
+  "address": [
+      "sdgds"
+  ],
+  "createdAt": "2024-09-03T16:20:47.623Z",
+  "updatedAt": "2024-09-03T16:20:47.623Z",
+  "__v": 0
+  }
+
+  const approveHandler = (id) => {
+    dispatch(deleteItem(id,shop._id));
+}
 
   const itemSearch = (value) => {
-      console.log(value)
-  }
-
-  const categories = [
-    {
-      name: "Starters",
-      noOfItems: 10
-    },
-    {
-      name: "Dal",
-      noOfItems: 5
-    },
-    {
-      name: "Main Course",
-      noOfItems: 10
-    },
-    {
-      name: "Chinese",
-      noOfItems: 10
-    },
-    {
-      name: "Biriyani",
-      noOfItems: 10
-    },
-    {
-      name: "Deserts",
-      noOfItems: 10
-    },
-  ]
-
-  const items = [
-    {
-        "_id": "66d8a4cd2cc63ecd1b1554bc",
-        "name": "Baby Corn",
-        "categoryId": {
-            "_id": "66d88d16e2beb007cffa2c84",
-            "name": "STARTERS"
-        },
-        "price": 180,
-        "mealType": "VEG",
-        "isAvailable": false,
-        "isStar": false,
-        "shopId": "66d7375fb62d65233df4ce36",
-        "__v": 0,
-        "shortCode": "BC"
-    },
-    {
-        "_id": "66d8a4fa2cc63ecd1b1554d0",
-        "name": "Chicken Pakora",
-        "categoryId": {
-            "_id": "66d88d16e2beb007cffa2c84",
-            "name": "STARTERS"
-        },
-        "price": 120,
-        "mealType": "NONVEG",
-        "isAvailable": true,
-        "isStar": false,
-        "shopId": "66d7375fb62d65233df4ce36",
-        "__v": 0
-    },
-    {
-        "_id": "66d8a5112cc63ecd1b1554d7",
-        "name": "Dal Makhani",
-        "categoryId": {
-            "_id": "66d88d2de2beb007cffa2c94",
-            "name": "DAL"
-        },
-        "price": 120,
-        "mealType": "VEG",
-        "isAvailable": true,
-        "isStar": false,
-        "shopId": "66d7375fb62d65233df4ce36",
-        "__v": 0
-    },
-    {
-        "_id": "66d8a51c2cc63ecd1b1554de",
-        "name": "Dal Tarke",
-        "categoryId": {
-            "_id": "66d88d2de2beb007cffa2c94",
-            "name": "DAL"
-        },
-        "price": 100,
-        "mealType": "VEG",
-        "isAvailable": true,
-        "isStar": false,
-        "shopId": "66d7375fb62d65233df4ce36",
-        "__v": 0
-    },
-    {
-        "_id": "66d8a5272cc63ecd1b1554e5",
-        "name": "Chicken Tarke",
-        "categoryId": {
-            "_id": "66d88d2de2beb007cffa2c94",
-            "name": "DAL"
-        },
-        "price": 130,
-        "mealType": "NONVEG",
-        "isAvailable": true,
-        "isStar": false,
-        "shopId": "66d7375fb62d65233df4ce36",
-        "__v": 0
+    setSearchValue(value);
+    if(value === ""){
+      return
     }
-]
-
-  const changeStarStatus = (_id) => {
-    console.log("hi");
+    if(value.length > 0){
+        navigate(`/items/item/${shop.name}/${shop._id}/${value.trim()}`)
+      }
+      else{
+        navigate(`/items/item/${shop.name}/${shop._id}`)
+    }
   }
 
-  const changeAvailbilityStatus = (_id) => {
-    console.log("hi");
+  const categorySorting = ((tab,id) => {
+    setActiveTab(tab);
+    if(tab === "ALL"){
+        setIsStar("");
+        setCategoryId("");
+    }
+    else if(tab === "STARRED"){
+      setIsStar(true);
+      setCategoryId("");
+    }
+    else{
+     setIsStar("");
+     setCategoryId(id)
+    }
+  })
+
+const resetHandler = () => {
+  dispatch(getItems(q,shop._id))
+  setSearchValue("");
+  setActiveTab("ALL")
+  setMealType("")
+  setAvailable("")
+  setCategoryId("")
+  setIsStar("")
+  navigate(`/items/item/${shop.name}/${shop._id}`)
+}
+
+  const changeStarStatus = (t) => {
+    const formData = new FormData();
+
+    formData.append("isStar",!t.isStar);
+
+    dispatch(editItem(formData,t._id,shop._id))
   }
 
-  const handleVegTabChange = () => {
-    setVegTab(!vegTab);
-    setNonVegTab(false);
+  const changeAvailbilityStatus = (t) => {
+    const formData = new FormData();
+
+    formData.append("isAvailable",!t.isAvailable);
+
+    dispatch(editItem(formData,t._id,shop._id))
   }
 
-  const handleNonVegTabChange = () => {
-    setVegTab(false);
-    setNonVegTab(!nonVegTab);
+  const handleChangeMealType = (value) => {
+    if(value === "VEG" && mealType === "VEG"){
+      setMealType("")
+    }
+    else if (value === "NONVEG" && mealType === "NONVEG"){
+      setMealType("")
+    }
+    else{
+      setMealType(value)
+    }
+
   }
+
+  useEffect(()=>{
+    dispatch(getItems(q,shop._id,mealType,available,isStar,categoryId))
+    dispatch(getCategories(shop._id))
+  },[dispatch,shop._id,q,itemMessage,itemError,mealType,available,isStar,categoryId])
+
+useEffect(()=>{
+    if(itemError){
+      toast.error(itemError);
+      dispatch(clearErrors());
+    }
+    if(itemMessage){
+        toast.success(itemMessage);
+        dispatch(clearMessages());
+    }
+    
+},[dispatch,itemError,itemMessage])
 
   return (
     <main>
@@ -159,11 +160,11 @@ const Items = () => {
          <div className='right-page-middle'>
             <div>
             <div className='right-page-middle-category'>
-                {categories && categories.length > 0 && <div className='right-page-middle-category-items'>
-                    <li onClick={(e)=>{setActiveTab("ALL")}} className={activeTab === "ALL" ? "category-active-tab" : ""} ><pre>ALL</pre></li>
-                    <li onClick={(e)=>{setActiveTab("STARRED")}} className={activeTab === "STARRED" ? "category-active-tab" : ""} ><pre>STARRED</pre></li>
+                {categories && categories?.length > 0 && <div className='right-page-middle-category-items'>
+                    <li onClick={(e)=>{categorySorting("ALL")}} className={activeTab === "ALL" ? "category-active-tab" : ""} ><pre>ALL</pre></li>
+                    <li onClick={(e)=>{categorySorting("STARRED")}} className={activeTab === "STARRED" ? "category-active-tab" : ""} ><pre>STARRED</pre></li>
                     {categories.map((m,i)=>(
-                    <li key={i} onClick={(e)=>{setActiveTab(m.name.toLowerCase())}} className={activeTab === m.name.toLowerCase() ? "category-active-tab" : ""} ><pre>{m.name}</pre></li>
+                    <li key={i} onClick={(e)=>{categorySorting(m.name.toLowerCase(),m._id)}} className={activeTab === m.name.toLowerCase() ? "category-active-tab" : ""} ><pre>{m.name}</pre></li>
                 ))}
                 </div>}
             </div>
@@ -178,22 +179,21 @@ const Items = () => {
         onChange={(e)=>setAvailable(e.target.value)}
       >
         <option value="">Availabity</option>
-        <option value="ALL">ALL</option>
-        <option value="available">Available</option>
-        <option value="not available">Not Available</option>
+        <option value="true">Available</option>
+        <option value="false">Not Available</option>
       </select>
       </Tooltip>
     </form>
-                      {<span onClick={handleVegTabChange}>
-                        <div style={vegTab ? {backgroundColor: "var(--green)"} : {}}></div>
+                      {<span onClick={()=>handleChangeMealType("VEG")}>
+                        <div style={mealType === "VEG" ? {backgroundColor: "var(--green)"} : {}}></div>
                         <p>Veg</p>
                       </span>}
-                      { <span onClick={handleNonVegTabChange}>
-                        <div style={nonVegTab ? {backgroundColor: "var(--red)"} : {}}></div>
+                      { <span onClick={()=>handleChangeMealType("NONVEG")}>
+                        <div style={mealType === "NONVEG" ? {backgroundColor: "var(--red)"} : {}}></div>
                         <p><pre>Non Veg</pre></p>
                       </span>}
                     <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
-                    <Tooltip title="Refresh"><RefreshIcon /></Tooltip>
+                    <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                     <p><pre>View by</pre> </p>
                     <div>
                     <Tooltip title="Grid"><GridViewIcon onClick={()=>setGridView(true)} style={gridView ? {color: "var(--violet)"} : {}} /></Tooltip>
@@ -201,11 +201,15 @@ const Items = () => {
                     </div>
                 </div>
                       {activeTab && <div className='showing-result'>
-                        <p>Showing Result for : {activeTab.toUpperCase()} {vegTab && 'veg'} {nonVegTab && 'non veg'} {available && available !== "ALL" && available} Items</p>
+                        <p>Showing Result for : {activeTab.toUpperCase()} {available===true && "available"} {available===false && "not available"} {mealType && mealType} Items {searchValue && searchValue}</p>
                       </div>}
+                {itemLoading ?
+                <h1>Loading</h1>
+                :
+                <>
                 {gridView ? 
                 <div className='right-page-content-grid' style={items?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{}}>
-                    {items.length > 0 ?
+                    {items?.length > 0 ?
                         <>
                             {items.map((t,i)=>(
                                 <div className='table-grid' key={i} style={t.shape === "CIRCLE" ? {borderRadius:"100%"}:{}}>
@@ -213,8 +217,8 @@ const Items = () => {
                                     <p>{t.categoryId.name}</p>
                                     <p><pre>{t.price}</pre></p>
                                     <span>
-                                            <EditTableDetailsModal><EditIcon style={{fontSize: "10px"}} /></EditTableDetailsModal>
-                                            <ConfirmationModal><DeleteIcon style={{fontSize: "10px"}} /></ConfirmationModal>
+                                            <EditItemDetailsModal item={t}><EditIcon style={{fontSize: "10px"}} /></EditItemDetailsModal>
+                                            <ConfirmationModal heading={"Confirmation"} subHeading={"Are you sure to delete this item"} data={t} confirmationHandler={approveHandler}><DeleteIcon style={{fontSize: "10px"}} /></ConfirmationModal>
                                     </span>
                                 </div>
                             ))}
@@ -225,7 +229,7 @@ const Items = () => {
                 </div>
                 :
                 <div className='right-page-content-row'>
-                    {items.length > 0 ?
+                    {items?.length > 0 ?
                         <>
                             <table className='table'>
                                 <thead>
@@ -249,11 +253,11 @@ const Items = () => {
                                           {t.price}
                                         </td>
                                         <td>{t.shortCode}</td>
-                                        <td onClick={()=>changeStarStatus(t.name)}>{t.isStar ? <StarIcon style={{fontSize:"20px",color:"var(--violet)"}} /> : <StarBorderIcon style={{fontSize:"20px",color:"var(--darkgrey)"}} /> }</td>
+                                        <td onClick={()=>changeStarStatus(t)}>{t.isStar ? <StarIcon style={{fontSize:"20px",color:"var(--violet)"}} /> : <StarBorderIcon style={{fontSize:"20px",color:"var(--darkgrey)"}} /> }</td>
                                         <td><Switch size="small" checked={t.isAvailable} onChange={()=>changeAvailbilityStatus(t)} /></td>
                                         <td>
-                                            <EditTableDetailsModal><EditIcon /></EditTableDetailsModal>
-                                            <ConfirmationModal><DeleteIcon /></ConfirmationModal>
+                                            <EditItemDetailsModal item={t}><EditIcon /></EditItemDetailsModal>
+                                            <ConfirmationModal heading={"Confirmation"} subHeading={"Are you sure to delete this item"} data={t} confirmationHandler={approveHandler}><DeleteIcon /></ConfirmationModal>
                                         </td>
                                       </tr>
                                     ))}
@@ -263,7 +267,7 @@ const Items = () => {
                         :
                         <h1>No Items</h1>
                     }
-                </div>}
+                </div>}</>}
             </div>
          </div>
     </main>

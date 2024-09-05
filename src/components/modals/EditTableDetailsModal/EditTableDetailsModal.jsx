@@ -15,8 +15,6 @@ const EditTableDetailsModal = ({table,children}) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
-
   const dispatch = useDispatch();
 
   const { areas } = useSelector((state)=>state.area);

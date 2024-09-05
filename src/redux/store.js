@@ -2,12 +2,16 @@ import { configureStore } from '@reduxjs/toolkit';
 import themeSlice from './reducers/themeReducer';
 import areaSlice from './reducers/areaReducer'
 import tableSlice from './reducers/tableReducer'
+import categorySlice from './reducers/categoryReducer'
+import itemSlice from './reducers/itemReducer'
 
 const store = configureStore({
     reducer: {
         theme : themeSlice,
         area : areaSlice,
-        table : tableSlice
+        table : tableSlice,
+        category : categorySlice,
+        item : itemSlice
     },
   });
   

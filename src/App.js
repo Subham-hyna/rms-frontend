@@ -41,6 +41,7 @@ function App() {
          <Route exact={true} path='/customers/customer/:shopName/:shopId' element={<CustomerLayout />} />
          <Route exact={true} path='/employees/employee/:shopName/:shopId' element={<EmployeesLayout />} />
          <Route exact={true} path='/items/item/:shopName/:shopId' element={<ItemsLayout />} />
+         <Route exact={true} path='/items/item/:shopName/:shopId/:q' element={<ItemsLayout />} />
          <Route exact={true} path='/items/category/:shopName/:shopId' element={<ItemsLayout />} />
          <Route exact={true} path='/invoices/invoice/:shopName/:shopId' element={<InvoiceLayout />} />
          <Route exact={true} path='/dashboard/:shopName/:shopId' element={<Dashboard />} />

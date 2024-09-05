@@ -279,7 +279,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     padding: 10px;
     width: 130px;
     min-height: 120px;
@@ -366,8 +366,8 @@
         justify-content: flex-start;
     }
     .table-grid{
-        width: 90px;
-        height: 90px;
+        /* width: 90px;
+        height: 90px; */
     }
     .table-grid>p{
         font-size: 8px;
