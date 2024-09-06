@@ -214,6 +214,12 @@
     padding-right: 30px;
 }
 
+.table>tbody>tr>td:first-child{
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
 .table>tbody>tr>td{
     font-size: 13px;
     font-weight: 500;

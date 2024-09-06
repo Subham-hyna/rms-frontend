@@ -32,7 +32,7 @@ const Table = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { q } = useParams();
+    const { shopName ,shopId, q } = useParams();
 
     const shop = 
     {
@@ -112,6 +112,12 @@ const Table = () => {
         }
         
     },[dispatch,tableError,tableMessage])
+
+    useEffect(()=>{
+        if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString())){
+            navigate("/404")
+        }
+    },[navigate,shop._id,shopId,shopName,shop.name])
 
 
   return (

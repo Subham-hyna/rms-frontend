@@ -59,7 +59,7 @@ const handleQrDownload = async () => {
 };
 
   useEffect(()=>{
-    generateQR(`${frontend}/${shop?.name}/${shop?._id}/${table?.name}`)
+    generateQR(`${frontend}/${shop?._id}/${table?.name}`)
   },[generateQR,shop.name,shop._id,table.name])
 
   return (<>
@@ -86,9 +86,9 @@ const handleQrDownload = async () => {
             </span>
             <h3>Table No. {table.name}</h3>
             <h2>{shop.name}</h2>
-            <div className='qr-img'>
+            <a href={`${frontend}/${shop?._id}/${table?.name}`} className='qr-img'>
               <img src={src} alt="qrcode" />
-            </div>
+            </a>
             <p>Please Open Google Lens to scan the code</p>
           </div>
         <div className='modal-button-group'>

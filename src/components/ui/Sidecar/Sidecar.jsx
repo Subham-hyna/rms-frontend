@@ -26,9 +26,9 @@ const Sidecar = () => {
   }
 
   const shop = {
-    _id: "jhsafjhasbfs",
-    name: "Desi Eshas"
-  }
+    name : "Desi Eshas",
+    _id : "66d7375fb62d65233df4ce36"
+   }
 
   const [activeTab, setActiveTab] = useState("");
   const [hideSidebar, setHideSidebar] = useState(false);

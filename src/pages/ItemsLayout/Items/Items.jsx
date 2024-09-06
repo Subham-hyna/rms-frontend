@@ -34,7 +34,7 @@ const Items = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { q } = useParams();
+  const { shopId,shopName, q } = useParams();
 
   const shop = 
   {
@@ -146,6 +146,12 @@ useEffect(()=>{
     
 },[dispatch,itemError,itemMessage])
 
+useEffect(()=>{
+  if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString())){
+      navigate("/404")
+  }
+},[navigate,shop._id,shopId,shopName,shop.name])
+
   return (
     <main>
         <PageHeading 
@@ -247,7 +253,7 @@ useEffect(()=>{
                                     {
                                     items.map((t,index)=>(
                                       <tr key={index}>
-                                        <td>{t.name}</td>
+                                        <td><div style={t.mealType === "VEG" ? {height:"10px", width:"10px",borderRadius:"100%", backgroundColor:"var(--darkgreen)"}:{height:"10px", width:"10px",borderRadius:"100%", backgroundColor:"var(--red)"}}></div>{t.name}</td>
                                         {categories.length > 0 && <td><pre>{t.categoryId.name}</pre></td>}
                                         <td>
                                           {t.price}

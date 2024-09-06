@@ -1,4 +1,4 @@
-import { addTableFail, addTableRequest, addTableSuccess, allTableFail, allTableRequest, allTableSuccess, clearError, clearMessage, deleteTableFail, deleteTableRequest, deleteTableSuccess, updateTableFail, updateTableRequest, updateTableSuccess } from "../reducers/tableReducer";
+import { addTableFail, addTableRequest, addTableSuccess, allTableFail, allTableRequest, allTableSuccess, clearError, clearMessage, deleteTableFail, deleteTableRequest, deleteTableSuccess, tableExistFail, tableExistRequest, tableExistSuccess, updateTableFail, updateTableRequest, updateTableSuccess } from "../reducers/tableReducer";
 import { server } from "../store";
 import axios from "axios";
 
@@ -115,6 +115,18 @@ export const editTableArea = (areaId, tableId, shopId) => async (dispatch) => {
     dispatch(updateTableSuccess(data));
   } catch (error) {
     dispatch(updateTableFail(error.response.data.message));
+  }
+};
+
+export const tableExistInShop = (tableNo, shopId) => async (dispatch) => {
+  try {
+    dispatch(tableExistRequest());
+
+    const { data } = await axios.get(`${server}/tables/table-exist/${tableNo}/${shopId}`);
+
+    dispatch(tableExistSuccess(data));
+  } catch (error) {
+    dispatch(tableExistFail(error.response.data.message));
   }
 };
 

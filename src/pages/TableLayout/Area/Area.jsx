@@ -12,10 +12,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, clearMessages, getAreas } from '../../../redux/actions/areaAction';
 import toast from 'react-hot-toast';
 import { deleteArea } from "../../../redux/actions/areaAction.js"
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Area = () => {
 
 const { areas, areaLoading, areaError, areaMessage } = useSelector((state)=>state.area);
+
+const {shopId , shopName} = useParams();
+const navigate = useNavigate();
 
 const shop = 
   {
@@ -58,6 +62,12 @@ useEffect(()=>{
   }
   
 },[dispatch,areaError,areaMessage])
+
+useEffect(()=>{
+  if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString())){
+      navigate("/404")
+  }
+},[navigate,shop._id,shopId,shopName,shop.name])
 
 
   return (

@@ -64,6 +64,8 @@
 .right-page-order-table{
     width: 100%;
     overflow-x: scroll;
+    background-color: var(--lightwhite2);
+    padding: 5px;
 }
 
 .right-page-order-table>table{
@@ -74,6 +76,7 @@
     font-size: 14px;
     text-align: center;
     padding: 2px;
+    padding-bottom: 10px;
 }
 
 .right-page-order-table>table>thead>th:nth-child(1){

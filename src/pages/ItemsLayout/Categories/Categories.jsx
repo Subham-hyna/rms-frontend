@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { clearErrors, clearMessages, deleteCategory, getCategories } from '../../../redux/actions/categoryAction';
 import EditCategoryDetailsModal from '../../../components/modals/EditCategoryDetailsModal/EditCategoryDetailsModal';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Categories = () => {
 
@@ -36,6 +37,9 @@ const Categories = () => {
     "__v": 0
 }
 
+const {shopId , shopName} = useParams();
+const navigate = useNavigate();
+
 const dispatch = useDispatch();
 
 const approveHandler = (id) => {
@@ -57,6 +61,12 @@ useEffect(()=>{
   }
   
 },[dispatch,categoryError,categoryMessage])
+
+useEffect(()=>{
+  if((shopId?.toString() !== shop?._id.toString()) || (shopName?.toString() !==shop?.name.toString())){
+      navigate("/404")
+  }
+},[navigate,shop._id,shopId,shopName,shop.name])
 
   return (
        <main>

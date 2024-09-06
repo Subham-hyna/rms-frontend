@@ -1,7 +1,6 @@
 import React from 'react'
 import './App.css';
 import { BrowserRouter as Router , Route , Routes } from "react-router-dom";
-// import {Toaster} from 'react-hot-toast';
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword"
 import VerifyUser from './pages/VerifyUser/VerifyUser';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
@@ -17,6 +16,8 @@ import EmployeesLayout from './pages/EmployeesLayout/EmployeesLayout';
 import InvoiceLayout from './pages/InvoiceLayout/InvoiceLayout';
 import OrderLayout from './pages/OrderLayout/OrderLayout';
 import { Toaster } from 'react-hot-toast';
+import QROrder from './pages/QROrder/QROrder';
+import OpenOrder from './pages/OpenOrder/OpenOrder';
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
          <Route exact={true} path='/user/verify/:token' element={<VerifyUser />} />
          <Route exact={true} path='/user/reset-password/:token' element={<ResetPassword />} />
          <Route exact={true} path='*' element={<ErrorPage />} />
+         
+         <Route exact={true} path='/orders/qr/:shopId/:tableNo' element={<QROrder />} />
+         <Route exact={true} path='/orders/dine-in/:shopId/:tableNo' element={<OpenOrder />} />
 
 
           {/* Private Only for Owner */}

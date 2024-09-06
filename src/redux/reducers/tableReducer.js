@@ -52,6 +52,20 @@ const tableSlice = createSlice({
             state.tableError = action.payload;
         },
 
+        tableExistRequest(state,action){
+            state.tableExistLoading = true;
+        },
+        tableExistSuccess(state,action){
+            state.tableExistLoading = false;
+            state.tableExist = true;
+            state.shopName = action.payload.data.shopName;
+        },
+        tableExistFail(state,action){
+            state.tableExistLoading = false;
+            state.tableExist = false;
+            state.tableError = action.payload;
+        },
+
         clearError(state,action){
             state.tableError = null;
         },
@@ -76,6 +90,9 @@ export const {
     allTableRequest,
     allTableSuccess,
     allTableFail,
+    tableExistRequest,
+    tableExistSuccess,
+    tableExistFail,
     clearError, 
     clearMessage 
 } = tableSlice.actions;
