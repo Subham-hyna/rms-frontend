@@ -270,7 +270,7 @@
     align-items: flex-start;
     width: 100%;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
     min-height: 300px;
     padding-bottom: 30px;
 }
@@ -303,6 +303,10 @@
     font-size: 15px;
     text-align: center;
     color: var(--darkgrey2);
+}
+
+.table-nonEmpty{
+    background-color: var(--lightviolet4) !important;
 }
 
 .table-grid>p{

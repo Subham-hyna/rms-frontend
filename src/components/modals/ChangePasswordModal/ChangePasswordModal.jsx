@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ChangePasswordModal.css'
 import { Modal } from '@mui/material';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { updatePasswordReset } from '../../redux/reducers/userReducer';
+import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-// import { clearErrors, updatePassword } from '../../redux/actions/userAction';
+import { clearErrors, clearMessages, updatePassword } from '../../../redux/actions/userAction';
 
-const ChangePasswordModal = ({children}) => {
+const ChangePasswordModal = () => {
 
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -15,9 +14,9 @@ const ChangePasswordModal = ({children}) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // const { error,loading, isChanged } = useSelector((state)=>state.user)
+    const { userLoading, userError, userMessage } = useSelector((state)=>state.user)
 
     function submitHandler(e){
         e.preventDefault();
@@ -34,26 +33,28 @@ const ChangePasswordModal = ({children}) => {
         formData.append("oldPassword",oldPassword.trim());
         formData.append("newPassword",newPassword.trim());
 
-        // dispatch(updatePassword(formData))
+        dispatch(updatePassword(formData))
 
+        setConfirmPassword("");
         setOldPassword("");
         setNewPassword("");
-        setConfirmPassword("");
     }
 
-    // useEffect(()=>{
-    //     if(error){
-    //         toast.error(error);
-    //         dispatch(clearErrors());
-    //     }
-    //     if(isChanged){
-    //         dispatch(updatePasswordReset());
-    //     }
-    // },[dispatch,error,isChanged]);
+    useEffect(()=>{
+        if(userError){
+            toast.error(userError);
+            dispatch(clearErrors());
+        }
+        if(userMessage){
+            toast.success(userMessage);
+            dispatch(clearMessages());
+            handleClose();
+        }
+    },[dispatch,userError,userMessage]);
 
   return (
     <>
-    {children && <li onClick={handleOpen}>{children}</li>}
+    <li onClick={handleOpen}>Change Password</li>
     <Modal
     open={open}
     onClose={handleClose}>
@@ -76,7 +77,7 @@ const ChangePasswordModal = ({children}) => {
                         <p>Confirm new Password</p>
                         <input type="password" onChange={(e)=>(setConfirmPassword(e.target.value)) } value={confirmPassword} />
                     </div>
-                    <button type='submit' className='success-button'>Submit</button>
+                    <button type='submit' className='success-button'>{userLoading?<span className='loader'>sfzdx</span>:"Submit"}</button>
                 </form>
 
                 <button onClick={handleClose} className='close-button'>Close</button>

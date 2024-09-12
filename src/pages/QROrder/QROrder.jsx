@@ -32,7 +32,7 @@ const QROrder = () => {
                 <h1>{shopName && shopName}</h1>
             </div>
             <h1>Welcome</h1>
-            <Link to={`/orders/dine-in/66d7375fb62d65233df4ce36/F2`} className='qr-order-container-button'>
+            <Link to={`/orders/dine-in/${shopId}/${tableNo}`} className='qr-order-container-button'>
                 <LocalDiningIcon /> Order now
             </Link>
         </div>

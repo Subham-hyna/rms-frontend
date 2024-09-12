@@ -1,168 +1,76 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddEmployeeModal from '../../../components/modals/AddEmployeeModal/AddEmployeeModal'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PageHeading from '../../../components/ui/pageHeading/pageHeading';
 import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
-import ViewCustomerDetailsModal from '../../../components/modals/ViewCustomerDetailsModal/ViewCustomerDetailsModal';
-import EditCustomerDetailsModal from '../../../components/modals/EditCustomerDetailsModal/EditCustomerDetailsModal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Pagination, Tooltip } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DownloadIcon from '@mui/icons-material/Download';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
-import { employeeStatus } from '../../../constanst';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { clearErrors, clearMessages, deleteEmployee, getEmployees } from '../../../redux/actions/employeeAction';
+import toast from 'react-hot-toast';
+import EditEmployeeDetailsModal from '../../../components/modals/EditEmployeeDetailsModal/EditEmployeeDetailsModal';
 
 const Employee = () => {
 
-    const [selectedEmployeeStatus, setSelectedEmployeeStatus] = useState("");
+    const [searchValue, setSearchValue] = useState("");
 
-    const shop = {
-        name : "Desi Eshas",
-        _id : "sdjhvfdsjhfsdgb",
-        createdAt : "2024-08-17T22:12Z"
-       }
+    const { shop } = useSelector(state=>state.shop);
+    const { user } = useSelector(state=>state.user);
 
-    const [startValue, setStartValue] = useState(dayjs(shop&&shop.createdAt.split("T")[0]));
-    const [endValue, setEndValue] = useState(dayjs(Date.now()));
+    const { shopId,shopName, q } = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const employeeSearch = (value) => {
-        console.log(value)
+    const approveHandler = (id) => {
+        dispatch(deleteEmployee(id,shop._id));
     }
 
-    const employees = [
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
-        {
-            name: "Subham Dutta",
-            saleId : "1233fs",
-            dateOfJoining: "12-09-2024",
-            email: "subhamdutta460@gmail.com",
-            phoneNo: "9365765523",
-            address :["No 2 colony Bishnunagar","Goalpara, Assam","783101","Assam"],
-            status : "ACTIVE"
-        },
+    const employeeSearch = (value) => {
+        setSearchValue(value);
+        if(value === ""){
+          return
+        }
+        if(value.length > 0){
+            navigate(`/employees/employee/${shop.name}/${shop._id}/${value.trim()}`)
+          }
+          else{
+            navigate(`/employees/employee/${shop.name}/${shop._id}`)
+        }
+    }
 
-    ]
+    const { employees, employeeLoading, employeeMessage, employeeError } = useSelector(state=>state.employee)
+
+    const resetHandler = () => {
+        navigate(`/employees/employee/${shop.name}/${shop._id}`)
+        setSearchValue("");
+        dispatch(getEmployees("",shopId));
+      };
+
+      useEffect(() => {
+        dispatch(getEmployees(q,shopId));
+      }, [dispatch, q, shopId ,employeeMessage,employeeError]);
+    
+      useEffect(()=>{
+        if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user._id.toString()){
+            navigate("/404")
+        }
+      },[navigate,shopId,shopName,shop,user])
+    
+    useEffect(()=>{
+        if(employeeError){
+          toast.error(employeeError);
+          dispatch(clearErrors());
+        }
+        if(employeeMessage){
+            toast.success(employeeMessage);
+            dispatch(clearMessages());
+        }
+        
+    },[dispatch,employeeError,employeeMessage])
 
   return (
     <main>
@@ -177,52 +85,23 @@ const Employee = () => {
          <div className='right-page-middle' style={{gap:"10px"}}>
             <div>
                 <div className='right-page-middle-category' >
-                    <div className='right-page-middle-category-items'>
-                        <span>    
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                label="From"
-                                value={startValue && startValue}
-                                onChange={(startValue)=>{setStartValue(startValue)}}
-                                />
-                                <p> - </p>
-                                <DatePicker 
-                                value={endValue && endValue}
-                                label="To"
-                                onChange={(endValue)=>{setEndValue(endValue)}}
-                                />
-                            </LocalizationProvider>
-                        </span>
-                    </div>
                 </div>
             </div>
 
             <div className='right-page-content'>
             <div className='right-page-content-viewBy'>
-            <form>
-      <Tooltip title="Sort by Employee Status">
-      <select
-        value={selectedEmployeeStatus}
-        onChange={(e)=>setSelectedEmployeeStatus(e.target.value)}
-      >
-        <option value="">Employee Status</option>
-        <option value="ALL">ALL</option>
-        {employeeStatus.map((t,i)=>(
-        <option key={i} value={t}>{t}</option>
-            
-        ))}
-      </select>
-      </Tooltip>
-    </form>
                     <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
-                    <Tooltip title="Refresh"><RefreshIcon /></Tooltip>
+                    <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler}/></Tooltip>
                 </div>
             </div>
-            {<div className='showing-result'>
-                        <p>Showing Result for : {`From ${startValue} to ${endValue}`} {selectedEmployeeStatus && `of ${selectedEmployeeStatus} employees`}</p>
+            {searchValue && <div className='showing-result'>
+                        <p>Showing Result for : {searchValue}</p>
                 </div>}
+            {employeeLoading ? 
+            <h1>Loading</h1>
+            :
             <div className='right-page-content-row'>
-                    {employees.length > 0 ?
+                    {employees?.length > 0 ?
                         <>
                             <table className='table'>
                                 <thead>
@@ -233,25 +112,26 @@ const Employee = () => {
                                     <th><pre>Phone No</pre></th>
                                     <th><pre>Status</pre></th>
                                     <th><pre>Joining Date</pre></th>
-                                    <th><pre>Leaving Date</pre></th>
+                                    <th><pre>Salary</pre></th>
+                                    <th><pre>Salary Date</pre></th>
                                     <th><pre>Action</pre></th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                     {
-                                    employees.map((c,index)=>(
+                                    employees?.map((c,index)=>(
                                       <tr key={index}>
                                         <td>{c.saleId}</td>
                                         <td>{c.name}</td>
                                         {<td><pre>{c.email}</pre></td>}
                                         <td>{c.phoneNo}</td>
                                         <td>{c.status}</td>
-                                        <td>{c.dateOfJoining}</td>
-                                        <td>{c.dateOfLeaving}</td>
+                                        <td>{new Date(c.dateOfJoining).toLocaleDateString()}</td>
+                                        <td><pre>Rs. {c.salary ? c.salary : "0"}</pre></td>
+                                        <td>{c.salaryReceived && new Date(c.salaryReceived).toLocaleDateString()}</td>
                                         <td>
-                                            <ViewCustomerDetailsModal><VisibilityIcon /></ViewCustomerDetailsModal>
-                                            <EditCustomerDetailsModal><EditIcon /></EditCustomerDetailsModal>
-                                            <ConfirmationModal><DeleteIcon /></ConfirmationModal>
+                                            <EditEmployeeDetailsModal employee={c}><EditIcon /></EditEmployeeDetailsModal>
+                                            <ConfirmationModal heading={"Confirmation"} subHeading={"Are you sure to delete this employee"} data={c} confirmationHandler={approveHandler}><DeleteIcon /></ConfirmationModal>
                                         </td>
                                       </tr>
                                     ))}
@@ -261,11 +141,7 @@ const Employee = () => {
                         :
                         <h1>No Employees</h1>
                     }
-                </div>
-
-        <div className='right-page-middle-footer'>
-        <Pagination count={10} variant="outlined" shape="rounded" />
-        </div>
+                </div>}
          </div>
     </main>
   )

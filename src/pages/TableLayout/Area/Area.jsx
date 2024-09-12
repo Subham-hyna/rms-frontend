@@ -21,25 +21,8 @@ const { areas, areaLoading, areaError, areaMessage } = useSelector((state)=>stat
 const {shopId , shopName} = useParams();
 const navigate = useNavigate();
 
-const shop = 
-  {
-    "_id": "66d7375fb62d65233df4ce36",
-    "name": "Desi Eshas",
-    "ownerId": "66d6d7070daa1cc6896b5aae",
-    "phoneNo": 6002576479,
-    "email": "dsubham490@gmail.com",
-    "gstIn": "1234567890224",
-    "shopType": "DHABA",
-    "employeesId": [],
-    "noOfemployees": 0,
-    "status": "ACTIVE",
-    "address": [
-        "sdgds"
-    ],
-    "createdAt": "2024-09-03T16:20:47.623Z",
-    "updatedAt": "2024-09-03T16:20:47.623Z",
-    "__v": 0
-}
+const { shop } = useSelector(state=>state.shop)
+const { user } = useSelector(state=>state.user)
 
 const dispatch = useDispatch();
 
@@ -64,10 +47,10 @@ useEffect(()=>{
 },[dispatch,areaError,areaMessage])
 
 useEffect(()=>{
-  if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString())){
+  if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user._id.toString()){
       navigate("/404")
   }
-},[navigate,shop._id,shopId,shopName,shop.name])
+},[navigate,shopId,shopName,shop,user])
 
 
   return (

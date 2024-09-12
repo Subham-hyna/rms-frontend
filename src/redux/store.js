@@ -4,6 +4,13 @@ import areaSlice from './reducers/areaReducer'
 import tableSlice from './reducers/tableReducer'
 import categorySlice from './reducers/categoryReducer'
 import itemSlice from './reducers/itemReducer'
+import userSlice from './reducers/userReducer'
+import shopSlice from './reducers/shopReducer'
+import customerSlice from './reducers/customerReducer'
+import orderSlice from './reducers/orderReducer'
+import invoiceSlice from './reducers/invoiceReducer'
+import inventorySlice from './reducers/inventoryReducer'
+import employeeSlice from './reducers/employeeReducer'
 
 const store = configureStore({
     reducer: {
@@ -11,12 +18,17 @@ const store = configureStore({
         area : areaSlice,
         table : tableSlice,
         category : categorySlice,
-        item : itemSlice
+        item : itemSlice,
+        user : userSlice,
+        shop : shopSlice,
+        customer : customerSlice,
+        order : orderSlice,
+        invoice : invoiceSlice,
+        inventory : inventorySlice,
+        employee : employeeSlice
     },
   });
   
 export default store;
   
 export const server = "http://127.0.0.1:8000/api/v1";
-// //   export const server = "https://lms-server-4c06.onrender.com/api/v1";
-//   export const server = "https://lms-server-yq5f.onrender.com/api/v1";

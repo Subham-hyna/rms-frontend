@@ -1,47 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import ToggleMode from '../ToogleMode/ToogleMode';
 import { Tooltip } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRequestedKots } from '../../../redux/actions/orderAction';
 
 const Navbar = ({listOfTabs,activeTab}) => {
 
-    const tables = [
-        {
-            _id: "gefghfds",
-            name: "1"
-        },
-        {
-            _id: "gefghfdssdf",
-            name: "2"
-        },
-        {
-            _id: "gefghsdfsds",
-            name: "3"
-        },
-    ]
+    const { shopId, shopName } = useParams();
 
-    const kot = [ 
-        {
-            "tableId" : {
-                "name" : "1"
-            },
-            "tokenNo" : "23111"
-        },
-        {
-            "tableId" : {
-                "name" : "2"
-            },
-            "tokenNo" : "23411"
-        },
-        {
-            "tableId" : {
-                "name" : "3"
-            },
-            "tokenNo" : "25171"
-        },
-    ]
+const { requestedKots } = useSelector(state => state.order);
+const { shop } = useSelector(state => state.shop);
+const { user } = useSelector(state=>state.user);
+const dispatch = useDispatch();
+const navigate = useNavigate();
+
+useEffect(()=>{
+    const interval = setInterval(() => {
+        dispatch(getRequestedKots(shop._id))
+    }, 30000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line 
+},[])
+
+useEffect(()=>{
+    if((shopId?.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user?._id.toString()){
+        navigate("/404")
+    }
+  },[navigate,shopId,shopName,shop,user])
 
 
     const handleChange = () => {
@@ -56,20 +44,15 @@ const Navbar = ({listOfTabs,activeTab}) => {
         )}
        </ul>
        <div className='navbar-right'>
-            {kot?.length > 0 && <div className='notify'></div>}
-            <Tooltip title={"KOT"}>
-            <NotificationsActiveIcon />
+            {requestedKots?.length > 0 && <div className='notify'></div>}
+            <Tooltip title={"KOT Requested"}>
+            <NotificationsActiveIcon onClick={()=>navigate(`/orders/manage/${shop.name}/${shop._id}`)} />
             </Tooltip>
             <Tooltip title={"Switch"}>
             <ToggleMode />
             </Tooltip>
-            <Link to={"/orders/order/dfh/dsg?newOrder=true"}><pre>New Order</pre></Link>
-            <select onChange={(e)=>handleChange(e.target.value)}>
-                <option value={""}>Print Bills</option>
-                {tables.map((m,i)=>(
-                <option key={i} value={m._id}>{m.name}</option>
-                ))}
-            </select>
+            <Link to={`/orders/order/${shop.name}/${shop._id}`}><pre>New Order</pre></Link>
+            <Link to={`/orders/table/${shop.name}/${shop._id}`}><pre>Print Bill</pre></Link>
        </div>
     </nav>
     </>

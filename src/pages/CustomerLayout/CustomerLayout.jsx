@@ -5,6 +5,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Navbar from '../../components/ui/Navbar/Navbar';
 import Sidecar from '../../components/ui/Sidecar/Sidecar';
+import { useSelector } from 'react-redux';
 
 const CustomerLayout = () => {
     const [sidebarMobileview, setSidebarMobileview] = useState(false)
@@ -12,10 +13,8 @@ const CustomerLayout = () => {
 
     const { pathname } = useLocation();
 
-    const shop = {
-        name : "Desi Eshas",
-        _id : "sdjhvfdsjhfsdgb"
-    }
+    const { shop } = useSelector(state=>state.shop);
+    
     const listOfTabs = [
         {
             title: "Customer",

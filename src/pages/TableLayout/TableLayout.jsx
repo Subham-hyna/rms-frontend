@@ -7,6 +7,7 @@ import Navbar from '../../components/ui/Navbar/Navbar';
 import { useLocation } from 'react-router-dom';
 import Table from './Table/Table';
 import Area from './Area/Area';
+import { useSelector } from 'react-redux';
 
 const TableLayout = () => {
 
@@ -22,10 +23,7 @@ const TableLayout = () => {
 
   },[activeTab,pathname]);
 
-  const shop = {
-    name : "Desi Eshas",
-    _id : "66d7375fb62d65233df4ce36"
-   }
+  const { shop } = useSelector(state=>state.shop)
 
   const listOfTabs = [
     {

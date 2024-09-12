@@ -25,233 +25,9 @@ const OpenOrder = () => {
     const [cartItems, setCartItems] = useState([]);
     const [paymentCounter, setPaymentCounter] = useState(0);
     const [itemCounter, setItemCounter] = useState(0);
-    
-    // const categories = [
-    //         {
-            
-    //                 "_id": "66d9570de0e25a12e3167d36",
-    //                 "name": "DAL",
-    //                 "noOfItems": 0,
-    //                 "priority": null,
-    //                 "shopId": "66d7375fb62d65233df4ce36",
-    //                 "__v": 0
-    //             },
-    //             {
-    //         "_id": "66d9fd5cbd0880ca1a1c1cf9",
-    //         "name": "CHINESE",
-    //         "noOfItems": 0,
-    //         "priority": null,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d9fd62bd0880ca1a1c1d02",
-    //         "name": "DRINKS",
-    //         "noOfItems": 0,
-    //         "priority": null,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d9fd6abd0880ca1a1c1d0b",
-    //         "name": "CHOWMIN",
-    //         "noOfItems": 0,
-    //         "priority": null,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d9fd73bd0880ca1a1c1d14",
-    //         "name": "MAIN COURSE",
-    //         "noOfItems": 0,
-    //         "priority": null,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d9fd7dbd0880ca1a1c1d1d",
-    //         "name": "SPECIAL",
-    //         "noOfItems": 0,
-    //         "priority": null,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d9fd87bd0880ca1a1c1d26",
-    //         "name": "ROTI",
-    //         "noOfItems": 0,
-    //         "priority": null,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d88d16e2beb007cffa2c84",
-    //         "name": "STARTERS",
-    //         "noOfItems": 3,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0,
-    //         "priority": 4
-    //     },
-    //     {
-    //         "_id": "66d88d27e2beb007cffa2c8f",
-    //         "name": "BIRIYANI",
-    //         "noOfItems": 6,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0,
-    //         "priority": 7
-    //     }
-    // ]
 
-    // const items = [
-    //     {
-    //         "_id": "66d8a4cd2cc63ecd1b1554bc",
-    //         "name": "Baby Corn",
-    //         "categoryId": {
-    //             "_id": "66d88d16e2beb007cffa2c84",
-    //             "name": "STARTERS"
-    //         },
-    //         "price": 180,
-    //         "mealType": "VEG",
-    //         "isAvailable": true,
-    //         "isStar": false,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0,
-    //         "shortCode": "BC"
-    //     },
-    //     {
-    //         "_id": "66d8a4cd2cc63ecd1b1454bc",
-    //         "name": "Baby Corn",
-    //         "categoryId": {
-    //             "_id": "66d88d16e2beb007cffa2c84",
-    //             "name": "STARTERS"
-    //         },
-    //         "price": 180,
-    //         "mealType": "VEG",
-    //         "isAvailable": true,
-    //         "isStar": false,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0,
-    //         "shortCode": "BC"
-    //     },
-    //     {
-    //         "_id": "66d8a4c62cc63ecd1b1454bc",
-    //         "name": "Baby Corn",
-    //         "categoryId": {
-    //             "_id": "66d88d16e2beb007cffa2c84",
-    //             "name": "STARTERS"
-    //         },
-    //         "price": 180,
-    //         "mealType": "VEG",
-    //         "isAvailable": true,
-    //         "isStar": false,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0,
-    //         "shortCode": "BC"
-    //     },
-    //     {
-    //         "_id": "66d8a4c62cc63fcd1b1454bc",
-    //         "name": "Baby Corn",
-    //         "categoryId": {
-    //             "_id": "66d88d16e2beb007cffa2c84",
-    //             "name": "STARTERS"
-    //         },
-    //         "price": 180,
-    //         "mealType": "VEG",
-    //         "isAvailable": true,
-    //         "isStar": false,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0,
-    //         "shortCode": "BC"
-    //     },
-    //     {
-    //         "_id": "66d8a4fa2cc63ecd1b1554d0",
-    //         "name": "Chicken Pakora",
-    //         "categoryId": {
-    //             "_id": "66d88d16e2beb007cffa2c84",
-    //             "name": "STARTERS"
-    //         },
-    //         "price": 120,
-    //         "mealType": "NONVEG",
-    //         "isAvailable": true,
-    //         "isStar": true,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d8c6091aadb3c5f39d6676",
-    //         "name": "Veg Biriyani",
-    //         "categoryId": {
-    //             "_id": "66d88d27e2beb007cffa2c8f",
-    //             "name": "BIRIYANI"
-    //         },
-    //         "price": 130,
-    //         "mealType": "VEG",
-    //         "isAvailable": true,
-    //         "isStar": true,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0,
-    //         "shortCode": "VB"
-    //     },
-    //     {
-    //         "_id": "66d8c6121aadb3c5f39d667d",
-    //         "name": "Egg Biriyani",
-    //         "categoryId": {
-    //             "_id": "66d88d27e2beb007cffa2c8f",
-    //             "name": "BIRIYANI"
-    //         },
-    //         "price": 130,
-    //         "mealType": "NONVEG",
-    //         "isAvailable": true,
-    //         "isStar": false,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d8c6191aadb3c5f39d6684",
-    //         "name": "Chicken Biriyani",
-    //         "categoryId": {
-    //             "_id": "66d88d27e2beb007cffa2c8f",
-    //             "name": "BIRIYANI"
-    //         },
-    //         "price": 130,
-    //         "mealType": "NONVEG",
-    //         "isAvailable": true,
-    //         "isStar": true,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d94b2de0e25a12e31678af",
-    //         "name": "Chicken Butter Masala",
-    //         "categoryId": {
-    //             "_id": "66d88d27e2beb007cffa2c8f",
-    //             "name": "BIRIYANI"
-    //         },
-    //         "price": 220,
-    //         "mealType": "NONVEG",
-    //         "isAvailable": true,
-    //         "isStar": false,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "66d94bb9e0e25a12e31678c4",
-    //         "name": "Panner Butter Masala",
-    //         "categoryId": {
-    //             "_id": "66d88d27e2beb007cffa2c8f",
-    //             "name": "BIRIYANI"
-    //         },
-    //         "price": 175,
-    //         "mealType": "VEG",
-    //         "isAvailable": true,
-    //         "isStar": false,
-    //         "shopId": "66d7375fb62d65233df4ce36",
-    //         "__v": 0,
-    //         "shortCode": "PBM"
-    //     }
-    // ]
-
-    const { items } = useSelector((state)=>state.item)
+    const { user } = useSelector(state=>state.user)
+    const { items, itemLoading } = useSelector((state)=>state.item)
     const { categories } = useSelector((state)=>state.category);
     const{ shopName, tableExistLoading, tableExist} = useSelector((state)=>state.table);
     const dispatch = useDispatch();
@@ -280,7 +56,7 @@ const OpenOrder = () => {
       }
 
       const resetHandler = () => {
-        dispatch(getItems("",shopId))
+        dispatch(getItems("",shopId,"",true,"",""))
         setSearchBoxValue("")
         setActiveTab("ALL")
         setMealType("")
@@ -326,7 +102,6 @@ const OpenOrder = () => {
             setItemCounter(itemCounter+1);
             setCartItems([...cartItems,object])
             
-            console.log(cartItems)
         }
       }
 
@@ -373,10 +148,13 @@ const OpenOrder = () => {
       }
 
     useEffect(()=>{
+                dispatch(getItems(searchBoxValue,shopId,mealType,true,"",categoryId))
+    },[dispatch,shopId,mealType,categoryId,searchBoxValue])
+
+    useEffect(()=>{
         dispatch(tableExistInShop(tableNo,shopId));
         dispatch(getCategories(shopId))
-                dispatch(getItems(searchBoxValue,shopId,mealType,"","",categoryId))
-    },[dispatch,tableNo,shopId,mealType,categoryId,searchBoxValue])
+      },[dispatch,tableNo,shopId])
     
     useEffect(()=>{
         if(tableExist === false){
@@ -393,7 +171,7 @@ const OpenOrder = () => {
                     <p><pre>{shopName}</pre></p>
                 </span>
                 <span className='open-order-nav-search-bar'>
-                    <form>
+                    <form onSubmit={(e)=>e.preventDefault()}>
                         {showSearchBar && <input type='text' placeholder='Search for item' onChange={(e)=>{setSearchBoxValue(e.target.value)}} value={searchBoxValue} />}
                         <SearchRoundedIcon onClick={()=>setShowSearchBar(!showSearchBar)}  />
                     </form>
@@ -402,7 +180,8 @@ const OpenOrder = () => {
             <div className='open-order-view'>
                 <span className='open-order-view-tableNo'>
                 <TableRestaurantIcon />
-                <p>3</p>
+                <p>{tableNo}</p>
+                {user?._id && <button onClick={()=>navigate(`/employee/tables/${shopId}`)}>All Tables</button>}
                 </span>
                 <span className='open-order-view-sort'>
                 {<span onClick={()=>handleChangeMealType("VEG")}>
@@ -432,12 +211,15 @@ const OpenOrder = () => {
                         <p>Showing Result for : {activeTab.toUpperCase()} {mealType && mealType} Items {searchBoxValue && searchBoxValue}</p>
                       </div>}
          </header>
+         {itemLoading ?
+         <h1>Loading</h1>
+         :
          <div className='open-order-content'>
             {items && items.length >0 ?
             <>
                {items?.map((item,index)=>(
                  <div key={index} class="food-item-row">
-                 <div class="food-item-image">
+                 <div className="food-item-image">
                    <KebabDiningIcon />
                  </div>
                  <div className="food-item-details">
@@ -461,9 +243,9 @@ const OpenOrder = () => {
             :
             <h1>No items</h1>    
         }
-         </div>
+         </div>}
          <div className={cartItems.length > 0 ? "cart-popup active" : "cart-popup"}>
-              <div class="cart-popup-details">
+              <div className="cart-popup-details">
                 <ShoppingCartIcon className="cart-popup-logo" />
                 <div className="cart-popup-info">
                   <h4>Cart Summary</h4>
@@ -471,7 +253,7 @@ const OpenOrder = () => {
                   <p>Rs. {paymentCounter}</p>
                 </div>
               </div>
-              <ViewCartModal handleCartItemsChange={handleCartItemsChange} paymentCounter={paymentCounter} itemCounter={itemCounter} cartItems={cartItems} >View Cart</ViewCartModal>
+              <ViewCartModal handleCartItemsChange={handleCartItemsChange} paymentCounter={paymentCounter} itemCounter={itemCounter} cartItems={cartItems} orderTableNo={tableNo} shopId={shopId}>View Cart</ViewCartModal>
             </div>
          </main>
   )

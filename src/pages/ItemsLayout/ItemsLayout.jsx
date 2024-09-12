@@ -6,6 +6,7 @@ import Items from './Items/Items'
 import Categories from './Categories/Categories'
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useSelector } from 'react-redux';
 
 const ItemsLayout = () => {
   const [sidebarMobileview, setSidebarMobileview] = useState(false)
@@ -20,10 +21,7 @@ const ItemsLayout = () => {
 
   },[activeTab,pathname]);
 
-  const shop = {
-    name : "Desi Eshas",
-    _id : "66d7375fb62d65233df4ce36"
-   }
+  const { shop } = useSelector(state=>state.shop)
 
   const listOfTabs = [
     {

@@ -104,6 +104,19 @@
     font-size: 18px;
     color: var(--orange);
   }
+
+  .open-order-view-tableNo>button{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3px;
+    background-color: var(--lightwhite2);
+    padding: 2px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    margin-left: 10px;
+  }
   
   .open-order-view-tableNo>p {
     font-weight: 500;

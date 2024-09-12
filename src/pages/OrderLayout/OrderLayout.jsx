@@ -8,6 +8,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import ManageOrder from './ManageOrder/ManageOrder'
 import TableView from './TableView/TableView';
+import { useSelector } from 'react-redux';
 
 const OrderLayout = () => {
 
@@ -23,10 +24,7 @@ const OrderLayout = () => {
   
     },[activeTab,pathname]);
   
-    const shop = {
-      name : "Desi Eshas",
-      _id : "sdjhvfdsjhfsdgb"
-     }
+    const { shop } = useSelector(state=>state.shop)
   
     const listOfTabs = [
       {

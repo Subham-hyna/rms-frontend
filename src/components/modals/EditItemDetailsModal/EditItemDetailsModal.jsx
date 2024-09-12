@@ -22,25 +22,7 @@ const EditItemDetailsModal = ({item,children}) => {
   
     const { categories } = useSelector((state)=>state.category);
 
-    const shop = 
-{
-  "_id": "66d7375fb62d65233df4ce36",
-  "name": "Desi Eshas",
-  "ownerId": "66d6d7070daa1cc6896b5aae",
-  "phoneNo": 6002576479,
-  "email": "dsubham490@gmail.com",
-  "gstIn": "1234567890224",
-  "shopType": "DHABA",
-  "employeesId": [],
-  "noOfemployees": 0,
-  "status": "ACTIVE",
-  "address": [
-      "sdgds"
-  ],
-  "createdAt": "2024-09-03T16:20:47.623Z",
-  "updatedAt": "2024-09-03T16:20:47.623Z",
-  "__v": 0
-}
+    const { shop } = useSelector(state=>state.shop)
 
 const submitHandler = (e) => {
     e.preventDefault();

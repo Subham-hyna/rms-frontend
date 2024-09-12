@@ -5,6 +5,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../../components/ui/Navbar/Navbar';
+import { useSelector } from 'react-redux';
 
 const InvoiceLayout = () => {
     const [sidebarMobileview, setSidebarMobileview] = useState(false)
@@ -12,10 +13,8 @@ const InvoiceLayout = () => {
 
     const { pathname } = useLocation();
 
-    const shop = {
-        name : "Desi Eshas",
-        _id : "sdjhvfdsjhfsdgb"
-    }
+    const { shop } = useSelector(state=>state.shop)
+
     const listOfTabs = [
         {
             title: "Invoice",

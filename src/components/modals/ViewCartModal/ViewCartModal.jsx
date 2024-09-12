@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import './ViewCartModal.css'
+import PlaceOrderModal from '../PlaceOrderModal/PlaceOrderModal';
 
-const ViewCartModal = ({handleCartItemsChange, cartItems,paymentCounter, itemCounter, children}) => {
+const ViewCartModal = ({handleCartItemsChange, orderTableNo, cartItems,paymentCounter, itemCounter, children, shopId, shopName}) => {
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -29,10 +30,6 @@ const ViewCartModal = ({handleCartItemsChange, cartItems,paymentCounter, itemCou
 
   const deleteCartItems = (item) => {
     handleCartItemsChange(showCartItems.filter((c)=>{return item.foodItemId !== c.foodItemId}),paymentCounter - (item.qty * item.price),itemCounter-item.qty)
-  }
-
-  const handleSubmit = () => {
-    console.log(showCartItems)
   }
 
   useEffect(()=>{
@@ -83,7 +80,7 @@ const ViewCartModal = ({handleCartItemsChange, cartItems,paymentCounter, itemCou
                      </div>
               </div>
 
-            <button onClick={handleSubmit} className='success-button'>Place Order</button>
+              <PlaceOrderModal cartItems={showCartItems} orderTableNo={orderTableNo} paymentCounter={paymentCounter} itemCounter={itemCounter} kotType={"DINEIN"} shopId={shopId} shopName={shopName}>Place Order</PlaceOrderModal>
             <button onClick={handleClose} className='close-button'>Order More</button>
         </div>
     </div>

@@ -1,141 +1,82 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddCustomerModal from '../../../components/modals/AddCustomerModal/AddCustomerModal'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PageHeading from '../../../components/ui/pageHeading/pageHeading';
 import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
-import ViewCustomerDetailsModal from '../../../components/modals/ViewCustomerDetailsModal/ViewCustomerDetailsModal';
 import EditCustomerDetailsModal from '../../../components/modals/EditCustomerDetailsModal/EditCustomerDetailsModal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Pagination, Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DownloadIcon from '@mui/icons-material/Download';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { clearErrors, clearMessages, deleteCustomer, getCustomers } from '../../../redux/actions/customerAction';
+import toast from 'react-hot-toast';
 
 const Customer = () => {
 
-    const shop = {
-        name : "Desi Eshas",
-        _id : "sdjhvfdsjhfsdgb",
-        createdAt : "2024-08-17T22:12Z"
-       }
+    const [searchValue, setSearchValue] = useState("");
+    const { customers, customerFilteredCount, resultPerPage ,customerLoading, customerError, customerMessage } =useSelector((state) => state.customer)
+    const [page,setPage] = useState(1);
 
-    const [startValue, setStartValue] = useState(dayjs(shop&&shop.createdAt.split("T")[0]));
-    const [endValue, setEndValue] = useState(dayjs(Date.now()));
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+  
+    const { shopId,shopName, q } = useParams();
 
-    const customerSearch = (value) => {
-        console.log(value)
+    const approveHandler = (id) => {
+        dispatch(deleteCustomer(id,shop._id));
     }
 
-    const customers = [
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
-        {
-            name:"Subham",
-            email: "dsfsdfjm @hsdf.com",
-            phoneNo: "9365765523",
-            totalSpending: "123123",
-            lastVisited: "12/09/23"
-        },
+    const { shop } = useSelector(state=>state.shop);
+    const { user } = useSelector(state=>state.user);
 
-    ]
+    const customerSearch = (value) => {
+        setSearchValue(value);
+        if(value === ""){
+          return
+        }
+        if(value.length > 0){
+            navigate(`/customers/customer/${shop.name}/${shop._id}/${value.trim()}`)
+          }
+          else{
+            navigate(`/customers/customer/${shop.name}/${shop._id}`)
+        }
+    }
+
+    const resetHandler = () => {
+      navigate(`/customers/customer/${shop.name}/${shop._id}`)
+      setSearchValue("");
+      setPage(1);
+      dispatch(getCustomers(q,shop._id,1))
+      }
+
+    const onPageChange = (event, value) => {
+        setPage(value);
+      };
+
+      useEffect(()=>{
+        dispatch(getCustomers(q,shopId,page));
+      },[dispatch,q,page,shopId,customerError,customerMessage]);
+
+      useEffect(()=>{
+        if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user._id.toString()){
+            navigate("/404")
+        }
+      },[navigate,shopId,shopName,shop,user])
+
+      useEffect(()=>{
+        if(customerError){
+          toast.error(customerError);
+          dispatch(clearErrors());
+        }
+        if(customerMessage){
+            toast.success(customerMessage);
+            dispatch(clearMessages());
+        }
+        
+    },[dispatch,customerError,customerMessage])
 
   return (
     <main>
@@ -145,48 +86,28 @@ const Customer = () => {
         placeholder={"by name or phoneNo or email"}
         searchHandler={customerSearch}
         button={<AddCustomerModal buttonIcon={<AddCircleOutlineIcon/>} buttonText={"Add Customer"} />}
-        tooltip={"Add Table"}
+        tooltip={"Add Customer"}
          /> 
          <div className='right-page-middle' style={{gap:"10px"}}>
-            <div>
-                <div className='right-page-middle-category' >
-                    <div className='right-page-middle-category-items'>
-                        <span>    
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                label="From"
-                                value={startValue && startValue}
-                                onChange={(startValue)=>{setStartValue(startValue)}}
-                                />
-                                <p> - </p>
-                                <DatePicker 
-                                value={endValue && endValue}
-                                label="To"
-                                onChange={(endValue)=>{setEndValue(endValue)}}
-                                />
-                            </LocalizationProvider>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
             <div className='right-page-content'>
-            <div className='right-page-content-viewBy'>
+            <div style={{marginTop:"10px"}} className='right-page-content-viewBy' >
                     <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
-                    <Tooltip title="Refresh"><RefreshIcon /></Tooltip>
+                    <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                 </div>
             </div>
             {<div className='showing-result'>
-                        <p>Showing Result for : {`From ${startValue} to ${endValue}`}</p>
+                        <p>Showing Result for : {searchValue && searchValue}</p>
                 </div>}
+            {customerLoading ?
+            <h1>Loading</h1>
+            :
             <div className='right-page-content-row'>
-                    {customers.length > 0 ?
+                    {customers?.length > 0 ?
                         <>
                             <table className='table'>
                                 <thead>
                                   <tr>
                                     <th><pre>Customer Name</pre></th>
-                                    {<th>Email</th>}
                                     <th><pre>Phone No</pre></th>
                                     <th><pre>Spending</pre></th>
                                     <th><pre>Last Visited</pre></th>
@@ -198,14 +119,12 @@ const Customer = () => {
                                     customers.map((c,index)=>(
                                       <tr key={index}>
                                         <td>{c?.name}</td>
-                                        {<td><pre>{c?.email}</pre></td>}
                                         <td>{c?.phoneNo}</td>
                                         <td><pre>Rs. {c.totalSpending}</pre></td>
-                                        <td>{c.lastVisited}</td>
+                                        <td><pre>{c.lastVisited && new Date(c.lastVisited).toDateString()}</pre></td>
                                         <td>
-                                            <ViewCustomerDetailsModal><VisibilityIcon /></ViewCustomerDetailsModal>
-                                            <EditCustomerDetailsModal><EditIcon /></EditCustomerDetailsModal>
-                                            <ConfirmationModal><DeleteIcon /></ConfirmationModal>
+                                            <EditCustomerDetailsModal customer={c}><EditIcon /></EditCustomerDetailsModal>
+                                            <ConfirmationModal heading={"Confirmation"} subHeading={"Are you sure to delete this customer"} data={c} confirmationHandler={approveHandler}><DeleteIcon /></ConfirmationModal>
                                         </td>
                                       </tr>
                                     ))}
@@ -215,11 +134,19 @@ const Customer = () => {
                         :
                         <h1>No Customers</h1>
                     }
-                </div>
+                </div>}
 
-        <div className='right-page-middle-footer'>
-        <Pagination count={10} variant="outlined" shape="rounded" />
-        </div>
+        {customerFilteredCount > resultPerPage && 
+        (<div className='right-page-middle-footer'>
+        <Pagination 
+            count={Math.ceil(customerFilteredCount / resultPerPage)}
+            page={page}
+            onChange={onPageChange}
+            variant="outlined" shape="rounded"
+        />
+        </div>)
+        }
+
          </div>
     </main>
   )

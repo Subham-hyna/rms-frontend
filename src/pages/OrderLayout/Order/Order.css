@@ -10,7 +10,7 @@
 
 .right-page-order>select{
     background-color: var(--violet);
-    padding: 5px;
+    padding: 8px 5px;
     font-size: 14px;
     font-weight: 500;
     border-radius: 10px;
@@ -39,7 +39,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     margin: 5px 0;
 }
 
@@ -133,10 +133,10 @@
 }
 
 .right-page-order-payment{
-    background-color: var(--lightgrey2);
+    background-color: var(--lightwhite2);
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 35px;
     border-radius: 5px;
 }
 
@@ -160,9 +160,11 @@
     align-items: center;
     gap: 10px;
     padding: 5px;
+    width: 100%;
 }
 
 .payment-btn>button{
+    flex: 1;
     padding: 8px 10px;
     background-color: var(--lightViolet);
     color: var(--violet);
@@ -188,6 +190,7 @@
     border-radius: 5px;
     width: 100px;
     border: 1px solid var(--darkviolet);
+    transform: scale(1.5);
 }
 
 .new-order-btn:hover{
@@ -196,6 +199,15 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-    
+.order-mobile{
+    display: none !important;
+}
+@media screen and (max-width: 1070px) {
+    .order-laptop{
+        display: none !important;
+    }
+    .order-mobile{
+        display: block !important;
+        width: 100%;
+    }
 }
