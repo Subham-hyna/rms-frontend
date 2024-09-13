@@ -57,6 +57,7 @@ useEffect(()=>{
         }>
          <Route exact={true} path='/user/forgot-password' element={<ForgotPassword />} />
          <Route exact={true} path='/login' element={<Login />} />
+         <Route exact={true} path='/' element={<Login />} />
          <Route exact={true} path='/signup' element={<Signup />} />
          <Route exact={true} path='/user/verify/:token' element={<VerifyUser />} />
          <Route exact={true} path='/user/reset-password/:token' element={<ResetPassword />} />
