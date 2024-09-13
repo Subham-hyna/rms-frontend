@@ -14,6 +14,7 @@ import toast from 'react-hot-toast';
 import { deleteArea } from "../../../redux/actions/areaAction.js"
 import { useNavigate, useParams } from 'react-router-dom';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Area = () => {
 
@@ -56,6 +57,7 @@ useEffect(()=>{
 
   return (
     <main>
+      <MetaData title={'AREA'} />
        <PageHeading 
         heading={"Areas"} 
         subHeading={"To View and add areas of tables"} 

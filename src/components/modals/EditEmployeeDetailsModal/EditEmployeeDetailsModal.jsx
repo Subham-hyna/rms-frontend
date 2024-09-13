@@ -29,8 +29,8 @@ const EditEmployeeDetailsModal = ({employee, children}) => {
         const formData = new FormData();
     
         formData.append("name",name);
-        formData.append("email",email);
-        formData.append("phoneNo",phoneNo);
+        formData.append("email",email.trim());
+        formData.append("phoneNo",phoneNo.trim());
         formData.append("line1",line1);
         formData.append("line2",line2);
         formData.append("pincode",pincode);

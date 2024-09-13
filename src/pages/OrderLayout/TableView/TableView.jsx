@@ -9,6 +9,7 @@ import PrintTableBillModal from '../../../components/modals/PrintTableBillModal/
 import { clearMessages } from '../../../redux/actions/invoiceAction';
 import toast from 'react-hot-toast';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const TableView = () => {
   const { tables , tableLoading, tableError, tableMessage } =useSelector((state) => state.table)
@@ -44,6 +45,7 @@ const TableView = () => {
       },[dispatch,invoiceMessage])
   return (
     <main>
+        <MetaData title={'TABLE VIEW'} />
         <PageHeading 
         heading={"Tables"} 
         subHeading={"To View and orders in tables"}

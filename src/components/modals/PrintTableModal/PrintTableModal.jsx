@@ -53,13 +53,14 @@ const handleQrDownload = async () => {
     open={open}
     onClose={handleClose}
     >
+        <>
         <div className='modal' style={{width:"500px"}}>
         <div className='modal-heading'>
             <p>Print Table</p>
             <p>To Edit Book with name, seats, shape</p>
         </div>
         <div className='modal-content'>
-          <div className='modal-print-url' ref = {qrRef}>
+          <div className='modal-print-url tab-view' ref = {qrRef}>
             <header>
             <img src={logo} alt='logo' />
             <h1>restura.</h1>
@@ -74,12 +75,16 @@ const handleQrDownload = async () => {
             </a>
             <p>Please Open Google Lens to scan the code</p>
           </div>
+    <div className='mobile-view'>
+      <h1>View on Desktop</h1>
+    </div>
         <div className='modal-button-group'>
-            <button className='success-button' onClick={handleQrDownload} >Download</button>
+            <button className='success-button tab-view' onClick={handleQrDownload} >Download</button>
             <button onClick={handleClose} className='close-button'>Close</button>
           </div>
         </div>
     </div>
+        </>
     </Modal>
   </>
   )

@@ -7,6 +7,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import TableLoader from '../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../components/ui/MetaData/MetaData';
 
 const WaiterTable = () => {
     const [searchBoxValue, setSearchBoxValue] = useState("");
@@ -27,6 +28,7 @@ const WaiterTable = () => {
 
   return (
     <main className='open-order'>
+        <MetaData title={"ORDERS"} />
         <header className='open-order-header'>
             <nav className='open-order-nav'>
                 <span className='open-order-nav-logo'>

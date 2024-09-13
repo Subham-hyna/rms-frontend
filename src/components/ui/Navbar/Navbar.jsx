@@ -48,7 +48,7 @@ useEffect(()=>{
             <ToggleMode />
             </Tooltip>
             <Link to={`/orders/order/${shop.name}/${shop._id}`}><pre>New Order</pre></Link>
-            <Link to={`/orders/table/${shop.name}/${shop._id}`}><pre>Print Bill</pre></Link>
+            {/* <Link to={`/orders/table/${shop.name}/${shop._id}`}><pre>Print Bill</pre></Link> */}
        </div>
     </nav>
     </>

@@ -90,4 +90,21 @@
 .modal-print-url>p{
     font-size: 14px;
     color: var(--lightgrey3);
+    text-align: center;
+}
+.mobile-view{
+    display: none;
+}
+
+.mobile-view>h1{
+    text-align: center;
+    font-size: 16px;
+}
+@media screen and (max-width: 500px) {
+    .mobile-view{
+        display: block;
+    }
+    .tab-view{
+        display: none;
+    }
 }

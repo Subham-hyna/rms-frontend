@@ -8,12 +8,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Pagination, Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, deleteCustomer, getCustomers } from '../../../redux/actions/customerAction';
 import toast from 'react-hot-toast';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Customer = () => {
 
@@ -81,6 +82,7 @@ const Customer = () => {
 
   return (
     <main>
+          <MetaData title={`CUSTOMERS`} />
         <PageHeading 
         heading={"Customers"} 
         subHeading={"To View and add customers"} 
@@ -92,7 +94,7 @@ const Customer = () => {
          <div className='right-page-middle' style={{gap:"10px"}}>
             <div className='right-page-content'>
             <div style={{marginTop:"10px"}} className='right-page-content-viewBy' >
-                    <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
+                    {/* <Tooltip title="Downnload"><DownloadIcon /></Tooltip> */}
                     <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                 </div>
             </div>

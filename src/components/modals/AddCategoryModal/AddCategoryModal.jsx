@@ -53,13 +53,13 @@ const { shop } = useSelector(state=>state.shop)
             <form onSubmit={submitHandler}>
                 <div>
                     <p>Name</p>
-                    <input type="text" onChange={(e)=>(setName(e.target.value))} value={name} required={true} />
+                    <input autoFocus type="text" onChange={(e)=>(setName(e.target.value))} value={name} required={true} />
                 </div>
                 <div>
                     <p>Priority</p>
                     <input type="number" onChange={(e)=>(setPriority(e.target.value)) } value={priority} />
                 </div>
-                <button type='submit' className='success-button'>{categoryLoading ? <div className="loader"></div>:"Submit"}</button>
+                <button type='submit' className='success-button'>{categoryLoading ? <div className="loader"></div>:"ADD"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

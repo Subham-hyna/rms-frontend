@@ -11,6 +11,7 @@ import ConfirmOrderModal from '../../../components/modals/ConfirmOrderModal/Conf
 import PrintKotModal from '../../../components/modals/PrintKotModal/PrintKotModal';
 import PrintKotBillModal from '../../../components/modals/PrintKotBillModal/PrintKotBillModal';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const ManageOrder = () => {
   // eslint-disable-next-line
@@ -97,6 +98,7 @@ useEffect(()=>{
 
   return (
     <main>
+      <MetaData title={'MANAGE ORDERS'} />
         <PageHeading 
         heading={"Manage Orders"} 
         subHeading={"To View ongoing orders"} 

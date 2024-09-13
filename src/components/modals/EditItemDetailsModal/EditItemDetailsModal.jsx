@@ -37,7 +37,7 @@ const submitHandler = (e) => {
     formData.append("isStar",isStar)
     formData.append("isAvailable",isAvailable)
     if(shortCode !== ""){
-        formData.append("shortCode",shortCode)
+        formData.append("shortCode",shortCode.toUpperCase())
     }
 
     dispatch(editItem(formData,item._id,shop._id));
@@ -91,7 +91,7 @@ const submitHandler = (e) => {
                     </select>
                 </div>
                 <div>
-                    <p>Meal Type</p>
+                    <p>Availability</p>
                      <select value={isAvailable} onChange={(e)=>(setIsAvailable(e.target.value))}>
                         <option value="" >Select Availability</option>
                         <option value="true" >Available</option>

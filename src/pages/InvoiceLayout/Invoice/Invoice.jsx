@@ -3,7 +3,7 @@ import PageHeading from '../../../components/ui/pageHeading/pageHeading';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Pagination, Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
 // import { LocalizationProvider } from '@mui/x-date-pickers';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -15,6 +15,7 @@ import { clearErrors, clearMessages, getInvoices } from '../../../redux/actions/
 import toast from 'react-hot-toast';
 import ViewInvoiceDetailsModal from '../../../components/modals/ViewInvoiceDetailsModal/ViewInvoiceDetailsModal';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Invoice = () => {
     const [paymentMode, setPaymentMode] = useState("");
@@ -47,6 +48,7 @@ const Invoice = () => {
     }
 
     const resetHandler = () => {
+      dispatch(getInvoices("",shop._id,1,""))
       setSearchValue("");
       setPaymentMode("");
       navigate(`/invoices/invoice/${shop.name}/${shop._id}`)
@@ -79,7 +81,7 @@ const Invoice = () => {
     // const viewingDays = ["ALL","TODAY","YESTERDAY","LAST WEEK","LAST MONTH","CUSTOM"]
 
     useEffect(()=>{
-      if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user._id.toString()){
+      if((shopId?.toString() !== shop?._id?.toString()) || (shopName?.toString() !==shop?.name?.toString()) || shop?.ownerId?.toString() !== user._id?.toString()){
           navigate("/404")
       }
     },[navigate,shopId,shopName,shop,user])
@@ -98,6 +100,7 @@ const Invoice = () => {
 
   return (
     <main>
+      <MetaData title={'INVOICES'} />
         <PageHeading 
         heading={"Invoices"} 
         subHeading={"To View and add invoices"} 
@@ -148,7 +151,7 @@ const Invoice = () => {
       </select>
       </Tooltip>
     </form>
-                    <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
+                    {/* <Tooltip title="Downnload"><DownloadIcon /></Tooltip> */}
                     <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                 </div>
             </div>
@@ -158,7 +161,8 @@ const Invoice = () => {
             {invoiceLoading ?
               <TableLoader column={6} />
               :
-              <div className='right-page-content-row'>
+              <>
+                <div className='right-page-content-row'>
                     {invoices?.length > 0 ?
                         <>
                             <table className='table'>
@@ -194,17 +198,19 @@ const Invoice = () => {
                         :
                         <h1>No Invoices</h1>
                     }
-                </div>}
+                </div>
         {invoiceFilteredCount > resultPerPage && 
-        (<div className='right-page-middle-footer'>
-        <Pagination 
-            count={Math.ceil(invoiceFilteredCount / resultPerPage)}
-            page={page}
-            onChange={onPageChange}
-            variant="outlined" shape="rounded"
-        />
-        </div>)
+          (<div className='right-page-middle-footer'>
+          <Pagination 
+          count={Math.ceil(invoiceFilteredCount / resultPerPage)}
+          page={page}
+          onChange={onPageChange}
+          variant="outlined" shape="rounded"
+          />
+          </div>)
         }
+              </>
+      }
          </div>
     </main>
   )

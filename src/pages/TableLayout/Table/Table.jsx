@@ -13,13 +13,14 @@ import EditTableDetailsModal from '../../../components/modals/EditTableDetailsMo
 import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 import PrintTableModal from '../../../components/modals/PrintTableModal/PrintTableModal';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, deleteTable, getTables } from '../../../redux/actions/tableAction';
 import toast from 'react-hot-toast';
 import { getAreas } from '../../../redux/actions/areaAction';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Table = () => {
 
@@ -106,6 +107,7 @@ const Table = () => {
 
   return (
     <main>
+        <MetaData title={'TABLE'} />
         <PageHeading 
         heading={"Tables"} 
         subHeading={"To View and add tables"} 
@@ -129,7 +131,7 @@ const Table = () => {
 
             <div className='right-page-content'>
                 <div className='right-page-content-viewBy'>
-                    <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
+                    {/* <Tooltip title="Downnload"><DownloadIcon /></Tooltip> */}
                     <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                     <p>View by </p>
                     <div>

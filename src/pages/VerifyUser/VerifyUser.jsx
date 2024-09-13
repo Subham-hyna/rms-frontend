@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux'
 import { clearErrors, verifyUser } from '../../redux/actions/userAction';
 import { useNavigate, useParams } from 'react-router-dom';
+import MetaData from '../../components/ui/MetaData/MetaData';
 
 const VerifyUser = () => {
   const [OTP, setOTP] = useState("")
@@ -35,8 +36,8 @@ const VerifyUser = () => {
 
   return (
     <>
-    {/* <MetaData title={`VERIFY USER`} />
-    {userLoading ? <InitialLoader />
+    <MetaData title={`VERIFY USER`} />
+    {/* {userLoading ? <InitialLoader />
     : */}
     <div className='login-page' style={{justifyContent: "center" , alignItems: "center"}}>
     <div className='login-right' style={{ borderRadius: "10px" , boxShadow: "#bebebe9c 3px 2px 13px 0px"}}>

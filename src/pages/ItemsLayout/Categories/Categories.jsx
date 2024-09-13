@@ -13,6 +13,7 @@ import { clearErrors, clearMessages, deleteCategory, getCategories } from '../..
 import EditCategoryDetailsModal from '../../../components/modals/EditCategoryDetailsModal/EditCategoryDetailsModal';
 import { useNavigate, useParams } from 'react-router-dom';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Categories = () => {
 
@@ -54,6 +55,7 @@ useEffect(()=>{
 
   return (
        <main>
+        <MetaData title={'FOOD CATEGORIES'} />
        <PageHeading 
         heading={"Category"} 
         subHeading={"To View and add categories"} 

@@ -7,13 +7,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, deleteEmployee, getEmployees } from '../../../redux/actions/employeeAction';
 import toast from 'react-hot-toast';
 import EditEmployeeDetailsModal from '../../../components/modals/EditEmployeeDetailsModal/EditEmployeeDetailsModal';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Employee = () => {
 
@@ -75,6 +76,7 @@ const Employee = () => {
 
   return (
     <main>
+        <MetaData title={'EMPLOYEES'} />
         <PageHeading 
         heading={"Employees"} 
         subHeading={"To View and add employees"} 
@@ -91,7 +93,7 @@ const Employee = () => {
 
             <div className='right-page-content'>
             <div className='right-page-content-viewBy'>
-                    <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
+                    {/* <Tooltip title="Downnload"><DownloadIcon /></Tooltip> */}
                     <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler}/></Tooltip>
                 </div>
             </div>

@@ -23,7 +23,7 @@ function ThemeProvider({ children }) {
             darkviolet2: "#ffffff",
             lightgrey: "#1c1c1c",
             lightViolet2: "#1f1f1f",
-            darkgrey2: "#dcdcdc"
+            darkgrey2: "#494949"
         }
     }
 

@@ -33,3 +33,7 @@
   --darkgrey: #8b8f9c;
   --darkgrey2: #585858;
 }
+
+.App{
+  user-select: none
+}

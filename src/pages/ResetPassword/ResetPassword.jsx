@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { clearErrors, resetPassword } from '../../redux/actions/userAction';
+import MetaData from '../../components/ui/MetaData/MetaData';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("")
@@ -47,8 +48,8 @@ const ResetPassword = () => {
 
   return (
     <>
-      {/* <MetaData title={`RESET PASSWORD`} />
-      {userLoading ? <InitialLoader />
+      <MetaData title={`RESET PASSWORD`} />
+      {/* {userLoading ? <InitialLoader />
     : */}
       <div className='login-page' style={{justifyContent: "center" , alignItems: "center"}}>
       <div className='login-right' style={{ borderRadius: "10px" , boxShadow: "#bebebe9c 3px 2px 13px 0px"}}>

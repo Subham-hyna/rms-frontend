@@ -27,8 +27,8 @@ const AddEmployeeModal = ({buttonIcon,buttonText}) => {
     const formData = new FormData();
 
     formData.append("name",name);
-    formData.append("email",email);
-    formData.append("phoneNo",phoneNo);
+    formData.append("email",email.trim());
+    formData.append("phoneNo",phoneNo.trim());
     formData.append("line1",line1);
     formData.append("line2",line2);
     formData.append("pincode",pincode);
@@ -97,7 +97,7 @@ const AddEmployeeModal = ({buttonIcon,buttonText}) => {
                     <p>State</p>
                     <input type="text" onChange={(e)=>(setState(e.target.value)) } value={state} required={true} />
                 </div>
-                <button type='submit' className='success-button'>{employeeLoading ? <div className="loader"></div>:"Submit"}</button>
+                <button type='submit' className='success-button'>{employeeLoading ? <div className="loader"></div>:"ADD"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

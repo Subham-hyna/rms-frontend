@@ -49,7 +49,7 @@ useEffect(()=>{
   return (
     <>
     <Router>
-     <div className='App'>
+     <div className='App' onContextMenu={(e)=>e.preventDefault()}>
       <Routes>
       <Route 
         element={

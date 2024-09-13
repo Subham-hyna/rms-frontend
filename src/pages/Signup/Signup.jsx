@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { clearErrors, login } from '../../redux/actions/userAction';
 import toast from 'react-hot-toast';
 import { clearErrors, clearMessages, signupOwner } from '../../redux/actions/userAction';
+import MetaData from '../../components/ui/MetaData/MetaData';
 // import MetaData from "../../components/MetaData/MetaData"
 // import InitialLoader from '../../components/Loader/InitialLoader/InitialLoader';
 
@@ -45,8 +46,8 @@ const Signup = () => {
     const formData = new FormData();
 
     formData.append("name",name);
-    formData.append("email",email);
-    formData.append("phoneNo",phoneNo);
+    formData.append("email",email.trim());
+    formData.append("phoneNo",phoneNo.trim());
     formData.append("line1",line1);
     formData.append("line2",line2);
     formData.append("pincode",pincode);
@@ -73,8 +74,8 @@ useEffect(()=>{
 
   return (
     <>
-    {/* <MetaData title={`LOGIN`} />
-    {userLoading ? <InitialLoader />
+    <MetaData title={`SIGNUP`} />
+    {/* {userLoading ? <InitialLoader />
     : */}
     <div className='login-page'>
         <div className='login-left'>

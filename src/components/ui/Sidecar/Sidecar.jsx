@@ -79,16 +79,16 @@ const Sidecar = () => {
             <h2 style={hideSidebar?{display:"none"}:{}} >Table</h2>
           </Link>
           </Tooltip>
-          <Tooltip title="Orders">
-          <Link to={`/orders/order/${shop.name}/${shop._id}`} className={activeTab === "orders" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("orders")}}>
-            <BorderColorIcon />
-            <h2 style={hideSidebar?{display:"none"}:{}} >Order</h2>
-          </Link>
-          </Tooltip>
           <Tooltip title="Items">
           <Link to={`/items/item/${shop.name}/${shop._id}`} className={activeTab === "items" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("items")}}>
             <RestaurantIcon />
             <h2 style={hideSidebar?{display:"none"}:{}} >Items</h2>
+          </Link>
+          </Tooltip>
+          <Tooltip title="Orders">
+          <Link to={`/orders/order/${shop.name}/${shop._id}`} className={activeTab === "orders" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("orders")}}>
+            <BorderColorIcon />
+            <h2 style={hideSidebar?{display:"none"}:{}} >Order</h2>
           </Link>
           </Tooltip>
           <Tooltip title="Invoices">
@@ -104,7 +104,7 @@ const Sidecar = () => {
           </Link>
           </Tooltip> */}
                <Tooltip title="Inventory">
-            <Link to={`/inventories/inventory/${shop.name}/${shop._id}`} className={activeTab === "inventory" ? "sidecar-active-tab" : ""} onClick={() => { setActiveTab("inventory"); }}>
+            <Link to={`/inventories/inventory/${shop.name}/${shop._id}`} className={activeTab === "inventories" ? "sidecar-active-tab" : ""} onClick={() => { setActiveTab("inventory"); }}>
               <InventoryIcon/>
               <h2 style={hideSidebar ? {display:"none"} : {}}>Inventory</h2>
             </Link>
@@ -127,7 +127,7 @@ const Sidecar = () => {
         <footer className='sidecar-footer'>
         <div style={hideSidebar?{display:"none"}:{}}>
           <img src={user?.avatar.url} alt='profile_pic' />
-          <h2>{user?.name.split(" ")[0]}</h2>
+          <h2>{user?.name.split(" ")[0].toUpperCase()}</h2>
           <p>{user?.role}</p>
         </div>
         <button>Open Profile</button>

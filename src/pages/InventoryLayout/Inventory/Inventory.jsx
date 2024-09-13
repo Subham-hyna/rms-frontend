@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Pagination, Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -17,6 +17,7 @@ import { deleteInventory } from '../../../redux/actions/inventoryAction';
 import AddInventoryModal from '../../../components/modals/AddInventoryModal/AddInventoryModal';
 import EditInventoryDetailsModal from '../../../components/modals/EditInventoryDetailsModal/EditInventoryDetailsModal';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Inventory = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -87,6 +88,7 @@ const { user } = useSelector(state=>state.user);
 
   return (
     <main>
+      <MetaData title={'INVENTORY'} />
       <PageHeading
         heading={'Inventory'}
         subHeading={'To View and manage inventory items'}
@@ -112,7 +114,7 @@ const { user } = useSelector(state=>state.user);
       </select>
       </Tooltip>
     </form>
-            <Tooltip title="Download"><DownloadIcon /></Tooltip>
+            {/* <Tooltip title="Download"><DownloadIcon /></Tooltip> */}
             <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
           </div>
         </div>

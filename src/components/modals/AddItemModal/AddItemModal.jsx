@@ -62,12 +62,12 @@ useEffect(()=>{
         <div className='modal'>
         <div className='modal-heading'>
             <p>Add Item</p>
-            <p>To Add Item with name, price, mealType</p>
+            <p>To Add Item with name, price</p>
         </div>
         <div className='modal-content'>
             <form onSubmit={submitHandler}>
                 <div>
-                    <p>Name</p>
+                    <p>Item Name</p>
                     <input type="text" onChange={(e)=>(setName(e.target.value))} value={name} required={true} />
                 </div>
                 <div>
@@ -92,7 +92,7 @@ useEffect(()=>{
                         ))}
                     </select>
                 </div>
-                <button type='submit' className='success-button'>{itemLoading ? <div className='loader'></div> :"Submit"}</button>
+                <button type='submit' className='success-button'>{itemLoading ? <div className='loader'></div> :"ADD"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

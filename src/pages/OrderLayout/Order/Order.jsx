@@ -18,6 +18,7 @@ import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import PlaceOrderModal from '../../../components/modals/PlaceOrderModal/PlaceOrderModal';
 import { useNavigate, useParams } from 'react-router-dom';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Order = () => {
   const [activeTab, setActiveTab] = useState("ALL");
@@ -237,6 +238,7 @@ useEffect(()=>{
 
   return (
     <main>
+      <MetaData title={'ORDERS'} />
         <PageHeading 
         heading={"Orders"} 
         subHeading={"To View and add orders"} 

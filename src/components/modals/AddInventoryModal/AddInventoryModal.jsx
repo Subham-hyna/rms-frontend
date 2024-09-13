@@ -71,7 +71,7 @@ const AddInventoryModal = ({ buttonIcon, buttonText }) => {
                   ))}
                 </select>
               </div>
-              <button type='submit' className='success-button'>{inventoryLoading ? <div className='loader'></div> :"Submit"}</button>
+              <button type='submit' className='success-button'>{inventoryLoading ? <div className='loader'></div> :"ADD"}</button>
             </form>
             <button onClick={handleClose} className='close-button'>Close</button>
           </div>

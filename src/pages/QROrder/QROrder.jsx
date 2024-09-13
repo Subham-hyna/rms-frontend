@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { tableExistInShop } from '../../redux/actions/tableAction';
 import logo from "../../assets/logo.svg"
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import MetaData from '../../components/ui/MetaData/MetaData';
 
 const QROrder = () => {
 
@@ -26,6 +27,7 @@ const QROrder = () => {
 
   return (
     <main className='qr-order'>
+        <MetaData title={'QR ORDER'} />
         <div className='qr-order-container'>
             <div className='qr-order-container-header'>
                 <img src={logo} alt='Logo' />

@@ -11,6 +11,7 @@ import { employeeOfShop, logout } from '../../redux/actions/userAction';
 import AddShopModal from '../../components/modals/AddShopModal/AddShopModal';
 import toast from 'react-hot-toast';
 import EditShopDetailsModal from '../../components/modals/EditShopDetailsModal/EditShopDetailsModal';
+import MetaData from '../../components/ui/MetaData/MetaData';
 
 const Shops = () => {
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ const Shops = () => {
 
   return (
     <>
+    <MetaData title={'SHOPS'} />
       {user && user.role === "OWNER" ? 
       <main className='shop-container-main'>
       <div className='shop-container-header'>

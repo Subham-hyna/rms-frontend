@@ -96,7 +96,7 @@ const AddShopModal = ({children, className}) => {
                     <p>Shop State</p>
                     <input type="text" onChange={(e)=>(setState(e.target.value)) } value={state} required={true} />
                 </div>
-                <button type='submit' className='success-button'>{shopLoading ? <div className='loader'></div> :"Submit"}</button>
+                <button type='submit' className='success-button'>{shopLoading ? <div className='loader'></div> :"ADD"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

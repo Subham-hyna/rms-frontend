@@ -67,7 +67,7 @@ useEffect(()=>{
         <div className='modal-content'>
             <form onSubmit={submitHandler}>
                 <div>
-                    <p>Name</p>
+                    <p>Table No</p>
                     <input type="text" onChange={(e)=>(setName(e.target.value))} value={name} required={true} />
                 </div>
                 <div>
@@ -92,7 +92,7 @@ useEffect(()=>{
                         ))}
                     </select>
                 </div>
-                <button type='submit' className='success-button'>{tableLoading ? <div className="loader"></div>:"Submit"}</button>
+                <button type='submit' className='success-button'>{tableLoading ? <div className="loader"></div>:"ADD"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

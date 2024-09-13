@@ -39,7 +39,7 @@ const PrintKotBillModal = ({kotId, children}) => {
     open={open}
     onClose={handleClose}
     >
-        <div className='modal' style={{width:"500px"}}>
+        <div className='modal'>
         <div className='modal-heading'>
             <p>Print Bill</p>
             <p>To print Bill of this Order</p>
@@ -48,7 +48,8 @@ const PrintKotBillModal = ({kotId, children}) => {
         {invoiceLoading ? 
         <TableLoader column={3} />
         :
-        <div className="modal-print-bill">
+       <>
+         <div className="modal-print-bill">
     <div className="modal-print-bill-header">
         <h1>{shop?.name}</h1>
         <p>{shop.address.line1}, {shop.address.line2}, {shop.address.pincode}, {shop.address.state}</p>
@@ -92,12 +93,14 @@ const PrintKotBillModal = ({kotId, children}) => {
         <p>Thank you for dining with us!</p>
         <p>Visit Again!</p>
     </div>
-</div>}
+</div>
         <div className='modal-button-group'>
             <PaidBillModal invoiceId={invoice?._id} >Paid</PaidBillModal>
             <button className='success-button' onClick={handleBillPrint} >Print Bill</button>
             <button onClick={handleClose} className='close-button'>Close</button>
           </div>
+       </>
+}
         </div>
     </div>
     </Modal>

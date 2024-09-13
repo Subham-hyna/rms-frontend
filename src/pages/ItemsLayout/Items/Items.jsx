@@ -9,7 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import toast from 'react-hot-toast';
@@ -19,6 +19,7 @@ import { clearErrors, clearMessages, deleteItem, editItem, getItems } from '../.
 import { getCategories } from '../../../redux/actions/categoryAction';
 import EditItemDetailsModal from '../../../components/modals/EditItemDetailsModal/EditItemDetailsModal';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../../components/ui/MetaData/MetaData';
 
 const Items = () => {
 
@@ -140,6 +141,7 @@ useEffect(()=>{
 
   return (
     <main>
+      <MetaData title={'FOOD ITEMS'} />
         <PageHeading 
         heading={"Items"} 
         subHeading={"To View and add items"} 
@@ -184,7 +186,7 @@ useEffect(()=>{
                         <div style={mealType === "NONVEG" ? {backgroundColor: "var(--red)"} : {}}></div>
                         <p><pre>Non Veg</pre></p>
                       </span>}
-                    <Tooltip title="Downnload"><DownloadIcon /></Tooltip>
+                    {/* <Tooltip title="Downnload"><DownloadIcon /></Tooltip> */}
                     <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                     <p><pre>View by</pre> </p>
                     <div>
@@ -207,7 +209,7 @@ useEffect(()=>{
                                 <div className='table-grid' key={i} style={t.shape === "CIRCLE" ? {borderRadius:"100%"}:{}}>
                                     <h3>{t.name}</h3>
                                     <p>{t.categoryId.name}</p>
-                                    <p><pre>{t.price}</pre></p>
+                                    <p><pre>&#8377; {t.price}</pre></p>
                                     <span>
                                             <EditItemDetailsModal item={t}><EditIcon style={{fontSize: "10px"}} /></EditItemDetailsModal>
                                             <ConfirmationModal heading={"Confirmation"} subHeading={"Are you sure to delete this item"} data={t} confirmationHandler={approveHandler}><DeleteIcon style={{fontSize: "10px"}} /></ConfirmationModal>
@@ -239,10 +241,10 @@ useEffect(()=>{
                                     {
                                     items.map((t,index)=>(
                                       <tr key={index}>
-                                        <td><div style={t.mealType === "VEG" ? {height:"10px", width:"10px",borderRadius:"100%", backgroundColor:"var(--darkgreen)"}:{height:"10px", width:"10px",borderRadius:"100%", backgroundColor:"var(--red)"}}></div>{t.name}</td>
+                                        <td><pre style={{display:"flex", gap:"3px",alignItems:"center"}}><div style={t.mealType === "VEG" ? {height:"10px", width:"10px",borderRadius:"100%", backgroundColor:"var(--darkgreen)"}:{height:"10px", width:"10px",borderRadius:"100%", backgroundColor:"var(--red)"}}></div>{t.name}</pre></td>
                                         {categories.length > 0 && <td><pre>{t.categoryId.name}</pre></td>}
                                         <td>
-                                          {t.price}
+                                       <pre> &#8377; {t.price}</pre>
                                         </td>
                                         <td>{t.shortCode}</td>
                                         <td onClick={()=>changeStarStatus(t)}>{t.isStar ? <StarIcon style={{fontSize:"20px",color:"var(--violet)"}} /> : <StarBorderIcon style={{fontSize:"20px",color:"var(--darkgrey)"}} /> }</td>

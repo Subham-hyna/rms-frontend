@@ -17,7 +17,7 @@ const PrintKotModal = ({ children, kot }) => {
         {children && <button onClick={handleOpen}>{children}</button>}
       </Tooltip>
       <Modal open={open} onClose={handleClose}>
-        <div className="modal" style={{ width: '500px' }}>
+        <div className="modal">
           <div className="modal-heading">
             <p>Print Kot</p>
             <p>To print Kot of this Order</p>

@@ -14,6 +14,7 @@ import { getItems } from '../../redux/actions/itemAction';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ViewCartModal from '../../components/modals/ViewCartModal/ViewCartModal';
 import TableLoader from '../../components/ui/Loader/TableLoader/TableLoader';
+import MetaData from '../../components/ui/MetaData/MetaData';
 
 const OpenOrder = () => {
     const [activeTab, setActiveTab] = useState("ALL");
@@ -165,6 +166,7 @@ const OpenOrder = () => {
 
   return (
     <main className='open-order'>
+      <MetaData title={'ORDERS'} />
         <header className='open-order-header'>
             <nav className='open-order-nav'>
                 <span className='open-order-nav-logo'>
