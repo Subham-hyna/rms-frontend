@@ -13,6 +13,7 @@ import KebabDiningIcon from '@mui/icons-material/KebabDining';
 import { getItems } from '../../redux/actions/itemAction';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ViewCartModal from '../../components/modals/ViewCartModal/ViewCartModal';
+import TableLoader from '../../components/ui/Loader/TableLoader/TableLoader';
 
 const OpenOrder = () => {
     const [activeTab, setActiveTab] = useState("ALL");
@@ -212,7 +213,7 @@ const OpenOrder = () => {
                       </div>}
          </header>
          {itemLoading ?
-         <h1>Loading</h1>
+         <TableLoader column={5} />
          :
          <div className='open-order-content'>
             {items && items.length >0 ?

@@ -220,6 +220,7 @@
     .login-page{
         justify-content: center;
         align-items: center;
+        background-color: var(--lightViolet);
     }
 }
 

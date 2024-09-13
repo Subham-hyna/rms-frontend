@@ -38,6 +38,10 @@ const Signup = () => {
         return toast.error("password not matching")
     }
 
+    if(avatar===""){
+      return toast.error("Avatar required")
+    }
+
     const formData = new FormData();
 
     formData.append("name",name);
@@ -61,7 +65,7 @@ useEffect(()=>{
         dispatch(clearErrors());
     }
     if(userMessage){
-      toast.success(userMessage);
+      toast.success("Verification Mail Sent");
       dispatch(clearMessages());
       navigate("/login")
     }

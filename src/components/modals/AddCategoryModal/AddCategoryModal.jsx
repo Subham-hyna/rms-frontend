@@ -13,7 +13,7 @@ const AddCategoryModal = ({buttonIcon,buttonText}) => {
   const handleClose = () => setOpen(false);
 
   const dispatch = useDispatch();
-  const { areaLoading } = useSelector((state)=>state.area);
+  const { categoryLoading } = useSelector((state)=>state.category);
 
 const { shop } = useSelector(state=>state.shop)
 
@@ -59,7 +59,7 @@ const { shop } = useSelector(state=>state.shop)
                     <p>Priority</p>
                     <input type="number" onChange={(e)=>(setPriority(e.target.value)) } value={priority} />
                 </div>
-                <button type='submit' className='success-button'>{areaLoading?<span className='loader'>sdf</span>:"Submit"}</button>
+                <button type='submit' className='success-button'>{categoryLoading ? <div className="loader"></div>:"Submit"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

@@ -16,6 +16,7 @@ import { clearErrors } from '../../../redux/actions/inventoryAction';
 import { deleteInventory } from '../../../redux/actions/inventoryAction';
 import AddInventoryModal from '../../../components/modals/AddInventoryModal/AddInventoryModal';
 import EditInventoryDetailsModal from '../../../components/modals/EditInventoryDetailsModal/EditInventoryDetailsModal';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Inventory = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -123,55 +124,56 @@ const { user } = useSelector(state=>state.user);
         )}
 
         {inventoryLoading ? (
-          <h1>Loading...</h1>
-        ) : (
-          <div className="right-page-content-row">
-            {inventoryItems?.length > 0 ? (
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th><pre>Item Name</pre></th>
-                    <th><pre>Quantity</pre></th>
-                    <th><pre>Status</pre></th>
-                    <th><pre>Action</pre></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {inventoryItems?.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.name}</td>
-                      <td><pre>{item.quantity} {item.quantityType}</pre></td>
-                      <td>{item.status}</td>
-                      <td>
-                        <EditInventoryDetailsModal inventory={item}><EditIcon /></EditInventoryDetailsModal>
-                        <ConfirmationModal
-                          heading={'Confirmation'}
-                          subHeading={'Are you sure to delete this inventory item?'}
-                          data={item}
-                          confirmationHandler={approveHandler}
-                        >
-                          <DeleteIcon />
-                        </ConfirmationModal>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <h1>No Inventory Items</h1>
-            )}
-          </div>
-        )}
+          <TableLoader column={6} />
+        ) : 
+         <> <div className="right-page-content-row">
+         {inventoryItems?.length > 0 ? (
+           <table className="table">
+             <thead>
+               <tr>
+                 <th><pre>Item Name</pre></th>
+                 <th><pre>Quantity</pre></th>
+                 <th><pre>Status</pre></th>
+                 <th><pre>Action</pre></th>
+               </tr>
+             </thead>
+             <tbody>
+               {inventoryItems?.map((item, index) => (
+                 <tr key={index}>
+                   <td>{item.name}</td>
+                   <td><pre>{item.quantity} {item.quantityType}</pre></td>
+                   <td>{item.status}</td>
+                   <td>
+                     <EditInventoryDetailsModal inventory={item}><EditIcon /></EditInventoryDetailsModal>
+                     <ConfirmationModal
+                       heading={'Confirmation'}
+                       subHeading={'Are you sure to delete this inventory item?'}
+                       data={item}
+                       confirmationHandler={approveHandler}
+                     >
+                       <DeleteIcon />
+                     </ConfirmationModal>
+                   </td>
+                 </tr>
+               ))}
+             </tbody>
+           </table>
+         ) : (
+           <h1>No Inventory Items</h1>
+         )}
+       </div>
+     
 
-    {inventoryFilteredCount > resultPerPage && 
-        (<div className='right-page-middle-footer'>
-        <Pagination 
-            count={Math.ceil(inventoryFilteredCount / resultPerPage)}
-            page={page}
-            onChange={onPageChange}
-            variant="outlined" shape="rounded"
-        />
-        </div>)
+ {inventoryFilteredCount > resultPerPage && 
+     (<div className='right-page-middle-footer'>
+     <Pagination 
+         count={Math.ceil(inventoryFilteredCount / resultPerPage)}
+         page={page}
+         onChange={onPageChange}
+         variant="outlined" shape="rounded"
+     />
+     </div>)
+     }</>
         }
       </div>
     </main>

@@ -52,7 +52,7 @@ const EditCategoryDetailsModal = ({category,children}) => {
                     <p>Priority</p>
                     <input type="number" onChange={(e)=>(setPriority(e.target.value)) } value={priority} />
                 </div>
-                <button type='submit' className='success-button'>{categoryLoading?<span className='loader'>sdf</span>:"Update"}</button>
+                <button type='submit' className='success-button'>{categoryLoading?<span className='loader'></span>:"Update"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

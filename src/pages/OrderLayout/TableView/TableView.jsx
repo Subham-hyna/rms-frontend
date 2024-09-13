@@ -8,6 +8,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import PrintTableBillModal from '../../../components/modals/PrintTableBillModal/PrintTableBillModal';
 import { clearMessages } from '../../../redux/actions/invoiceAction';
 import toast from 'react-hot-toast';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const TableView = () => {
   const { tables , tableLoading, tableError, tableMessage } =useSelector((state) => state.table)
@@ -56,7 +57,7 @@ const TableView = () => {
                     <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                 </div>
                {tableLoading ? 
-                <h1>Loading</h1>
+                <TableLoader column={6} />
                 :
                 <>
                 <div className='right-page-content-grid' style={tables?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{}}>

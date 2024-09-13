@@ -68,7 +68,7 @@ const EditShopDetailsModal = ({shop,children, className}) => {
                 </div>
                 <div>
                     <p>Gst In</p>
-                    <input type="number" onChange={(e)=>(setGstIn(e.target.value)) } value={gstIn} required={true} />
+                    <input type="number" onChange={(e)=>(setGstIn(e.target.value)) } value={gstIn} />
                 </div>
                 <div>
                     <p>Select Shop Type</p>
@@ -95,7 +95,7 @@ const EditShopDetailsModal = ({shop,children, className}) => {
                     <p>Shop State</p>
                     <input type="text" onChange={(e)=>(setState(e.target.value)) } value={state} required={true} />
                 </div>
-                <button type='submit' className='success-button'>{shopLoading ? <div className='loader'>asgd</div> :"Update"}</button>
+                <button type='submit' className='success-button'>{shopLoading ? <div className='loader'></div> :"Update"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

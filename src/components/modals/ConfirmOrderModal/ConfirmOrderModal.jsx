@@ -7,7 +7,7 @@ const ConfirmOrderModal = ({heading, subHeading, confirmationHandler,data, child
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { areaLoading } = useSelector((state)=>state.area);
+  const { orderLoading } = useSelector((state)=>state.order);
 
   function submitHandler(e){
       e.preventDefault();
@@ -28,7 +28,7 @@ const ConfirmOrderModal = ({heading, subHeading, confirmationHandler,data, child
         </div>
         <div className='modal-content'>
             <div className='modal-button-group'>
-            <button onClick={submitHandler} className='success-button' >{areaLoading?<span className='loader'>"sgfhf"</span>:"Confirm"}</button>
+            <button onClick={submitHandler} className='success-button' >{orderLoading?<span className='loader'></span>:"Confirm"}</button>
             <button onClick={handleClose} className='close-button'>Close</button>
             </div>
 

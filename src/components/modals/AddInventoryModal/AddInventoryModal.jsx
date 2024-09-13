@@ -63,15 +63,15 @@ const AddInventoryModal = ({ buttonIcon, buttonText }) => {
                 <input type="number" onChange={(e) => setQuantity(e.target.value)} value={quantity} required={true} />
               </div>
               <div>
-                <p>Quantity Type</p>
+                <p>Quantity Unit</p>
                 <select onChange={(e) => setQuantityType(e.target.value)} value={quantityType} required={true}>
-                  <option value="">Select Quantity Type</option>
+                  <option value="">Select Quantity Unit</option>
                   {INVENTORY_QUANTITY_TYPES.map((type,i) => (
                     <option key={i} value={type}>{type}</option>
                   ))}
                 </select>
               </div>
-              <button type='submit' className='success-button'>{inventoryLoading ? <div className='loader'>asgd</div> :"Submit"}</button>
+              <button type='submit' className='success-button'>{inventoryLoading ? <div className='loader'></div> :"Submit"}</button>
             </form>
             <button onClick={handleClose} className='close-button'>Close</button>
           </div>

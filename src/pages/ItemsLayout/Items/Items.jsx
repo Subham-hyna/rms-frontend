@@ -18,6 +18,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, deleteItem, editItem, getItems } from '../../../redux/actions/itemAction';
 import { getCategories } from '../../../redux/actions/categoryAction';
 import EditItemDetailsModal from '../../../components/modals/EditItemDetailsModal/EditItemDetailsModal';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Items = () => {
 
@@ -195,7 +196,7 @@ useEffect(()=>{
                         <p>Showing Result for : {activeTab.toUpperCase()} {available===true && "available"} {available===false && "not available"} {mealType && mealType} Items {searchValue && searchValue}</p>
                       </div>}
                 {itemLoading ?
-                <h1>Loading</h1>
+                <TableLoader column={6} />
                 :
                 <>
                 {gridView ? 

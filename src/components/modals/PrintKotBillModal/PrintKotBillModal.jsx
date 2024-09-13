@@ -5,6 +5,7 @@ import { clearMessages, generateSingleInvoice, paidInvoice } from '../../../redu
 import { Modal, Tooltip } from '@mui/material';
 import { billPaymentMode } from '../../../constanst';
 import toast from 'react-hot-toast';
+import TableLoader from '../../ui/Loader/TableLoader/TableLoader';
 
 const PrintKotBillModal = ({kotId, children}) => {
   const [open, setOpen] = useState(false);
@@ -45,7 +46,7 @@ const PrintKotBillModal = ({kotId, children}) => {
         </div>
         <div className='modal-content'>
         {invoiceLoading ? 
-        <h1>Loading</h1>
+        <TableLoader column={3} />
         :
         <div className="modal-print-bill">
     <div className="modal-print-bill-header">
@@ -154,7 +155,7 @@ function PaidBillModal({invoiceId,children}) {
                         ))}
                     </select>
                 </div>
-                <button type='submit' className='success-button'>{invoiceLoading?<span className='loader'>sdf</span>:"Paid"}</button>
+                <button type='submit' className='success-button'>{invoiceLoading?<span className='loader'></span>:"Paid"}</button>
             </form>
             <button onClick={handleClose} className='close-button'>Close</button>
         </div>

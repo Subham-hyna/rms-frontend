@@ -77,7 +77,7 @@ const EditProfileModal = ({children, user}) => {
                     <p>State</p>
                     <input type="text" onChange={(e)=>(setState(e.target.value)) } value={state} required={true} />
                 </div>
-                <button type='submit' className='success-button'>{userLoading ? <div className='loader'>asgd</div> :"Update"}</button>
+                <button type='submit' className='success-button'>{userLoading ? <div className='loader'></div> :"Update"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

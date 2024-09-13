@@ -92,7 +92,7 @@ useEffect(()=>{
                         ))}
                     </select>
                 </div>
-                <button type='submit' className='success-button'>{itemLoading ? <div className='loader'>asgd</div> :"Submit"}</button>
+                <button type='submit' className='success-button'>{itemLoading ? <div className='loader'></div> :"Submit"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 import ConfirmOrderModal from '../../../components/modals/ConfirmOrderModal/ConfirmOrderModal';
 import PrintKotModal from '../../../components/modals/PrintKotModal/PrintKotModal';
 import PrintKotBillModal from '../../../components/modals/PrintKotBillModal/PrintKotBillModal';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const ManageOrder = () => {
   // eslint-disable-next-line
@@ -125,7 +126,7 @@ useEffect(()=>{
                         <p>Showing Result for : {activeTab} Orders for {searchBoxValue && searchBoxValue}</p>
                       </div>}
                {orderLoading ? 
-                <h1>Loading</h1>
+                <TableLoader column={5} />
                 :
                 <>
                 <div className='right-page-content-grid' style={kots?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{gap:"20px"}}>

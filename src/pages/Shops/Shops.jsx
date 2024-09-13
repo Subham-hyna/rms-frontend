@@ -7,15 +7,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import shopLogo from '../../assets/store.png'
 import logo from "../../assets/logo.svg"
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
-import { employeeOfShop } from '../../redux/actions/userAction';
+import { employeeOfShop, logout } from '../../redux/actions/userAction';
 import AddShopModal from '../../components/modals/AddShopModal/AddShopModal';
 import toast from 'react-hot-toast';
 import EditShopDetailsModal from '../../components/modals/EditShopDetailsModal/EditShopDetailsModal';
 
 const Shops = () => {
   const navigate = useNavigate();
-  const { user } = useSelector(state=> state.user);
-  const { shops, shop, shopMessage, shopError } = useSelector(state=>state.shop)
+  const { user, userLoading } = useSelector(state=> state.user);
+  const { shops, shop, shopMessage, shopError, shopLoading } = useSelector(state=>state.shop)
   const dispatch = useDispatch();
 
   const handleClick = (shop) => {
@@ -67,7 +67,7 @@ const Shops = () => {
       <div className="shop-info">
         <h2>{s.name}</h2>
         <p>Address : {s.address.line1} {s.address.line2} {s.address.pincode} {s.address.state}</p>
-        <button onClick={()=>handleClick(s)} >Get in Shop</button>
+        <button onClick={()=>handleClick(s)} >{shopLoading ? <div className='loader'></div>:"Get in Shop"}</button>
       </div>
     </div>
     ))}
@@ -87,6 +87,7 @@ const Shops = () => {
             <Link to={`/employee/tables/${shop._id}`} className='qr-order-container-button'>
                 <LocalDiningIcon /> Order now
             </Link>
+            <button onClick={()=>dispatch(logout())}>{userLoading ?<span className='loader'></span>:" Logout"}</button>
         </div>
     </main>}
     </>

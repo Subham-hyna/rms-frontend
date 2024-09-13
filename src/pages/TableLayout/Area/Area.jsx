@@ -13,6 +13,7 @@ import { clearErrors, clearMessages, getAreas } from '../../../redux/actions/are
 import toast from 'react-hot-toast';
 import { deleteArea } from "../../../redux/actions/areaAction.js"
 import { useNavigate, useParams } from 'react-router-dom';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Area = () => {
 
@@ -68,7 +69,7 @@ useEffect(()=>{
                     <Tooltip title="Refresh"><RefreshIcon onClick={()=>dispatch(getAreas(shop._id))} /></Tooltip>
                 </div>
               {areaLoading ? 
-              <h1>Loading</h1>
+              <TableLoader column={6} />
               :
               <>
               <div className='right-page-content-grid' style={areas?.length === 0 ?{justifyContent:"center", alignItems:"center"}:{}}>

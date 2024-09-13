@@ -20,6 +20,7 @@ const AddTableModal = ({buttonIcon,buttonText}) => {
 
 const { areas } = useSelector((state)=>state.area);
 const { shop } = useSelector(state=>state.shop)
+const { tableLoading } = useSelector(state=>state.table)
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -61,7 +62,7 @@ useEffect(()=>{
         <div className='modal'>
         <div className='modal-heading'>
             <p>Add Table</p>
-            <p>To Add Book with name, seats, shape</p>
+            <p>To Add Table with name, seats, shape</p>
         </div>
         <div className='modal-content'>
             <form onSubmit={submitHandler}>
@@ -91,7 +92,7 @@ useEffect(()=>{
                         ))}
                     </select>
                 </div>
-                <button type='submit' className='success-button'>Submit</button>
+                <button type='submit' className='success-button'>{tableLoading ? <div className="loader"></div>:"Submit"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

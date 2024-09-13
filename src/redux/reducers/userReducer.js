@@ -62,17 +62,17 @@ const userSlice = createSlice({
             state.userError = action.payload;
         },
 
-        // OTPVerificationRequest(state,action){
-        //     state.userLoading = true;
-        // },
-        // OTPVerificationSuccess(state,action){
-        //     state.userLoading = false;
-        //     state.userMessage = action.payload.userMessage
-        // },
-        // OTPVerificationFail(state,action){
-        //     state.userLoading = false;
-        //     state.userError = action.payload;
-        // },
+        OTPVerificationRequest(state,action){
+            state.userLoading = true;
+        },
+        OTPVerificationSuccess(state,action){
+            state.userLoading = false;
+            state.userMessage = action.payload.message
+        },
+        OTPVerificationFail(state,action){
+            state.userLoading = false;
+            state.userError = action.payload;
+        },
 
         updateAvatarRequest(state,action){
             state.userLoading = true;
@@ -86,10 +86,6 @@ const userSlice = createSlice({
             state.userLoading = false;
             state.userError = action.payload;
         },
-        // updateAvatarReset(state,action){
-        //     state.isUpdated = false;
-        // },
-
         updatePasswordRequest(state,action){
             state.userLoading = true;
         },
@@ -101,72 +97,35 @@ const userSlice = createSlice({
             state.userLoading = false;
             state.userError = action.payload;
         },
-        // updatePasswordReset(state,action){
-        //     state.isChanged = false;
-        // },
 
-        // forgotPasswordRequest(state,action){
-        //     state.userLoading = true;
-        // },
-        // forgotPasswordSuccess(state,action){
-        //     state.userLoading = false;
-        //     state.userMessage = action.payload.userMessage;
-        // },
-        // forgotPasswordFail(state,action){
-        //     state.userLoading = false;
-        //     state.userError = action.payload;
-        // },
+        forgotPasswordRequest(state,action){
+            state.userLoading = true;
+        },
+        forgotPasswordSuccess(state,action){
+            state.userLoading = false;
+            state.userMessage = action.payload.message;
+        },
+        forgotPasswordFail(state,action){
+            state.userLoading = false;
+            state.userError = action.payload;
+        },
 
-        // resetPasswordRequest(state,action){
-        //     state.userLoading = true;
-        //     state.isAuthenticated = false
-        // },
-        // resetPasswordSuccess(state,action){
-        //     state.user = action.payload.data.user
-        //     state.userMessage = action.payload.userMessage;
-        //     state.isAuthenticated = true
-        //     state.userLoading = false;
-        //     state.isChanged = true;
-        // },
-        // resetPasswordFail(state,action){
-        //     state.userLoading = false;
-        //     state.userError = action.payload;
-        //     state.isAuthenticated = false
-        // },
-        // resetPasswordReset(state,action){
-        //     state.isChanged = false;
-        // },
-
-        // changeMembershipRequest(state,action){
-        //     state.userLoading = true;
-        // },
-        // changeMembershipSuccess(state,action){
-        //     state.userMessage = action.payload.userMessage;
-        //     state.userLoading = false;
-        //     state.isChanged = true;
-        // },
-        // changeMembershipFail(state,action){
-        //     state.userLoading = false;
-        //     state.userError = action.payload;
-        // },
-        // changeMembershipReset(state,action){
-        //     state.isChanged = false;
-        // },
-
-        // allMemberRequest(state,action){
-        //     state.userLoading = true;
-        //     state.users = [];
-        // },
-        // allMemberSuccess(state,action){
-        //     state.userLoading = false;
-        //     state.users = action.payload.data.users;
-        //     state.resultPerPage = action.payload.data.resultPerPage;
-        //     state.userFilteredCount =  action.payload.data.userFilteredCount;
-        // },
-        // allMemberFail(state,action){
-        //     state.userLoading = false;
-        //     state.userError = action.payload;
-        // },
+        resetPasswordRequest(state,action){
+            state.userLoading = true;
+            state.isAuthenticated = false
+        },
+        resetPasswordSuccess(state,action){
+            state.user = action.payload.data.user
+            state.userMessage = action.payload.message;
+            state.isAuthenticated = true
+            state.userLoading = false;
+            state.isChanged = true;
+        },
+        resetPasswordFail(state,action){
+            state.userLoading = false;
+            state.userError = action.payload;
+            state.isAuthenticated = false
+        },
 
         clearError(state,action){
             state.userError = null;
@@ -192,31 +151,21 @@ export const {
     logoutRequest, 
     logoutSuccess, 
     logoutFail, 
-    // OTPVerificationRequest, 
-    // OTPVerificationSuccess, 
-    // OTPVerificationFail, 
+    OTPVerificationRequest,
+    OTPVerificationSuccess,
+    OTPVerificationFail,
     updateAvatarRequest,
     updateAvatarSuccess,
     updateAvatarFail,
-    // updateAvatarReset, 
     updatePasswordRequest, 
     updatePasswordSuccess, 
     updatePasswordFail, 
-    // updatePasswordReset,
-    // forgotPasswordRequest,
-    // forgotPasswordSuccess,
-    // forgotPasswordFail,
-    // resetPasswordRequest,
-    // resetPasswordSuccess,
-    // resetPasswordFail, 
-    // resetPasswordReset,
-    // allMemberRequest,
-    // allMemberSuccess,
-    // allMemberFail,
-    // changeMembershipRequest,
-    // changeMembershipSuccess,
-    // changeMembershipFail,
-    // changeMembershipReset,
+    forgotPasswordRequest,
+    forgotPasswordSuccess,
+    forgotPasswordFail,
+    resetPasswordRequest,
+    resetPasswordSuccess,
+    resetPasswordFail, 
     clearError, 
     clearMessage 
 } = userSlice.actions;

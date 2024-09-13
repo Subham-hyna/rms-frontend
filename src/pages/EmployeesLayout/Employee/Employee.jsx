@@ -13,6 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, deleteEmployee, getEmployees } from '../../../redux/actions/employeeAction';
 import toast from 'react-hot-toast';
 import EditEmployeeDetailsModal from '../../../components/modals/EditEmployeeDetailsModal/EditEmployeeDetailsModal';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Employee = () => {
 
@@ -98,7 +99,7 @@ const Employee = () => {
                         <p>Showing Result for : {searchValue}</p>
                 </div>}
             {employeeLoading ? 
-            <h1>Loading</h1>
+            <TableLoader column={6} />
             :
             <div className='right-page-content-row'>
                     {employees?.length > 0 ?

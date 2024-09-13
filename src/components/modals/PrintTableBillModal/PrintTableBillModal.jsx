@@ -156,7 +156,7 @@ const PrintTableBillModal = ({table, children, className, style}) => {
                           ))}
                       </select>
                   </div>
-                  <button type='submit' className='success-button'>{invoiceLoading?<span className='loader'>sdf</span>:"Paid"}</button>
+                  <button type='submit' className='success-button'>{invoiceLoading?<span className='loader'></span>:"Paid"}</button>
               </form>
               <button onClick={handleClose} className='close-button'>Close</button>
           </div>

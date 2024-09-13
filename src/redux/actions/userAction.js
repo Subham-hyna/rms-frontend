@@ -1,6 +1,6 @@
 import axios from "axios";
 import { server } from "../store";
-import { clearError, clearMessage, loadUserFail, loadUserRequest, loadUserSuccess, loginFail, loginRequest, loginSuccess, logoutFail, logoutRequest, logoutSuccess, signupFail, signupRequest, signupSuccess, updateAvatarFail, updateAvatarRequest, updateAvatarSuccess, updatePasswordFail, updatePasswordRequest, updatePasswordSuccess } from "../reducers/userReducer";
+import { OTPVerificationFail, OTPVerificationRequest, OTPVerificationSuccess, clearError, clearMessage, forgotPasswordFail, forgotPasswordRequest, forgotPasswordSuccess, loadUserFail, loadUserRequest, loadUserSuccess, loginFail, loginRequest, loginSuccess, logoutFail, logoutRequest, logoutSuccess, resetPasswordFail, resetPasswordRequest, resetPasswordSuccess, signupFail, signupRequest, signupSuccess, updateAvatarFail, updateAvatarRequest, updateAvatarSuccess, updatePasswordFail, updatePasswordRequest, updatePasswordSuccess } from "../reducers/userReducer";
 import { myShopFail, myShopRequest, myShopSuccess } from "../reducers/shopReducer";
 
 //Login owner
@@ -126,27 +126,27 @@ export const employeeOfShop = () => async (dispatch) => {
 //   }
 // };
 
-// //Verify user
-// export const verifyUser = (otp,token) => async (dispatch) => {
-//   try {
-//     dispatch(OTPVerificationRequest());
+//Verify user
+export const verifyUser = (otp,token) => async (dispatch) => {
+  try {
+    dispatch(OTPVerificationRequest());
 
-//     const config = { headers: { 
-//       "Content-Type": "application/json",
-//     },
-//     withCredentials: true
-//    };
+    const config = { headers: { 
+      "Content-Type": "application/json",
+    },
+    withCredentials: true
+   };
 
-//     const { data } = await axios.put(`${server}/users/verify/${token}`,
-//     {otp},
-//     config
-//     );
+    const { data } = await axios.put(`${server}/users/verify-user/${token}`,
+    {otp},
+    config
+    );
 
-//     dispatch(OTPVerificationSuccess(data));
-//   } catch (error) {
-//     dispatch(OTPVerificationFail(error.response.data.message));
-//   }
-// };
+    dispatch(OTPVerificationSuccess(data));
+  } catch (error) {
+    dispatch(OTPVerificationFail(error.response.data.message));
+  }
+};
 
 //LoadUser
 export const loadUser = () => async (dispatch) => {
@@ -276,41 +276,41 @@ export const updatePassword = (userData) => async (dispatch) => {
   }
 };
 
-// // Forgot Password
-// export const forgotPassword = (email) => async (dispatch) => {
-//   try {
-//     dispatch(forgotPasswordRequest());
+// Forgot Password
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch(forgotPasswordRequest());
 
-//     const config = { headers: { "Content-Type": "application/json" } };
+    const config = { headers: { "Content-Type": "application/json" } };
 
-//     const { data } = await axios.post(`${server}/users/forgot-password`, {email}, config);
+    const { data } = await axios.post(`${server}/users/forgot-password`, {email}, config);
 
-//     dispatch(forgotPasswordSuccess(data));
-//   } catch (error) {
-//     dispatch(forgotPasswordFail(error.response.data.message));
-//   }
-// };
+    dispatch(forgotPasswordSuccess(data));
+  } catch (error) {
+    dispatch(forgotPasswordFail(error.response.data.message));
+  }
+};
 
-// // Reset Password
-// export const resetPassword = (formData,token) => async (dispatch) => {
-//   try {
-//     dispatch(resetPasswordRequest());
+// Reset Password
+export const resetPassword = (formData,token) => async (dispatch) => {
+  try {
+    dispatch(resetPasswordRequest());
 
-//     const config = { headers: { "Content-Type": "application/json" } };
+    const config = { headers: { "Content-Type": "application/json" } };
 
-//     const { data } = await axios.put(
-//       `${server}/users/reset-password/${token}`,
-//       formData,
-//       config
-//     );
+    const { data } = await axios.put(
+      `${server}/users/reset-password/${token}`,
+      formData,
+      config
+    );
 
-//     dispatch(resetPasswordSuccess(data));
-//     localStorage.setItem("Access-Token",data.data.accessToken);
-//     localStorage.setItem("Refresh-Token",data.data.refreshToken);
-//   } catch (error) {
-//     dispatch(resetPasswordFail(error.response.data.message));
-//   }
-// };
+    dispatch(resetPasswordSuccess(data));
+    localStorage.setItem("Access-Token",data.data.accessToken);
+    localStorage.setItem("Refresh-Token",data.data.refreshToken);
+  } catch (error) {
+    dispatch(resetPasswordFail(error.response.data.message));
+  }
+};
 
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {

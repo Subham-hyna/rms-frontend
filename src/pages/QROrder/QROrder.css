@@ -74,6 +74,18 @@
     background-color: var(--darkviolet);
     transform: translateY(-5px);
   }
+
+  .qr-order-container>button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--red);
+    color: var(--lightwhite2);
+    border: none;
+    outline: none;
+    border-radius: 15px;
+  }
   
   @media (max-width: 600px) {
     .qr-order-container {

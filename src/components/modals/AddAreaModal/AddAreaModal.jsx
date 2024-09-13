@@ -60,7 +60,7 @@ const AddAreaModal = ({buttonIcon,buttonText}) => {
                     <p>Priority</p>
                     <input type="number" onChange={(e)=>(setPriority(e.target.value)) } value={priority}/>
                 </div>
-                <button type='submit' className='success-button'>{areaLoading?<span className='loader'>sdf</span>:"Submit"}</button>
+                <button type='submit' className='success-button'>{areaLoading ? <div className="loader"></div>:"Submit"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

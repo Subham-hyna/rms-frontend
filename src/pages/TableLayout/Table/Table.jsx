@@ -19,6 +19,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, deleteTable, getTables } from '../../../redux/actions/tableAction';
 import toast from 'react-hot-toast';
 import { getAreas } from '../../../redux/actions/areaAction';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Table = () => {
 
@@ -140,7 +141,7 @@ const Table = () => {
                         <p>Showing Result for : Tables in {activeTab.toUpperCase()} area {searchValue && searchValue}</p>
                       </div>}
                {tableLoading ? 
-                <h1>Loading</h1>
+                <TableLoader column={6} />
                 :
                 <>
                 {gridView ? 

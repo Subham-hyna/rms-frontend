@@ -17,6 +17,7 @@ import ViewCartModal from '../../../components/modals/ViewCartModal/ViewCartModa
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import PlaceOrderModal from '../../../components/modals/PlaceOrderModal/PlaceOrderModal';
 import { useNavigate, useParams } from 'react-router-dom';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Order = () => {
   const [activeTab, setActiveTab] = useState("ALL");
@@ -274,7 +275,7 @@ useEffect(()=>{
                     <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                 </div>
                 {itemLoading ?
-                <h1>Loading</h1>
+                <TableLoader column={5} />
                 :
                 <div className='right-page-content-grid' style={items?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{}}>
                     {items?.length > 0 ?
@@ -375,7 +376,7 @@ useEffect(()=>{
                     ))}
               </span>
             {itemLoading ?
-                <h1>Loading</h1>
+                <TableLoader column={6} />
                 :
             <div className='open-order-content'>
             {items && items.length >0 ?
@@ -423,7 +424,7 @@ useEffect(()=>{
             :
             <>
                      {tableLoading ?
-                     <h1>Loading</h1>
+                     <TableLoader column={6} />
                      :
                      <div className='right-page-content-grid' style={tables?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{paddingTop:"20px"}}>
                     {tables?.length > 0 ?

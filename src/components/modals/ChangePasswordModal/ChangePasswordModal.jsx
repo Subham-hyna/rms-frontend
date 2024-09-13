@@ -77,7 +77,7 @@ const ChangePasswordModal = () => {
                         <p>Confirm new Password</p>
                         <input type="password" onChange={(e)=>(setConfirmPassword(e.target.value)) } value={confirmPassword} />
                     </div>
-                    <button type='submit' className='success-button'>{userLoading?<span className='loader'>sfzdx</span>:"Submit"}</button>
+                    <button type='submit' className='success-button'>{userLoading?<span className='loader'></span>:"Submit"}</button>
                 </form>
 
                 <button onClick={handleClose} className='close-button'>Close</button>

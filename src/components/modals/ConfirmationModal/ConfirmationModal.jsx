@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import './ConfirmationModal.css'
 import { Modal, Tooltip } from '@mui/material'
-import { useSelector } from 'react-redux';
 
 const ConfirmationModal = ({heading, subHeading, confirmationHandler,data, children}) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { areaLoading } = useSelector((state)=>state.area);
 
   function submitHandler(e){
       e.preventDefault();
@@ -29,7 +27,7 @@ const ConfirmationModal = ({heading, subHeading, confirmationHandler,data, child
         </div>
         <div className='modal-content'>
             <div className='modal-button-group'>
-            <button onClick={submitHandler} className='danger-button' >{areaLoading?<span className='loader'>"sgfhf"</span>:"Delete"}</button>
+            <button onClick={submitHandler} className='danger-button' >Delete</button>
             <button onClick={handleClose} className='close-button'>Close</button>
             </div>
 

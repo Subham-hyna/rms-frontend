@@ -6,12 +6,13 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import TableLoader from '../../components/ui/Loader/TableLoader/TableLoader';
 
 const WaiterTable = () => {
     const [searchBoxValue, setSearchBoxValue] = useState("");
     const [showSearchBar, setShowSearchBar] = useState(false);
     const { shop } = useSelector(state=>state.shop);
-    const { tables } = useSelector(state=>state.table);
+    const { tables, tableLoading } = useSelector(state=>state.table);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -45,7 +46,11 @@ const WaiterTable = () => {
                 </span>
             </div>
          </header>
-         <div className='right-page-content-grid' style={tables?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{paddingTop:"20px"}}>
+        {
+        tableLoading ?
+        <TableLoader column={5} />
+        :
+        <div className='right-page-content-grid' style={tables?.length === 0 ? {justifyContent:"center", alignItems:"center"}:{paddingTop:"20px"}}>
                     {tables?.length > 0 ?
                         <>
                             {tables.map((t,i)=>(
@@ -60,6 +65,7 @@ const WaiterTable = () => {
                         <h1>No Tables</h1>
                     }
                 </div>
+                }
          </main>
   )
 }

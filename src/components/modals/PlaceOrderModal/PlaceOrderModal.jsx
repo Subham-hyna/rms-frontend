@@ -13,7 +13,7 @@ const PlaceOrderModal = ({children, cartItems, orderTableNo, paymentCounter, ite
     const handleClose = () => setOpen(false);
 
     const { user } = useSelector(state => state.user);
-    const { orderError, orderMessage } = useSelector(state => state.order)
+    const { orderError, orderMessage, orderLoading } = useSelector(state => state.order)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -71,7 +71,7 @@ const PlaceOrderModal = ({children, cartItems, orderTableNo, paymentCounter, ite
                     <p>Phone No</p>
                     <input type="number" onChange={(e)=>(setPhoneNo(e.target.value)) } value={phoneNo}/>
                 </div>
-                <button type='submit' className='success-button'>Place Order</button>
+                <button type='submit' className='success-button'>{orderLoading?<span className='loader'></span>:"Place Order"}</button>
             </form>
             <button onClick={handleClose} className='close-button'>Order More</button>
         </div>

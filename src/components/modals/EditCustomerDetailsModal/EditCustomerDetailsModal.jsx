@@ -9,6 +9,7 @@ const EditCustomerDetailsModal = ({customer,children}) => {
 const [phoneNo, setPhoneNo] = useState(customer && customer.phoneNo);
 
 const { shop } = useSelector(state=>state.shop)
+const { customerLoading } = useSelector((state)=>state.customer);
 
 const dispatch = useDispatch();
 
@@ -54,7 +55,7 @@ const submitHandler = (e) => {
                     <p>Phone No</p>
                     <input type="number" onChange={(e)=>(setPhoneNo(e.target.value)) } value={phoneNo} required={true} />
                 </div>
-                <button type='submit' className='success-button'>Submit</button>
+                <button type='submit' className='success-button'>{customerLoading?<span className='loader'></span>:"Update"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

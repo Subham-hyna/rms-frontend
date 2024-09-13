@@ -21,6 +21,7 @@ const EditItemDetailsModal = ({item,children}) => {
     const dispatch = useDispatch();
   
     const { categories } = useSelector((state)=>state.category);
+    const { itemLoading } = useSelector(state=>state.item);
 
     const { shop } = useSelector(state=>state.shop)
 
@@ -97,7 +98,7 @@ const submitHandler = (e) => {
                         <option value="false" >Not Available</option>
                     </select>
                 </div>
-                <button type='submit' className='success-button'>Update</button>
+                <button type='submit' className='success-button'>{itemLoading?<span className='loader'></span>:"Update"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

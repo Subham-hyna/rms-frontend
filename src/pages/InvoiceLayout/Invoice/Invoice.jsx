@@ -14,6 +14,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, getInvoices } from '../../../redux/actions/invoiceAction';
 import toast from 'react-hot-toast';
 import ViewInvoiceDetailsModal from '../../../components/modals/ViewInvoiceDetailsModal/ViewInvoiceDetailsModal';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Invoice = () => {
     const [paymentMode, setPaymentMode] = useState("");
@@ -155,7 +156,7 @@ const Invoice = () => {
                         <p>Showing Result for : Invoices {paymentMode.length !== 0 &&  ` in ${paymentMode} payment mode ${searchValue}`}</p>
                       </div>}
             {invoiceLoading ?
-              <h1>Loading</h1>
+              <TableLoader column={6} />
               :
               <div className='right-page-content-row'>
                     {invoices?.length > 0 ?

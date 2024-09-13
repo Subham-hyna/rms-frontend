@@ -3,6 +3,7 @@ import './OpenInvoice.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleInvoice } from '../../redux/actions/invoiceAction'
 import { Link, useParams } from 'react-router-dom'
+import TableLoader from '../../components/ui/Loader/TableLoader/TableLoader'
 
 const OpenInvoice = () => {
     const [ url, setUrl ] = useState("");
@@ -19,7 +20,7 @@ const OpenInvoice = () => {
   return (
     <main className='open-invoice'>
         {invoiceLoading ?
-        <h1>Loading..</h1>
+        <TableLoader column={6} />
             :
             <div className="modal-print-bill">
             <div className="modal-print-bill-header">
@@ -70,7 +71,7 @@ const OpenInvoice = () => {
         {user._id && <div className='open-invoice-footer'>
         <div className='open-invoice-footer-button'>
         <button onClick={() => navigator.clipboard.writeText(url)}>Copy Link</button>
-        <a href={`https://api.whatsapp.com/send?text=Check%20this%20out:%20https://www.example.com`} target="_blank" rel="noreferrer">Share on WhatsApp</a>
+        <a href={`https://api.whatsapp.com/send?text=Hello, your bill is ready. Please view it here: ${url}. Thank you!`} target="_blank" rel="noreferrer">Share on WhatsApp</a>
         <a href={`sms:?body=Hello, your bill is ready. Please view it here: ${url}. Thank you!`} >Send SMS</a>
         </div>
 

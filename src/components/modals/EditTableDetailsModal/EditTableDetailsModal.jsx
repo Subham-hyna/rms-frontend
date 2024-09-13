@@ -18,6 +18,7 @@ const EditTableDetailsModal = ({table,children}) => {
   const dispatch = useDispatch();
 
   const { areas } = useSelector((state)=>state.area);
+  const { tableLoading } = useSelector((state)=>state.table);
 
   const { shop } = useSelector(state=>state.shop)
 
@@ -75,7 +76,7 @@ const EditTableDetailsModal = ({table,children}) => {
                         ))}
                     </select>
                 </div>
-                <button type='submit' className='success-button'>Update</button>
+                <button type='submit' className='success-button'>{tableLoading?<span className='loader'></span>:"Update"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

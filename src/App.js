@@ -5,7 +5,6 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword"
 import VerifyUser from './pages/VerifyUser/VerifyUser';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Login from './pages/Login/Login';
-import RegisterOwner from './pages/RegisterOwner/RegisterOwner'
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import TableLayout from './pages/TableLayout/TableLayout';
 import Shops from './pages/Shops/Shops';
@@ -59,9 +58,7 @@ useEffect(()=>{
          <Route exact={true} path='/user/forgot-password' element={<ForgotPassword />} />
          <Route exact={true} path='/login' element={<Login />} />
          <Route exact={true} path='/signup' element={<Signup />} />
-         <Route exact={true} path='/user/register-owner' element={<RegisterOwner />} />
-         <Route exact={true} path='/user/owner/verify/:token' element={<VerifyUser />} />
-         <Route exact={true} path='/user/employee/verify/:token' element={<VerifyUser />} />
+         <Route exact={true} path='/user/verify/:token' element={<VerifyUser />} />
          <Route exact={true} path='/user/reset-password/:token' element={<ResetPassword />} />
          <Route exact={true} path='*' element={<ErrorPage />} />
          </Route>
@@ -77,7 +74,7 @@ useEffect(()=>{
         element={
           <ProtectedRoute isAuthenticated={isAuthenticated} redirect="/login" />
         }>
-         <Route exact={true} path='/shops' element={<Shops />} />
+          <Route exact={true} path='/shops' element={<Shops />} />
          <Route exact={true} path='/tables/table/:shopName/:shopId' element={<TableLayout />} />
          <Route exact={true} path='/tables/table/:shopName/:shopId/:q' element={<TableLayout />} />
          <Route exact={true} path='/tables/area/:shopName/:shopId' element={<TableLayout />} />

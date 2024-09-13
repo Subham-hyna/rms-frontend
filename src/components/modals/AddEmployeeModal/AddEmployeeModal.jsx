@@ -97,7 +97,7 @@ const AddEmployeeModal = ({buttonIcon,buttonText}) => {
                     <p>State</p>
                     <input type="text" onChange={(e)=>(setState(e.target.value)) } value={state} required={true} />
                 </div>
-                <button type='submit' className='success-button'>{employeeLoading ? <div className='loader'>asgd</div> :"Submit"}</button>
+                <button type='submit' className='success-button'>{employeeLoading ? <div className="loader"></div>:"Submit"}</button>
             </form>
 
             <button onClick={handleClose} className='close-button'>Close</button>

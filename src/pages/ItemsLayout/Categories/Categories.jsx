@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 import { clearErrors, clearMessages, deleteCategory, getCategories } from '../../../redux/actions/categoryAction';
 import EditCategoryDetailsModal from '../../../components/modals/EditCategoryDetailsModal/EditCategoryDetailsModal';
 import { useNavigate, useParams } from 'react-router-dom';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Categories = () => {
 
@@ -66,7 +67,7 @@ useEffect(()=>{
                     <Tooltip title="Refresh"><RefreshIcon onClick={()=>dispatch(getCategories(shop._id))} /></Tooltip>
                 </div>
               {categoryLoading ?
-              <h1>Loading</h1>
+              <TableLoader column={6} />
               :
               <>
               <div className='right-page-content-grid' style={categories?.length === 0 ?{justifyContent:"center", alignItems:"center"}:{}}>

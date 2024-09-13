@@ -72,7 +72,7 @@ const EditInventoryDetailsModal = ({inventory, children}) => {
                   ))}
                 </select>
               </div>
-              <button type='submit' className='success-button'>{inventoryLoading ? <div className='loader'>asgd</div> :"Update"}</button>
+              <button type='submit' className='success-button'>{inventoryLoading ? <div className='loader'></div> :"Update"}</button>
             </form>
             <button onClick={handleClose} className='close-button'>Close</button>
         </div>

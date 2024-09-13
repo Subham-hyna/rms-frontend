@@ -31,10 +31,6 @@ useEffect(()=>{
     }
   },[navigate,shopId,shopName,shop,user])
 
-
-    const handleChange = () => {
-        console.log("first")
-    }
   return (
     <>
     <nav className='navbar'>

@@ -98,7 +98,7 @@ useEffect(()=>{
               { auth !== "" && <div className='login-password'>
                     <input type={showPassword ? "text" : "password"} onChange={(e)=>(setPassword(e.target.value)) } value={password} placeholder='Password' required={true} />
                     {!showPassword ? <VisibilityOffIcon onClick={()=>{setShowPassword(!showPassword)}} /> : <VisibilityIcon onClick={()=>{setShowPassword(!showPassword)}}/>}
-                <Link to='/forgot-password' >Forgot Password?</Link>
+                <Link to='/user/forgot-password' >Forgot Password?</Link>
               </div>}
              {auth !== "" &&  <button type='submit' className='login-button'>{userLoading ? <span className="loader"></span> :"Login"}</button>}
              <Link to='/signup'>Click here to register yourself!!</Link>

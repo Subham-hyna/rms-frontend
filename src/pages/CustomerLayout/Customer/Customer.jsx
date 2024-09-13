@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, deleteCustomer, getCustomers } from '../../../redux/actions/customerAction';
 import toast from 'react-hot-toast';
+import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 
 const Customer = () => {
 
@@ -99,8 +100,9 @@ const Customer = () => {
                         <p>Showing Result for : {searchValue && searchValue}</p>
                 </div>}
             {customerLoading ?
-            <h1>Loading</h1>
+            <TableLoader column={6}/>
             :
+            <>
             <div className='right-page-content-row'>
                     {customers?.length > 0 ?
                         <>
@@ -134,17 +136,20 @@ const Customer = () => {
                         :
                         <h1>No Customers</h1>
                     }
-                </div>}
+                </div>
+        
 
         {customerFilteredCount > resultPerPage && 
-        (<div className='right-page-middle-footer'>
-        <Pagination 
-            count={Math.ceil(customerFilteredCount / resultPerPage)}
-            page={page}
-            onChange={onPageChange}
-            variant="outlined" shape="rounded"
-        />
-        </div>)
+          (<div className='right-page-middle-footer'>
+          <Pagination 
+          count={Math.ceil(customerFilteredCount / resultPerPage)}
+          page={page}
+          onChange={onPageChange}
+          variant="outlined" shape="rounded"
+          />
+          </div>)
+        }
+            </>
         }
 
          </div>
