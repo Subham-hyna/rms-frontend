@@ -50,7 +50,6 @@ const Sidecar = () => {
   useEffect(()=>{
     const uri = pathname.split("/");
     setActiveTab(uri[1]);
-    if(activeTab === "orders") setHideSidebar(true)
     window.scrollTo(0, 0);
 
   },[activeTab,pathname]);
