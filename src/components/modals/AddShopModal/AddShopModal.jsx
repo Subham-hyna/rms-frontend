@@ -37,6 +37,16 @@ const AddShopModal = ({children, className}) => {
         formData.append("gstIn",gstIn);
 
         dispatch(addShop(formData));
+        setName("");
+        setEmail("")
+        setGstIn("");
+        setPhoneNo("");
+        setLine1("");
+        setLine2("");
+        setPincode("");
+        setState("");
+        setShopType("");
+
 
     }
 

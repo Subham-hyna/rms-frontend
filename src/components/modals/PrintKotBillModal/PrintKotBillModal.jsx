@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './PrintKotBillModal.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { clearMessages, generateSingleInvoice, paidInvoice } from '../../../redux/actions/invoiceAction';
@@ -6,6 +6,7 @@ import { Modal, Tooltip } from '@mui/material';
 import { billPaymentMode } from '../../../constanst';
 import toast from 'react-hot-toast';
 import TableLoader from '../../ui/Loader/TableLoader/TableLoader';
+import html2canvas from "html2canvas"
 
 const PrintKotBillModal = ({kotId, children}) => {
   const [open, setOpen] = useState(false);
@@ -21,8 +22,19 @@ const PrintKotBillModal = ({kotId, children}) => {
   const { invoice, invoiceLoading, invoiceMessage } = useSelector(state=>state.invoice);
   const dispatch = useDispatch();
 
-  const handleBillPrint = () => {
-
+  const invoiceRef = useRef();
+  const handleBillPrint =async () => {
+      if (invoiceRef.current) {
+          const canvas = await html2canvas(invoiceRef.current);
+          const imgData = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = imgData;
+          link.download = `invoiceNo-${invoice?.invoiceNo}-details.png`;
+      
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
   }
 
   useEffect(()=>{
@@ -49,7 +61,7 @@ const PrintKotBillModal = ({kotId, children}) => {
         <TableLoader column={3} />
         :
        <>
-         <div className="modal-print-bill">
+         <div className="modal-print-bill" ref={invoiceRef}>
     <div className="modal-print-bill-header">
         <h1>{shop?.name}</h1>
         <p>{shop.address.line1}, {shop.address.line2}, {shop.address.pincode}, {shop.address.state}</p>

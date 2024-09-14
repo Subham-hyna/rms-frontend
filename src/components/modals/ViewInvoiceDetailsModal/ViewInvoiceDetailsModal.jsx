@@ -1,8 +1,9 @@
 import { Modal, Tooltip } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
 import './ViewInvoiceDetailsModal.css'
 import { useNavigate } from 'react-router-dom';
+import html2canvas from "html2canvas"
 
 const ViewInvoiceDetailsModal = ({invoice, children}) => {
     const [open, setOpen] = useState(false);
@@ -12,8 +13,19 @@ const ViewInvoiceDetailsModal = ({invoice, children}) => {
     const { shop } = useSelector(state=>state.shop);
     const navigate = useNavigate();
 
-    const handleBillPrint = () => {
-
+    const invoiceRef = useRef();
+    const handleBillPrint =async () => {
+        if (invoiceRef.current) {
+            const canvas = await html2canvas(invoiceRef.current);
+            const imgData = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = imgData;
+            link.download = `invoiceNo-${invoice?.invoiceNo}-details.png`;
+        
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
     }
 
   return (
@@ -31,7 +43,7 @@ const ViewInvoiceDetailsModal = ({invoice, children}) => {
             <p>To print Bill of this Order</p>
         </div>
         <div className='modal-content'>
-        <div className="modal-print-bill">
+        <div className="modal-print-bill" ref={invoiceRef}>
     <div className="modal-print-bill-header">
         <h1>{shop?.name}</h1>
         <p>{shop.address.line1}, {shop.address.line2}, {shop.address.pincode}, {shop.address.state}</p>
