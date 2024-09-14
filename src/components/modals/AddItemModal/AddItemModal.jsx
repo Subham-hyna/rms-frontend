@@ -77,7 +77,7 @@ useEffect(()=>{
                 <div>
                     <p>Select Category</p>
                      <select value={categoryId} onChange={(e)=>(setCategoryId(e.target.value))} required={true}>
-                        <option value="" >Select Area</option>
+                        <option value="" >Select Category</option>
                         {categories && categories.map((b,index)=>(
                         <option key={index} value={b._id} >{b.name}</option>
                         ))}
@@ -86,7 +86,7 @@ useEffect(()=>{
                 <div>
                     <p>Select Meal Type</p>
                      <select value={mealType} onChange={(e)=>(setMealType(e.target.value))} required={true}>
-                        <option value="" >Select Shape</option>
+                        <option value="" >Select Meal Type</option>
                         {veg_nonNeg && veg_nonNeg.map((b,index)=>(
                         <option key={index} value={b} >{b}</option>
                         ))}
