@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './PrintKotBillModal.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { clearMessages, generateSingleInvoice, paidInvoice } from '../../../redux/actions/invoiceAction';
+import { addCharges, clearMessages, generateSingleInvoice, paidInvoice } from '../../../redux/actions/invoiceAction';
 import { Modal, Tooltip } from '@mui/material';
 import { billPaymentMode } from '../../../constanst';
 import toast from 'react-hot-toast';
@@ -95,6 +95,28 @@ const PrintKotBillModal = ({kotId, children}) => {
             </tbody>
         </table>
     </div>
+    <div className="modal-print-bill-summary">
+        <table>
+            <tbody>
+                <tr>
+                    <td><strong>Subtotal:</strong></td>
+                    <td>Rs. {invoice?.totalPayment + invoice?.discount - invoice?.packingFee - invoice?.deliveryCharges}</td>
+                </tr>
+                <tr>
+                    <td><strong>Discount({((invoice?.discount * 100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges)).toFixed(0)}%):</strong></td>
+                    <td>Rs. {invoice?.discount}</td>
+                </tr>
+                <tr>
+                    <td><strong>Packing Fee:</strong></td>
+                    <td>Rs. {invoice?.packingFee}</td>
+                </tr>
+                <tr>
+                    <td><strong>Delivery Fee:</strong></td>
+                    <td>Rs. {invoice?.deliveryCharges}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div className="modal-print-bill-payment">
         <span><strong>Total Amount({invoice?.totalItems} items)</strong></span>
@@ -107,8 +129,9 @@ const PrintKotBillModal = ({kotId, children}) => {
     </div>
 </div>
         <div className='modal-button-group'>
-            <PaidBillModal invoiceId={invoice?._id} >Paid</PaidBillModal>
-            <button className='success-button' onClick={handleBillPrint} >Print Bill</button>
+            <PaidBillModal invoice={invoice} >Paid</PaidBillModal>
+            <button className='success-button' onClick={handleBillPrint} ><pre>Print Bill</pre></button>
+            <EditChargeModal invoice={invoice} style={{backgroundColor:"var(--green)"}} ><pre>Add Charges</pre></EditChargeModal>
             <button onClick={handleClose} className='close-button'>Close</button>
           </div>
        </>
@@ -125,8 +148,9 @@ export default PrintKotBillModal
 
 
 
-function PaidBillModal({invoiceId,children}) {
+function PaidBillModal({invoice,children}) {
   const[paymentMode, setPaymentMode] = useState("");
+  const [amountReceived, setAmountReceived] = useState(invoice.totalPayment);
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -144,7 +168,10 @@ function PaidBillModal({invoiceId,children}) {
     if(paymentMode === ""){
       return toast.error("Select Payment mode")
     }
-    dispatch(paidInvoice(invoiceId,paymentMode,shop._id));
+    if(invoice.totalPayment < amountReceived){
+      return toast.error("Amount Received can't be more than invoice payment")
+    }
+    dispatch(paidInvoice(invoice._id,paymentMode,amountReceived,shop._id));
   }
 
   return (
@@ -170,6 +197,10 @@ function PaidBillModal({invoiceId,children}) {
                         ))}
                     </select>
                 </div>
+                <div>
+                    <p>Amount Received</p>
+                    <input type="number" onChange={(e)=>(setAmountReceived(e.target.value)) } value={amountReceived} />
+                </div>
                 <button type='submit' className='success-button'>{invoiceLoading?<span className='loader'></span>:"Paid"}</button>
             </form>
             <button onClick={handleClose} className='close-button'>Close</button>
@@ -179,3 +210,71 @@ function PaidBillModal({invoiceId,children}) {
     </>
   );
 }
+
+function EditChargeModal({invoice,style,children}) {
+  const [discount, setDiscount] = useState(invoice?.discount);
+  const [discountPercentage, setDiscountPercentage] = useState((discount*100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges + invoice?.discount));
+  const [deliveryCharges, setDeliveryCharges] = useState(invoice?.deliveryCharges);
+  const [packingFee, setPackingFee] = useState(invoice?.packingFee);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const{ shop } = useSelector(state=>state.shop)
+  const{ invoiceLoading } = useSelector(state=>state.invoice)
+  const dispatch = useDispatch();
+
+  const handleAddCharges = (e) => {
+    e.preventDefault();
+    if(deliveryCharges < 0 || packingFee < 0 || discount < 0 || discountPercentage < 0 || discountPercentage >= 100){
+      return toast.error("Charges not allowed")
+    }
+    dispatch(addCharges(invoice?._id,deliveryCharges,packingFee,discount,shop?._id));
+  }
+
+  
+  useEffect(()=>{
+    setDiscount((discountPercentage*(invoice.totalPayment - invoice.packingFee - invoice.deliveryCharges + invoice.discount))/100)
+  },[discountPercentage,invoice])
+
+
+  return (
+    <>
+      <button onClick={handleOpen} style={style} className="success-button" >{children}</button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <div className='modal' style={{width:"500px"}}>
+        <div className='modal-heading'>
+            <p>Print Kot</p>
+            <p>To print Kot of this Order</p>
+        </div>
+        <div className='modal-content'>
+        <form onSubmit={handleAddCharges}>
+                <div>
+                    <p>Delivery Fee</p>
+                    <input type="number" onChange={(e)=>(setDeliveryCharges(e.target.value)) } value={deliveryCharges} />
+                </div>
+                <div>
+                    <p>Packing Fee</p>
+                    <input type="number" onChange={(e)=>(setPackingFee(e.target.value)) } value={packingFee} />
+                </div>
+                <div>
+                    <p>Discount</p>
+                    Rs. <input type="number" placeholder='Discount Amount' onChange={(e)=>(setDiscount(e.target.value)) } value={discount} />
+                    % <input type="number" placeholder='Discount Percentage' onChange={(e)=>(setDiscountPercentage(e.target.value)) } value={discountPercentage} />
+                </div>
+                <button type='submit' className='success-button'>{invoiceLoading?<span className='loader'></span>:"Add Charges"}</button>
+            </form>
+            <button onClick={handleClose} className='close-button'>Close</button>
+        </div>
+    </div>
+      </Modal>
+    </>
+  );
+  }

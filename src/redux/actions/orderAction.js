@@ -2,7 +2,7 @@ import { allOrderFail, allOrderRequest, allOrderSuccess, clearError, clearMessag
 import { server } from "../store";
 import axios from "axios";
 
-export const generateKot = (cartItems, tableNo, customerName, customerPhoneNo, orderValue, totalOrderItems,kotType,shopId, userId) => async (dispatch) => {
+export const generateKot = (cartItems, tableNo, customerName, customerPhoneNo, orderValue, totalOrderItems,kotType,shopId, specialRequest="", userId) => async (dispatch) => {
     try {
         dispatch(generateKotRequest());
 
@@ -19,7 +19,8 @@ export const generateKot = (cartItems, tableNo, customerName, customerPhoneNo, o
             totalOrderItems,
             kotType,
             customerName,
-            customerPhoneNo
+            customerPhoneNo,
+            specialRequest
         }
         );
     
@@ -117,6 +118,72 @@ export const rejectOrder = (kotId,shopId) => async (dispatch) => {
         let link = `${server}/orders/reject-kot/${kotId}/${shopId}`;
   
         const { data } = await axios.delete(link,config);
+    
+        dispatch(updateOrderSuccess(data));
+      } catch (error) {
+        dispatch(updateOrderFail(error.response.data.message));
+      }
+}
+
+export const deleteOrder = (kotId,shopId) => async (dispatch) => {
+    try {
+        dispatch(updateOrderRequest());
+    
+        let token = localStorage.getItem("Access-Token");
+    
+        const config = { headers: { 
+          'Authorization': `Bearer ${token}` 
+        },
+        withCredentials: true
+        }
+    
+        let link = `${server}/orders/delete-kot/${kotId}/${shopId}`;
+  
+        const { data } = await axios.delete(link,config);
+    
+        dispatch(updateOrderSuccess(data));
+      } catch (error) {
+        dispatch(updateOrderFail(error.response.data.message));
+      }
+}
+
+export const deleteOrderItem = (kotId,orderItemId,shopId) => async (dispatch) => {
+    try {
+        dispatch(updateOrderRequest());
+    
+        let token = localStorage.getItem("Access-Token");
+    
+        const config = { headers: { 
+          'Authorization': `Bearer ${token}` 
+        },
+        withCredentials: true
+        }
+    
+        let link = `${server}/orders/delete-orderItem/${orderItemId}/${shopId}`;
+  
+        const { data } = await axios.put(link,{kotId},config);
+    
+        dispatch(updateOrderSuccess(data));
+      } catch (error) {
+        dispatch(updateOrderFail(error.response.data.message));
+      }
+}
+
+export const editOrderItem = (kotId,quantity,orderItemId,shopId) => async (dispatch) => {
+    try {
+        dispatch(updateOrderRequest());
+    
+        let token = localStorage.getItem("Access-Token");
+    
+        const config = { headers: { 
+          'Authorization': `Bearer ${token}` 
+        },
+        withCredentials: true
+        }
+    
+        let link = `${server}/orders/edit-orderItem/${orderItemId}/${shopId}`;
+  
+        const { data } = await axios.put(link,{kotId,quantity},config);
     
         dispatch(updateOrderSuccess(data));
       } catch (error) {

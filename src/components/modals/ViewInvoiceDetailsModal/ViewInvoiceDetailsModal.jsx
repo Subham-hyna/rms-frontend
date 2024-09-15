@@ -77,7 +77,28 @@ const ViewInvoiceDetailsModal = ({invoice, children}) => {
             </tbody>
         </table>
     </div>
-
+    <div className="modal-print-bill-summary">
+        <table>
+            <tbody>
+                <tr>
+                    <td><strong>Subtotal:</strong></td>
+                    <td>Rs. {invoice?.totalPayment + invoice?.discount - invoice?.packingFee - invoice?.deliveryCharges}</td>
+                </tr>
+                <tr>
+                <td><strong>Discount({((invoice?.discount * 100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges)).toFixed(0)}%):</strong></td>
+                    <td>Rs. {invoice?.discount}</td>
+                </tr>
+                <tr>
+                    <td><strong>Packing Fee:</strong></td>
+                    <td>Rs. {invoice?.packingFee}</td>
+                </tr>
+                <tr>
+                    <td><strong>Delivery Fee:</strong></td>
+                    <td>Rs. {invoice?.deliveryCharges}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div className="modal-print-bill-payment">
         <span><strong>Total Amount({invoice?.totalItems} items)</strong></span>
         <span><strong>Rs. {invoice?.totalPayment}</strong></span>

@@ -167,7 +167,8 @@ const itemIncreaseHandler = (i) => {
 
 const deleteCartItems = (item) => {
   setPaymentCounter(paymentCounter - (item.qty * item.price))
-  setCartItems(cartItems.filter((c)=>{return item._id !== c.foodItemId}))
+  setCartItems(cartItems.filter((c)=>{return item.foodItemId !== c.foodItemId}))
+  setItemCounter(itemCounter - item.qty)
 }
 
 const categorySorting = ((tab,id) => {

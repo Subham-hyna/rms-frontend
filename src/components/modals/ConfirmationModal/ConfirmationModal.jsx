@@ -10,7 +10,11 @@ const ConfirmationModal = ({heading, subHeading, confirmationHandler,data, child
 
   function submitHandler(e){
       e.preventDefault();
-      confirmationHandler(data._id);
+      if(data.kotId){
+        confirmationHandler(data._id,data.kotId);
+      }else{
+        confirmationHandler(data._id);
+      }
   }
   return (<>
     <Tooltip title="Delete">

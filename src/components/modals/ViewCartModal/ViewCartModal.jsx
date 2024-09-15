@@ -7,6 +7,7 @@ import PlaceOrderModal from '../PlaceOrderModal/PlaceOrderModal';
 
 const ViewCartModal = ({handleCartItemsChange, orderTableNo, cartItems,paymentCounter, itemCounter, children, shopId, shopName}) => {
 
+  const [specialRequest, setSpecialRequest] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -76,11 +77,11 @@ const ViewCartModal = ({handleCartItemsChange, orderTableNo, cartItems,paymentCo
                     </span>
                     <div class="special-request">
                        <label>Special Request:</label>
-                       <textarea rows="4" placeholder="Any preferences? (e.g., extra spicy, no onions)"></textarea>
+                       <textarea value={specialRequest} onChange={(e)=>setSpecialRequest(e.target.value)} rows="4" placeholder="Any preferences? (e.g., extra spicy, no onions)"></textarea>
                      </div>
               </div>
 
-              <PlaceOrderModal cartItems={showCartItems} orderTableNo={orderTableNo} paymentCounter={paymentCounter} itemCounter={itemCounter} kotType={"DINEIN"} shopId={shopId} shopName={shopName}>Place Order</PlaceOrderModal>
+              <PlaceOrderModal cartItems={showCartItems} orderTableNo={orderTableNo} paymentCounter={paymentCounter} itemCounter={itemCounter} kotType={"DINEIN"} shopId={shopId} shopName={shopName} specialRequest={specialRequest} >Place Order</PlaceOrderModal>
             <button onClick={handleClose} className='close-button'>Order More</button>
         </div>
     </div>

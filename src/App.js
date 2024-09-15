@@ -24,6 +24,7 @@ import WaiterTable from './pages/WaiterTable/WaiterTable';
 import Signup from './pages/Signup/Signup';
 import InventoryLayout from './pages/InventoryLayout/InventoryLayout';
 import OpenInvoice from './pages/OpenInvoice/OpenInvoice';
+import KotPage from './pages/KotPage/KotPage';
 
 function App() {
 
@@ -49,7 +50,7 @@ useEffect(()=>{
   return (
     <>
     <Router>
-     <div className='App' onContextMenu={(e)=>e.preventDefault()}>
+     <div className='App'>
       <Routes>
       <Route 
         element={
@@ -96,6 +97,7 @@ useEffect(()=>{
          <Route exact={true} path='/orders/manage/:shopName/:shopId/:q' element={<OrderLayout />} />
          <Route exact={true} path='/orders/table/:shopName/:shopId' element={<OrderLayout />} />
          <Route exact={true} path='/employee/tables/:shopId' element={<WaiterTable />} />
+         <Route exact={true} path='/employee/orders/:shopId' element={<KotPage />} />
          </Route>
          </Routes>
      </div>

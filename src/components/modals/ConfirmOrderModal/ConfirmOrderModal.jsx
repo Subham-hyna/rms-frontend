@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal, Tooltip } from '@mui/material'
 import { useSelector } from 'react-redux';
 
-const ConfirmOrderModal = ({heading, subHeading, confirmationHandler,data, children}) => {
+const ConfirmOrderModal = ({heading, subHeading, confirmationHandler,data,style, children}) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -15,7 +15,7 @@ const ConfirmOrderModal = ({heading, subHeading, confirmationHandler,data, child
   }
   return (<>
     <Tooltip title="Delete">
-    {children && <button onClick={handleOpen} className='delete-btn'>{children}</button>}
+    {children && <button style={style ?style:{}} onClick={handleOpen} className='delete-btn'>{children}</button>}
     </Tooltip>
     <Modal
     open={open}

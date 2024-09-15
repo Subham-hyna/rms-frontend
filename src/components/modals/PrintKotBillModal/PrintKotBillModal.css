@@ -115,10 +115,12 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    border-bottom: 1px dashed var(--darkgrey);
+    padding-bottom: 10px;
 }
 
 .modal-print-bill-payment>span{
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     font-family: 'Courier New', Courier, monospace !important;
 }
@@ -134,4 +136,23 @@
 .modal-print-bill-footer>p{
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.modal-print-bill-summary{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;    
+    border-bottom: 1px dashed var(--darkgrey);
+    padding-bottom: 10px;
+}
+
+.modal-print-bill-summary>table{
+    width: 100%;
+}
+
+.modal-print-bill-summary>table>tbody>tr>td:nth-child(2){
+    text-align: right;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-weight: 600;
 }

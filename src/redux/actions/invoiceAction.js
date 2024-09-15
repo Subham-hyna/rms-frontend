@@ -1,4 +1,4 @@
-import { allInvoicesFail, allInvoicesLoading, allInvoicesSuccess, clearError, clearMessage, generateInvoiceFail, generateInvoiceLoading, generateInvoiceSuccess, paidInvoiceFail, paidInvoiceLoading, paidInvoiceSuccess, singleInvoiceFail, singleInvoiceRequest, singleInvoiceSuccess } from "../reducers/invoiceReducer";
+import { allInvoicesFail, allInvoicesLoading, allInvoicesSuccess, clearError, clearMessage, generateInvoiceFail, generateInvoiceLoading, generateInvoiceSuccess, paidInvoiceFail, paidInvoiceLoading, paidInvoiceSuccess, singleInvoiceFail, singleInvoiceRequest, singleInvoiceSuccess, updateInvoiceFail, updateInvoiceLoading, updateInvoiceSuccess } from "../reducers/invoiceReducer";
 import { server } from "../store";
 import axios from "axios";
 
@@ -49,7 +49,7 @@ export const generateTableInvoice = (tableId,shopId) => async (dispatch) => {
 };
 
 // Pay invoice
-export const paidInvoice = (invoiceId,paymentMode,shopId) => async (dispatch) => {
+export const paidInvoice = (invoiceId,paymentMode,amountReceived,shopId) => async (dispatch) => {
     try {
       dispatch(paidInvoiceLoading());
   
@@ -63,11 +63,34 @@ export const paidInvoice = (invoiceId,paymentMode,shopId) => async (dispatch) =>
   
       let link = `${server}/invoices/pay-invoice/${invoiceId}/${shopId}`;
 
-      const { data } = await axios.put(link,{paymentMode},config);
+      const { data } = await axios.put(link,{paymentMode,amountReceived},config);
   
       dispatch(paidInvoiceSuccess(data));
     } catch (error) {
       dispatch(paidInvoiceFail(error.response.data.message));
+    }
+};
+
+// Add Charges
+export const addCharges = (invoiceId,deliveryCharges,packingFee,discount,shopId) => async (dispatch) => {
+    try {
+      dispatch(updateInvoiceLoading());
+  
+      let token = localStorage.getItem("Access-Token");
+  
+      const config = { headers: { 
+        'Authorization': `Bearer ${token}` 
+      },
+      withCredentials: true
+      }
+  
+      let link = `${server}/invoices/add-charges/${invoiceId}/${shopId}`;
+
+      const { data } = await axios.put(link,{deliveryCharges,packingFee,discount},config);
+  
+      dispatch(updateInvoiceSuccess(data));
+    } catch (error) {
+      dispatch(updateInvoiceFail(error.response.data.message));
     }
 };
 

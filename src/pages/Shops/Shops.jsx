@@ -29,7 +29,7 @@ const Shops = () => {
       }else if(user?.role === "OWNER"){ 
         dispatch(getMyShops());
       }
-    },[dispatch,user,shop,shopMessage,shopError])
+    },[dispatch,user,shopMessage,shopError])
 
     useEffect(()=>{
       if(shopError){
@@ -88,6 +88,9 @@ const Shops = () => {
             <h1>Welcome</h1>
             <Link to={`/employee/tables/${shop._id}`} className='qr-order-container-button'>
                 <LocalDiningIcon /> Order now
+            </Link>
+            <Link to={`/employee/orders/${shop._id}`} className='qr-order-container-button'>
+                <LocalDiningIcon /> View KOT
             </Link>
             <button onClick={()=>dispatch(logout())}>{userLoading ?<span className='loader'></span>:" Logout"}</button>
         </div>

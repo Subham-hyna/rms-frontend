@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { clearErrors, clearMessages, generateKot } from '../../../redux/actions/orderAction';
 import toast from 'react-hot-toast';
 
-const PlaceOrderModal = ({children, cartItems, orderTableNo, paymentCounter, itemCounter, kotType, shopId, orderPlaced, shopName }) => {
+const PlaceOrderModal = ({children, cartItems, orderTableNo, paymentCounter, itemCounter, kotType, shopId, orderPlaced, shopName, specialRequest }) => {
     const [name, setName] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
     const [open, setOpen] = useState(false);
@@ -21,10 +21,10 @@ const PlaceOrderModal = ({children, cartItems, orderTableNo, paymentCounter, ite
         e.preventDefault();
 
         if(user._id){
-            dispatch(generateKot(cartItems,orderTableNo,name,phoneNo,paymentCounter,itemCounter,kotType,shopId,user._id))
+            dispatch(generateKot(cartItems,orderTableNo,name,phoneNo,paymentCounter,itemCounter,kotType,shopId,specialRequest,user._id))
 
         } else {
-            dispatch(generateKot(cartItems,orderTableNo,name,phoneNo,paymentCounter,itemCounter,kotType,shopId))
+            dispatch(generateKot(cartItems,orderTableNo,name,phoneNo,paymentCounter,itemCounter,kotType,shopId,specialRequest))
         }
     }
     

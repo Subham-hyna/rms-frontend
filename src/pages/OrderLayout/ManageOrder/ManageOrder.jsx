@@ -5,13 +5,17 @@ import './ManageOrder.css'
 import { Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { useNavigate, useParams } from 'react-router-dom';
-import { clearErrors, clearMessages, confirmOrder, getKots, rejectOrder } from '../../../redux/actions/orderAction';
+import { clearErrors, clearMessages, confirmOrder, deleteOrder, deleteOrderItem, getKots, rejectOrder } from '../../../redux/actions/orderAction';
 import toast from 'react-hot-toast';
 import ConfirmOrderModal from '../../../components/modals/ConfirmOrderModal/ConfirmOrderModal';
 import PrintKotModal from '../../../components/modals/PrintKotModal/PrintKotModal';
 import PrintKotBillModal from '../../../components/modals/PrintKotBillModal/PrintKotBillModal';
 import TableLoader from '../../../components/ui/Loader/TableLoader/TableLoader';
 import MetaData from '../../../components/ui/MetaData/MetaData';
+import ConfirmationModal from '../../../components/modals/ConfirmationModal/ConfirmationModal';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditOrderItemsModal from '../../../components/modals/EditOrderItemsModal/EditOrderItemsModal';
 
 const ManageOrder = () => {
   // eslint-disable-next-line
@@ -26,6 +30,11 @@ const ManageOrder = () => {
   const { shopName ,shopId, q } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const deleteItemHandler = (id,kotId) => {
+    console.log(id)
+    dispatch(deleteOrderItem(kotId,id,shop._id))
+  }
 
   const itemSearch = (value) => {
     setSearchBoxValue(value);
@@ -48,6 +57,9 @@ const ManageOrder = () => {
       navigate(`/orders/manage/${shop.name}/${shop._id}`)
     }
 
+    const handleDeleteKot = (kotId) => {
+      dispatch(deleteOrder(kotId,shop._id));
+    }
     const handleCancelKot = (kotId) => {
       dispatch(rejectOrder(kotId,shop._id));
     }
@@ -135,11 +147,11 @@ useEffect(()=>{
                     {kots?.length > 0 ?
                         <>
                             {kots.map((k,i)=>(
-                              <div className='kot-container'>
+                              <div key={i} className='kot-container'>
                                 <div className='kot-header'> 
                                 <span className='kot-header-name'>
                                   <h1>Order #{k.tokenNo}</h1>
-                                  <h4>{k.kotType === "DINEIN" ? `Dine in / Table No. ${k.tableId.name}` : k.kotType}</h4>
+                                  <h4>{k.kotType === "DINEIN" ? `Dine in / Table No. ${k.tableId?.name}` : k.kotType}</h4>
                                   {(k?.customerId?.name || k?.customerId?.phoneNo)  && <h5>{k.customerId?.name} {k.customerId?.phoneNo}</h5>}
                                 </span>
                                 <span className='kot-header-status' style={k.status === "REQUESTED" ?{backgroundColor:"var(--orange)"}:{backgroundColor:"var(--green)"}}>
@@ -151,14 +163,17 @@ useEffect(()=>{
                                     <thead>
                                       <th>Items</th>
                                       <th>Qty</th>
-                                      <th>Price</th>
+                                      <th>Action</th>
                                     </thead>
                                     <tbody>
                                       {k.items.length > 0 && k.items.map((c,i)=>(
                                         <tr key={i}>
                                           <td>{c.name}</td>
                                           <td>{c.quantity}</td>
-                                          <td>{c.price}</td>
+                                          <td style={{display: "flex"}}>
+                                            <EditOrderItemsModal kotId={k._id} orderItem={c} ><EditIcon /></EditOrderItemsModal>
+                                            <ConfirmationModal heading={"Confirmation"} subHeading={"Are you sure to delete this item"} data={{...c,kotId:k._id}} confirmationHandler={deleteItemHandler} ><DeleteIcon /></ConfirmationModal>
+                                        </td>
                                         </tr>
                                       ))}
                                     </tbody>
@@ -166,7 +181,7 @@ useEffect(()=>{
                             </div>
                             <div className='kot-footer'>
                                   <span className='kot-footer-payment'>
-                                    <h2>Total Payment ({k.totalOrderItems} items)</h2>
+                                    <h2>Total Amount ({k.totalOrderItems} items)</h2>
                                     <h2>Rs. {k.orderValue}</h2>
                                   </span>
                                   <span className='kot-footer-button'>
@@ -174,6 +189,7 @@ useEffect(()=>{
                                   <>
                                   <PrintKotModal kot={k}>Print Kot</PrintKotModal>
                                   <PrintKotBillModal kotId={k._id} >Pay Bill</PrintKotBillModal>
+                                  <ConfirmOrderModal style={{backgroundColor:"var(--red)"}} heading={"Delete KOT"} subHeading={"Are you sure to Delete this Kot"} data={k} confirmationHandler={handleDeleteKot}>Cancel</ConfirmOrderModal>
                                   </>
                                   :
                                   <>

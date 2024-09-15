@@ -53,7 +53,7 @@ const PrintKotModal = ({ children, kot }) => {
                 </p>
                 {kot.kotType === 'DINEIN' && (
                   <p>
-                    <strong>Table No:</strong> {kot.tableId.name}
+                    <strong>Table No:</strong> {kot?.tableId?.name}
                   </p>
                 )}
               </div>
@@ -70,6 +70,11 @@ const PrintKotModal = ({ children, kot }) => {
                   </span>
                 ))}
               </div>
+             {kot.specialRequest !== "" && <div className='special-request'>
+              <p>
+                  <strong>Special Request:</strong> {kot.specialRequest}
+                </p>
+              </div>}
 
               <div className="modal-print-kot-order-footer">
                 <p>Thank you</p>
