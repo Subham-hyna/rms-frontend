@@ -31,7 +31,7 @@ const KotPage = () => {
 
     useEffect(()=>{
         dispatch(getKots(searchBoxValue,"COOKING","",shop._id))
-    },[shop,dispatch,searchBoxValue])
+    },[shop,dispatch,searchBoxValue,orderMessage])
 
     useEffect(()=>{
         if(orderError){
