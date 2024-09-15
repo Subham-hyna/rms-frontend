@@ -18,7 +18,7 @@ const EditOrderItemsModal = ({children,orderItem,kotId}) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if(quantity <= 1){
+    if(quantity < 1){
         toast.error("Quantity invalid")
         return 
     }

@@ -7,9 +7,9 @@ import { Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import TableLoader from '../../components/ui/Loader/TableLoader/TableLoader';
 import MetaData from '../../components/ui/MetaData/MetaData';
-import { getKots } from '../../redux/actions/orderAction';
-import { clearErrors, clearMessages } from '../../redux/actions/invoiceAction';
+import { clearErrors, clearMessages, getKots, updateKotStatus } from '../../redux/actions/orderAction';
 import toast from 'react-hot-toast';
+import ConfirmOrderModal from '../../components/modals/ConfirmOrderModal/ConfirmOrderModal';
 
 const KotPage = () => {
 
@@ -23,6 +23,10 @@ const KotPage = () => {
     const resetHandler = () => {
         dispatch(getKots("","COOKING","",shop._id))
         setSearchBoxValue("");
+    }
+
+    const confirmHandler =  (id) => {
+        dispatch(updateKotStatus(id,shop._id))
     }
 
     useEffect(()=>{
@@ -119,6 +123,7 @@ const KotPage = () => {
               <div className="modal-print-kot-order-footer">
                 <p>Thank you</p>
               </div>
+            <ConfirmOrderModal style={{border:"1px solid var(--violet)"}} heading={"Confirmation"} subHeading={"Are you sure to this item is served?"} data={kot} confirmationHandler={confirmHandler} >Served</ConfirmOrderModal>
             </div>
                               </>
                             ))}

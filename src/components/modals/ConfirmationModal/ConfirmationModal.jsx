@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './ConfirmationModal.css'
 import { Modal, Tooltip } from '@mui/material'
 
-const ConfirmationModal = ({heading, subHeading, confirmationHandler,data, children}) => {
+const ConfirmationModal = ({heading, subHeading, confirmationHandler,data,style, children}) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -18,7 +18,7 @@ const ConfirmationModal = ({heading, subHeading, confirmationHandler,data, child
   }
   return (<>
     <Tooltip title="Delete">
-    {children && <div onClick={handleOpen} className='delete-btn'>{children}</div>}
+    {children && <div style={style} onClick={handleOpen} className='delete-btn'>{children}</div>}
     </Tooltip>
     <Modal
     open={open}

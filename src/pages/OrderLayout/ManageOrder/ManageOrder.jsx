@@ -185,7 +185,7 @@ useEffect(()=>{
                                     <h2>Rs. {k.orderValue}</h2>
                                   </span>
                                   <span className='kot-footer-button'>
-                                  {k.status === "COOKING" ?
+                                  {k.status !== "REQUESTED" ?
                                   <>
                                   <PrintKotModal kot={k}>Print Kot</PrintKotModal>
                                   <PrintKotBillModal kotId={k._id} >Pay Bill</PrintKotBillModal>

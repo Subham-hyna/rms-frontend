@@ -103,6 +103,28 @@ export const confirmOrder = (kotId,shopId) => async (dispatch) => {
       }
 }
 
+export const updateKotStatus = (kotId,shopId) => async (dispatch) => {
+    try {
+        dispatch(updateOrderRequest());
+    
+        let token = localStorage.getItem("Access-Token");
+    
+        const config = { headers: { 
+          'Authorization': `Bearer ${token}` 
+        },
+        withCredentials: true
+        }
+    
+        let link = `${server}/orders/update-kot/${kotId}/${shopId}`;
+  
+        const { data } = await axios.put(link,{},config);
+    
+        dispatch(updateOrderSuccess(data));
+      } catch (error) {
+        dispatch(updateOrderFail(error.response.data.message));
+      }
+}
+
 export const rejectOrder = (kotId,shopId) => async (dispatch) => {
     try {
         dispatch(updateOrderRequest());
