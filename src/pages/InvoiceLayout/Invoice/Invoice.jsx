@@ -183,7 +183,7 @@ const Invoice = () => {
                                       <tr key={index}>
                                         <td>{c?.invoiceNo}</td>
                                         <td>{c?.customerId?.phoneNo}</td>
-                                        {<td><pre>{c.totalPayment}</pre></td>}
+                                        {<td><pre>&#8377; {c.totalPayment}</pre></td>}
                                         <td>{c.totalItems}</td>
                                         <td>{new Date(c.createdAt).toLocaleDateString()}</td>
                                         <td>{c.paymentMode}</td>

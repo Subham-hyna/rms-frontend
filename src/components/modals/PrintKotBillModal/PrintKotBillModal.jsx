@@ -6,7 +6,7 @@ import { Modal, Tooltip } from '@mui/material';
 import { billPaymentMode } from '../../../constanst';
 import toast from 'react-hot-toast';
 import TableLoader from '../../ui/Loader/TableLoader/TableLoader';
-import html2canvas from "html2canvas"
+import { useReactToPrint } from "react-to-print"
 
 const PrintKotBillModal = ({kotId, children}) => {
   const [open, setOpen] = useState(false);
@@ -23,19 +23,11 @@ const PrintKotBillModal = ({kotId, children}) => {
   const dispatch = useDispatch();
 
   const invoiceRef = useRef();
-  const handleBillPrint =async () => {
-      if (invoiceRef.current) {
-          const canvas = await html2canvas(invoiceRef.current);
-          const imgData = canvas.toDataURL('image/png');
-          const link = document.createElement('a');
-          link.href = imgData;
-          link.download = `invoiceNo-${invoice?.invoiceNo}-details.png`;
-      
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
-  }
+  const handleBillPrint = 
+      useReactToPrint({
+        content:()=>invoiceRef.current,
+      })
+  
 
   useEffect(()=>{
     if(invoiceMessage){
@@ -103,7 +95,7 @@ const PrintKotBillModal = ({kotId, children}) => {
                     <td>Rs. {invoice?.totalPayment + invoice?.discount - invoice?.packingFee - invoice?.deliveryCharges}</td>
                 </tr>
                 <tr>
-                    <td><strong>Discount({((invoice?.discount * 100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges)).toFixed(0)}%):</strong></td>
+                    <td><strong>Discount({((invoice?.discount * 100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges + invoice?.discount)).toFixed(0)}%):</strong></td>
                     <td>Rs. {invoice?.discount}</td>
                 </tr>
                 <tr>
@@ -213,7 +205,10 @@ function PaidBillModal({invoice,children}) {
 
 function EditChargeModal({invoice,style,children}) {
   const [discount, setDiscount] = useState(invoice?.discount);
-  const [discountPercentage, setDiscountPercentage] = useState((discount*100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges + invoice?.discount));
+  const [discountPercentage, setDiscountPercentage] = useState(() => {
+    const totalAfterCharges = invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges + invoice?.discount;
+    return totalAfterCharges ? (discount * 100) / totalAfterCharges : 0;
+  });
   const [deliveryCharges, setDeliveryCharges] = useState(invoice?.deliveryCharges);
   const [packingFee, setPackingFee] = useState(invoice?.packingFee);
   const [open, setOpen] = useState(false);
@@ -238,7 +233,7 @@ function EditChargeModal({invoice,style,children}) {
 
   
   useEffect(()=>{
-    setDiscount((discountPercentage*(invoice.totalPayment - invoice.packingFee - invoice.deliveryCharges + invoice.discount))/100)
+    setDiscount((discountPercentage*(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges + invoice?.discount))/100)
   },[discountPercentage,invoice])
 
 

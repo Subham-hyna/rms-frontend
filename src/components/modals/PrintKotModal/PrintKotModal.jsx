@@ -1,7 +1,7 @@
 import { Modal, Tooltip } from '@mui/material';
 import './PrintKotModal.css';
 import React, { useRef, useState } from 'react';
-import html2canvas from "html2canvas"
+import { useReactToPrint } from "react-to-print"
 
 const PrintKotModal = ({ children, kot }) => {
   const [open, setOpen] = useState(false);
@@ -9,19 +9,10 @@ const PrintKotModal = ({ children, kot }) => {
   const handleClose = () => setOpen(false);
 
   const invoiceRef = useRef();
-  const handleKotPrint =async () => {
-      if (invoiceRef.current) {
-          const canvas = await html2canvas(invoiceRef.current);
-          const imgData = canvas.toDataURL('image/png');
-          const link = document.createElement('a');
-          link.href = imgData;
-          link.download = `Token No-${kot?.tokenNo}-details.png`;
-      
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
-  }
+  const handleKotPrint = 
+  useReactToPrint({
+    content:()=>invoiceRef.current,
+  })
 
   return (
     <>
