@@ -31,6 +31,5 @@ const store = configureStore({
   
 export default store;
   
-export const server = "https://rms-server-1.onrender.com/api/v1";
-// export const server = "http://127.0.0.1:8000/api/v1";
-
+// export const server = "https://rms-server-1.onrender.com/api/v1";
+export const server = "http://127.0.0.1:8000/api/v1";

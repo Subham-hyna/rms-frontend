@@ -25,7 +25,7 @@ const PrintKotBillModal = ({kotId, children}) => {
   const invoiceRef = useRef();
   const handleBillPrint = 
       useReactToPrint({
-        contentRef: invoiceRef
+         contentRef: invoiceRef
       })
   
 
@@ -58,7 +58,7 @@ const PrintKotBillModal = ({kotId, children}) => {
         <h1>{shop?.name}</h1>
         <p>{shop.address.line1}, {shop.address.line2}, {shop.address.pincode}, {shop.address.state}</p>
         <p>Phone: {shop?.phoneNo}</p>
-        <p>GSTIN: {shop?.gstIn}</p>
+        <p>{shop?.gstIn !== undefined && "GSTIN:"} {shop?.gstIn}</p>
     </div>
 
     <div class="modal-print-bill-middle">
