@@ -27,7 +27,7 @@ const PrintTableBillModal = ({table, children, className, style}) => {
     const invoiceRef = useRef();
     const handleBillPrint = 
     useReactToPrint({
-      content:()=>invoiceRef.current,
+      contentRef: invoiceRef
     })
   
     useEffect(()=>{

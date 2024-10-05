@@ -9,9 +9,10 @@ const PrintKotModal = ({ children, kot }) => {
   const handleClose = () => setOpen(false);
 
   const invoiceRef = useRef();
+
   const handleKotPrint = 
   useReactToPrint({
-    content:()=>invoiceRef.current,
+    contentRef: invoiceRef
   })
 
   return (

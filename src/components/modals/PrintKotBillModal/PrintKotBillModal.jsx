@@ -25,7 +25,7 @@ const PrintKotBillModal = ({kotId, children}) => {
   const invoiceRef = useRef();
   const handleBillPrint = 
       useReactToPrint({
-        content:()=>invoiceRef.current,
+        contentRef: invoiceRef
       })
   
 
