@@ -59,7 +59,7 @@ const PrintTableBillModal = ({table, children, className, style}) => {
           <h1>{shop?.name}</h1>
           <p>{shop.address.line1}, {shop.address.line2}, {shop.address.pincode}, {shop.address.state}</p>
           <p>Phone: {shop?.phoneNo}</p>
-          <p>{shop?.gstIn !== undefined && "GSTIN:"} {shop?.gstIn}</p>
+        <p>{shop?.gstIn !== "undefined" && "GSTIN:"} {shop?.gstIn !== "undefined" && shop?.gstIn}</p>
       </div>
   
       <div class="modal-print-bill-middle">
