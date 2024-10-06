@@ -6,6 +6,7 @@ import ToggleMode from '../ToogleMode/ToogleMode';
 import { Tooltip } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRequestedKots } from '../../../redux/actions/orderAction';
+import notificationSound from '../../../assets/notification.mp3'
 
 const Navbar = ({listOfTabs,activeTab}) => {
 
@@ -24,6 +25,15 @@ useEffect(()=>{
     return () => clearInterval(interval);
     // eslint-disable-next-line 
 },[])
+
+// eslint-disable-next-line 
+const notification = new Audio(notificationSound);
+
+useEffect(()=>{
+    if(requestedKots?.length > 0) {
+        notification.play();
+    }
+},[requestedKots?.length,notification])
 
 useEffect(()=>{
     if((shopId?.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user?._id.toString()){
