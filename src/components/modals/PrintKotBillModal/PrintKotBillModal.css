@@ -85,6 +85,12 @@
     font-size: 16px;
 }
 .modal-print-bill-items>table>thead>tr>th:nth-child(3){
+    text-align: center;
+    width: 25%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+}
+.modal-print-bill-items>table>thead>tr>th:nth-child(4){
     text-align: right;
     width: 25%;
     font-family: 'Courier New', Courier, monospace;
@@ -104,6 +110,12 @@
     font-size: 14px;
 }
 .modal-print-bill-items>table>tbody>tr>td:nth-child(3){
+    text-align: center;
+    width: 25%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+}
+.modal-print-bill-items>table>tbody>tr>td:nth-child(4){
     text-align: right;
     width: 25%;
     font-family: 'Courier New', Courier, monospace;

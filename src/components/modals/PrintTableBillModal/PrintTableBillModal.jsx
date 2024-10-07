@@ -74,7 +74,8 @@ const PrintTableBillModal = ({table, children, className, style}) => {
                   <tr>
                       <th>Item</th>
                       <th>Qty</th>
-                      <th>Price</th>
+                      <th>Rate</th>
+                      <th>Amount</th>
                   </tr>
               </thead>
               <tbody>
@@ -83,6 +84,7 @@ const PrintTableBillModal = ({table, children, className, style}) => {
                       <td>{item.name}</td>
                       <td>{item.quantity}</td>
                       <td>Rs.{item.price}</td>
+                    <td>Rs.{item.price * item.quantity}</td>
                     </tr>
                   )}
               </tbody>
@@ -243,8 +245,7 @@ const PrintTableBillModal = ({table, children, className, style}) => {
       >
         <div className='modal' style={{width:"500px"}}>
         <div className='modal-heading'>
-            <p>Print Kot</p>
-            <p>To print Kot of this Order</p>
+            <p>Add Charges</p>
         </div>
         <div className='modal-content'>
         <form onSubmit={handleAddCharges}>

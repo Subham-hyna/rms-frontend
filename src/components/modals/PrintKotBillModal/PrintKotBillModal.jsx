@@ -73,7 +73,8 @@ const PrintKotBillModal = ({kotId, children}) => {
                 <tr>
                     <th>Item</th>
                     <th>Qty</th>
-                    <th>Price</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,6 +83,7 @@ const PrintKotBillModal = ({kotId, children}) => {
                     <td>{item.name}</td>
                     <td>{item.quantity}</td>
                     <td>Rs.{item.price}</td>
+                    <td>Rs.{item.price * item.quantity}</td>
                   </tr>
                 )}
             </tbody>
@@ -246,8 +248,7 @@ function EditChargeModal({invoice,style,children}) {
       >
         <div className='modal' style={{width:"500px"}}>
         <div className='modal-heading'>
-            <p>Print Kot</p>
-            <p>To print Kot of this Order</p>
+            <p>Add Charges</p>
         </div>
         <div className='modal-content'>
         <form onSubmit={handleAddCharges}>
