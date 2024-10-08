@@ -31,6 +31,7 @@ const Order = () => {
   const [categoryId, setCategoryId] = useState("")  
   const [mealType, setMealType] = useState("");
   const [searchBoxValue, setSearchBoxValue] = useState("");
+  const [specialRequest, setSpecialRequest] = useState("");
   // eslint-disable-next-line
   const [isStar, setIsStar] = useState("")
   
@@ -342,8 +343,13 @@ useEffect(()=>{
                         <pre><p>Total Payment ({itemCounter} items)</p></pre>
                         <pre><p>Rs. {paymentCounter}</p></pre>
                       </span>
+
+                    <div class="special-request">
+                       <label>Special Request:</label>
+                       <textarea value={specialRequest} onChange={(e)=>setSpecialRequest(e.target.value)} rows="4" placeholder="Any preferences? (e.g., extra spicy, no onions)"></textarea>
+                     </div>
                       <div className='payment-btn'>
-                          <PlaceOrderModal cartItems={cartItems} orderTableNo={orderTableNo} paymentCounter={paymentCounter} itemCounter={itemCounter} kotType={selectedOrderType} shopId={shop._id} orderPlaced={handleOrderPlaced} shopName={shop.name} >Proceed</PlaceOrderModal>
+                          <PlaceOrderModal cartItems={cartItems} orderTableNo={orderTableNo} paymentCounter={paymentCounter} itemCounter={itemCounter} kotType={selectedOrderType} shopId={shop._id} orderPlaced={handleOrderPlaced} shopName={shop.name} specialRequest={specialRequest} >Proceed</PlaceOrderModal>
                           <button>PRINT</button>
                       </div>
               </div>}
