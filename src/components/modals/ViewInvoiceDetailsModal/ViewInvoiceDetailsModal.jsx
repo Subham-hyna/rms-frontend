@@ -48,7 +48,7 @@ const ViewInvoiceDetailsModal = ({invoice, children}) => {
         <h1>{shop?.name}</h1>
         <p>{shop.address.line1}, {shop.address.line2}, {shop.address.pincode}, {shop.address.state}</p>
         <p>Phone: {shop?.phoneNo}</p>
-        <p>GSTIN: {shop?.gstIn}</p>
+        <p>{shop?.gstIn !== "undefined" && "GSTIN:"} {shop?.gstIn !== "undefined" && shop?.gstIn}</p>
     </div>
 
     <div class="modal-print-bill-middle">
@@ -63,7 +63,8 @@ const ViewInvoiceDetailsModal = ({invoice, children}) => {
                 <tr>
                     <th>Item</th>
                     <th>Qty</th>
-                    <th>Price</th>
+                      <th>Rate</th>
+                      <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -71,7 +72,8 @@ const ViewInvoiceDetailsModal = ({invoice, children}) => {
                   <tr key={i}>
                     <td>{item.name}</td>
                     <td>{item.quantity}</td>
-                    <td>Rs.{item.price}</td>
+                      <td>Rs.{item.price}</td>
+                    <td>Rs.{item.price * item.quantity}</td>
                   </tr>
                 )}
             </tbody>
