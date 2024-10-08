@@ -71,7 +71,7 @@ const PrintKotBillModal = ({kotId, children}) => {
         <table>
             <thead>
                 <tr>
-                    <th>Item</th>
+                    <th>Items</th>
                     <th>Qty</th>
                     <th>Rate</th>
                     <th>Amount</th>

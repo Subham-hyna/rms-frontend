@@ -72,7 +72,7 @@ const PrintTableBillModal = ({table, children, className, style}) => {
           <table>
               <thead>
                   <tr>
-                      <th>Item</th>
+                      <th>Items</th>
                       <th>Qty</th>
                       <th>Rate</th>
                       <th>Amount</th>

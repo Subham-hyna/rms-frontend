@@ -40,6 +40,7 @@
 .modal-print-kot-middle>p{
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
 }
 .modal-print-kot-order-items{
     display: flex;
@@ -69,6 +70,7 @@
 .modal-print-kot-order-items>span>p{
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
 }
 
 .modal-print-kot-order-footer{
@@ -81,6 +83,7 @@
 .modal-print-kot-order-footer>p{
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
 }
 
 .special-request{
@@ -92,4 +95,5 @@
 .special-request>p{
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
 }
