@@ -49,19 +49,6 @@ const Order = () => {
 
   const { shopId, shopName } = useParams();
 
-// const [showItems, setShowItems] = useState([items && items]);
-
-// const kot = [
-//   {tokenNo: "#3241AE",
-//   orderValue: "1234",
-//   isexpire: "false",
-//   status enum
-//  ItemsId [array] fk
-//    tableId objectId fk
-//  shopId ObjectId fk
-//  specialRequest string}
-// ]
-
 const handleNewOrder = () => {
   setNewOrder(true);
   setCartItems([]);
@@ -221,7 +208,7 @@ useEffect(()=>{
     dispatch(getTables("",shop._id))
   }
   if(orderTableNo !== ""){
-    dispatch(getItems(searchBoxValue,shop._id,mealType,true,"",categoryId))
+    dispatch(getItems(searchBoxValue,shop._id,mealType,true,isStar,categoryId))
   }
   
 },[shop,newOrder,dispatch,categoryId,mealType,orderTableNo,searchBoxValue,isStar])
