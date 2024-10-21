@@ -12,6 +12,7 @@ const AddItemModal = ({buttonIcon,buttonText}) => {
   const [categoryId, setCategoryId] = useState("");
   const [price, setPrice] = useState("");
   const [mealType, setMealType] = useState("");
+  const [priority, setPriority] = useState("");
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -36,6 +37,7 @@ const submitHandler = (e) => {
   formData.append("price",price.trim())
   formData.append("categoryId",categoryId.trim())
   formData.append("mealType",mealType.trim())
+  formData.append("priority",priority)
 
   dispatch(addItem(formData,shop._id));
 
@@ -43,6 +45,7 @@ const submitHandler = (e) => {
   setPrice("");
   setCategoryId("");
   setMealType("");
+  setPriority("");
 }
 
 useEffect(()=>{
@@ -91,6 +94,10 @@ useEffect(()=>{
                         <option key={index} value={b} >{b}</option>
                         ))}
                     </select>
+                </div>
+                <div>
+                    <p>Priority</p>
+                    <input type="number" onChange={(e)=>(setPriority(e.target.value)) } value={priority} />
                 </div>
                 <button type='submit' className='success-button'>{itemLoading ? <div className='loader'></div> :"ADD"}</button>
             </form>

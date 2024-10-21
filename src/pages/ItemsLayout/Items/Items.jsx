@@ -75,6 +75,7 @@ const Items = () => {
   })
 
 const resetHandler = () => {
+  dispatch(getItems("",shop._id,"","","",""))
   setSearchValue("");
   setActiveTab("ALL")
   setMealType("")

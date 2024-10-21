@@ -13,6 +13,8 @@ const EditItemDetailsModal = ({item,children}) => {
     const [isStar, setIsStar] = useState(item && item.isStar);
     const [isAvailable, setIsAvailable] = useState(item && item.isAvailable);
     const [shortCode, setShortCode] = useState(item && (item.shortCode || ""))
+        // eslint-disable-next-line
+    const [priority, setPriority] = useState(item && item.priority || 0);
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -39,6 +41,7 @@ const submitHandler = (e) => {
     if(shortCode !== ""){
         formData.append("shortCode",shortCode.toUpperCase())
     }
+    formData.append("priority",priority)
 
     dispatch(editItem(formData,item._id,shop._id));
     dispatch(editItemCategory(categoryId,item._id,shop._id));
@@ -97,6 +100,10 @@ const submitHandler = (e) => {
                         <option value="true" >Available</option>
                         <option value="false" >Not Available</option>
                     </select>
+                </div>
+                <div>
+                    <p>Priority</p>
+                    <input type="number" onChange={(e)=>(setPriority(e.target.value)) } value={priority} />
                 </div>
                 <button type='submit' className='success-button'>{itemLoading?<span className='loader'></span>:"Update"}</button>
             </form>
