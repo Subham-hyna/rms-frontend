@@ -94,7 +94,7 @@ const Sidecar = () => {
           <Tooltip title="Invoices">
           <Link to={`/invoices/invoice/${shop.name}/${shop._id}`} className={activeTab === "invoices" ? "sidecar-active-tab" : ""} onClick={()=>{setActiveTab("invoices")}}>
             <ReceiptIcon />
-            <h2 style={hideSidebar?{display:"none"}:{}} >Invoives</h2>
+            <h2 style={hideSidebar?{display:"none"}:{}} >Invoices</h2>
           </Link>
           </Tooltip>
           {/* <Tooltip title="Reports">
