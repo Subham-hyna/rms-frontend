@@ -1,0 +1,65 @@
+.invoice-summary-btn{
+    font-size: 14px;
+    padding: 5px 15px !important;
+    color: var(--darkgrey);
+    background-color: var(--white);
+}
+
+.invoice-summary-btn:hover{
+    background-color: var(--violet);
+    color: var(--lightViolet);
+}
+
+.invoice-summary {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.invoice-summary>h2{
+    font-size: 30px;
+    color: var(--darkgrey2);
+}
+
+.invoice-summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.invoice-summary-item:last-child {
+    border-bottom: none;
+}
+
+.invoice-summary-total {
+    font-weight: bold;
+    color: var(--green);
+}
+
+.invoice-summary-payment-mode {
+    margin-top: 20px;
+    border-top: 2px solid var(--green);
+    padding-top: 20px;
+}
+
+.invoice-summary-payment-mode>h2{
+    font-size: 25px;
+    color: var(--darkgrey2);
+}
+
+.invoice-summary-payment-subheading {
+    font-weight: bold;
+    margin: 10px 0;
+    color: var(--violet);
+}
+
+.invoice-summary-payment-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.invoice-summary-payment-item:last-child {
+    border-bottom: none;
+}

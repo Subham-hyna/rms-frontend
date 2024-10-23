@@ -1,4 +1,4 @@
-import { allInvoicesFail, allInvoicesLoading, allInvoicesSuccess, clearError, clearMessage, generateInvoiceFail, generateInvoiceLoading, generateInvoiceSuccess, paidInvoiceFail, paidInvoiceLoading, paidInvoiceSuccess, singleInvoiceFail, singleInvoiceRequest, singleInvoiceSuccess, updateInvoiceFail, updateInvoiceLoading, updateInvoiceSuccess } from "../reducers/invoiceReducer";
+import { allInvoicesFail, allInvoicesLoading, allInvoicesSuccess, clearError, clearMessage, generateInvoiceFail, generateInvoiceLoading, generateInvoiceSuccess, invoiceSummaryFail, invoiceSummaryLoading, invoiceSummarySuccess, paidInvoiceFail, paidInvoiceLoading, paidInvoiceSuccess, singleInvoiceFail, singleInvoiceRequest, singleInvoiceSuccess, updateInvoiceFail, updateInvoiceLoading, updateInvoiceSuccess } from "../reducers/invoiceReducer";
 import { server } from "../store";
 import axios from "axios";
 
@@ -95,7 +95,7 @@ export const addCharges = (invoiceId,deliveryCharges,packingFee,discount,shopId)
 };
 
 // Get All Invoices
-export const getInvoices = (q = "",shopId,currentPage=1,paymentMode="") => async (dispatch) => {
+export const getInvoices = (q = "",shopId,currentPage=1,paymentMode="",startDate="",endDate="") => async (dispatch) => {
   try {
     dispatch(allInvoicesLoading());
 
@@ -107,10 +107,10 @@ export const getInvoices = (q = "",shopId,currentPage=1,paymentMode="") => async
     withCredentials: true
     }
 
-    let link = `${server}/invoices/get-invoices/${shopId}?q=${q}&page=${currentPage}`;
+    let link = `${server}/invoices/get-invoices/${shopId}?q=${q}&page=${currentPage}&startDate=${startDate}&endDate=${endDate}`;
 
     if(paymentMode !==""){
-      link = `${server}/invoices/get-invoices/${shopId}?q=${q}&page=${currentPage}&paymentMode=${paymentMode}`;
+      link = `${server}/invoices/get-invoices/${shopId}?q=${q}&page=${currentPage}&paymentMode=${paymentMode}&startDate=${startDate}&endDate=${endDate}`;
     }
 
     const { data } = await axios.get(link,config);
@@ -133,6 +133,29 @@ export const getSingleInvoice = (invoiceId) => async (dispatch) => {
     dispatch(singleInvoiceSuccess(data));
   } catch (error) {
     dispatch(singleInvoiceFail(error.response.data.message));
+  }
+};
+
+// Get Invoice Summary
+export const getInvoiceSummary = (shopId,startDate,endDate) => async (dispatch) => {
+  try {
+    dispatch(invoiceSummaryLoading());
+
+    let token = localStorage.getItem("Access-Token");
+    
+    const config = { headers: { 
+      'Authorization': `Bearer ${token}` 
+    },
+    withCredentials: true
+  }
+
+    let link = `${server}/invoices/get-invoiceSummary/${startDate}/${endDate}/${shopId}`;
+
+    const { data } = await axios.get(link,config);
+
+    dispatch(invoiceSummarySuccess(data));
+  } catch (error) {
+    dispatch(invoiceSummaryFail(error.response.data.message));
   }
 };
 

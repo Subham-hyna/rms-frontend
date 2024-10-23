@@ -62,6 +62,17 @@ const invoiceSlice = createSlice({
         state.invoiceLoading = false;
         state.invoiceError = action.payload
        },
+       invoiceSummaryLoading(state,action){
+        state.invoiceLoading = true;
+       },
+       invoiceSummarySuccess(state,action){
+        state.invoiceLoading = false;
+        state.invoiceSummary = action.payload.data.invoiceSummary;
+       },
+       invoiceSummaryFail(state,action){
+        state.invoiceLoading = false;
+        state.invoiceError = action.payload
+       },
         clearError(state,action){
             state.invoiceError = null;
         },
@@ -89,6 +100,9 @@ export const {
     updateInvoiceFail,
     updateInvoiceLoading,
     updateInvoiceSuccess,
+    invoiceSummaryLoading,
+    invoiceSummarySuccess,
+    invoiceSummaryFail,
     clearError, 
     clearMessage 
 } = invoiceSlice.actions;

@@ -81,6 +81,47 @@
     color: var(--lightwhite);
 }
 
+.right-page-middle-category-custom-dates{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px !important;
+}
+
+.right-page-middle-category-custom-dates>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.right-page-middle-category-custom-dates>div>p{
+    font-size: 16px;
+    color: var(--lightgrey3);
+}
+
+.right-page-middle-category-custom-dates>div>input{
+    width: 100%;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--lightgrey2);
+    outline: none;
+    color: var(--lightgrey3);
+}
+
+.right-page-middle-category-custom-dates>button{
+    background-color: var(--violet);
+    color: var(--lightViolet);
+    border: 1px solid var(--violet);
+    padding: 5px 16px;
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 .right-page-content{
     display: flex;
     flex-direction: column;
