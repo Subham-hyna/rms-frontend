@@ -16,8 +16,6 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
             dispatch(getInvoiceSummary(shop._id,shop.createdAt,tomorrow))
         }
         else{
-            console.log(startDate)
-            console.log(endDate)
             dispatch(getInvoiceSummary(shop._id,startDate,endDate))
         }
     };
@@ -57,18 +55,18 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
             <h2>Total Summary</h2>
             <div className="invoice-summary-item">
                 <span>Total Payment:</span>
-                {invoiceSummary && <span className="invoice-summary-total">&#8377; {invoiceSummary.totalAmount}</span>}
+                {invoiceSummary && invoiceSummary.totalAmount && <span className="invoice-summary-total">&#8377; {invoiceSummary.totalAmount}</span>}
             </div>
             <div className="invoice-summary-item">
                 <span>Total Invoices:</span>
-                {invoiceSummary && <span className="invoice-summary-total">{invoiceSummary.totalInvoice}</span>}
+                {invoiceSummary && invoiceSummary.totalInvoice && <span className="invoice-summary-total">{invoiceSummary.totalInvoice}</span>}
             </div>
         </div>
 
         <div className="invoice-summary-payment-mode">
             <h2>Summary of Payment Modes</h2>
 
-            {invoiceSummary && invoiceSummary.paymentMode.map((mode)=>(
+            {invoiceSummary && invoiceSummary.paymentMode && invoiceSummary.paymentMode.map((mode)=>(
                 <>
                     <div className="invoice-summary-payment-subheading">{mode.paymentMode}</div>
                 <div className="invoice-summary-payment-item">

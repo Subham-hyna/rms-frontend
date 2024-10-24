@@ -64,6 +64,7 @@ const invoiceSlice = createSlice({
        },
        invoiceSummaryLoading(state,action){
         state.invoiceLoading = true;
+        state.invoiceSummary = {};
        },
        invoiceSummarySuccess(state,action){
         state.invoiceLoading = false;
