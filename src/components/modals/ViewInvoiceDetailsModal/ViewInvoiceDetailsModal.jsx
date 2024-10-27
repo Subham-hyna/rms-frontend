@@ -86,18 +86,18 @@ const ViewInvoiceDetailsModal = ({invoice, children}) => {
                     <td><strong>Subtotal:</strong></td>
                     <td>Rs. {invoice?.totalPayment + invoice?.discount - invoice?.packingFee - invoice?.deliveryCharges}</td>
                 </tr>
-                <tr>
-                <td><strong>Discount({((invoice?.discount * 100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges)).toFixed(0)}%):</strong></td>
+                {invoice && invoice?.discount > 0 && <tr>
+                <td><strong>Discount({((invoice?.discount * 100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges + invoice?.discount)).toFixed(0)}%):</strong></td>
                     <td>Rs. {invoice?.discount}</td>
-                </tr>
-                <tr>
+                </tr>}
+                {invoice && invoice?.packingFee > 0 && <tr>
                     <td><strong>Packing Fee:</strong></td>
                     <td>Rs. {invoice?.packingFee}</td>
-                </tr>
-                <tr>
+                </tr>}
+                {invoice && invoice?.deliveryCharges > 0 && <tr>
                     <td><strong>Delivery Fee:</strong></td>
                     <td>Rs. {invoice?.deliveryCharges}</td>
-                </tr>
+                </tr>}
             </tbody>
         </table>
     </div>

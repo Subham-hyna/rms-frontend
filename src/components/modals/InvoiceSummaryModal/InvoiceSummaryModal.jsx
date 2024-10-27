@@ -25,6 +25,22 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
     const { invoiceLoading, invoiceSummary, invoiceMessage } = useSelector(state=>state.invoice)
     const dispatch = useDispatch();
 
+
+    const formatIndianNumber = (number) => {
+        const numStr = number.toString();
+        const [integerPart, decimalPart] = numStr.split(".");
+        const lastThree = integerPart.slice(-3);
+        const otherNumbers = integerPart.slice(0, -3);
+        const formattedIntegerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherNumbers ? "," : "") + lastThree;
+        return decimalPart ? `${formattedIntegerPart}.${decimalPart}` : formattedIntegerPart;
+    }
+
+    const convertUTCToISTDateOnly = (utcDateStr) => {
+        const date = new Date(utcDateStr);
+        const options = { timeZone: "Asia/Kolkata", year: "numeric", month: "2-digit", day: "2-digit" };
+        return new Intl.DateTimeFormat("en-IN", options).format(date);
+    }
+
     useEffect(()=>{
         if(invoiceMessage){
           dispatch(clearMessages());
@@ -43,7 +59,7 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
         <div className='modal' style={{width:"500px"}}>
         <div className='modal-heading'>
             <p style={{fontSize:"30px", fontWeight:"600"}}>Invoice Summary</p>
-            {(startDate && endDate) ? <p style={{fontSize:"16px"}}>From {startDate} to {endDate}</p> : <p style={{fontSize:"16px"}}>All Invoices</p>}
+            {(startDate && endDate) ? <p style={{fontSize:"16px"}}>From {convertUTCToISTDateOnly(startDate)} to {convertUTCToISTDateOnly(endDate)}</p> : <p style={{fontSize:"16px"}}>All Invoices</p>}
         </div>
         <div className='modal-content' style={{alignItems:"normal"}}>
         {invoiceLoading ? 
@@ -55,7 +71,7 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
             <h2>Total Summary</h2>
             <div className="invoice-summary-item">
                 <span>Total Payment:</span>
-                {invoiceSummary && invoiceSummary.totalAmount && <span className="invoice-summary-total">&#8377; {invoiceSummary.totalAmount}</span>}
+                {invoiceSummary && invoiceSummary.totalAmount && <span className="invoice-summary-total">&#8377; {formatIndianNumber(invoiceSummary.totalAmount)}</span>}
             </div>
             <div className="invoice-summary-item">
                 <span>Total Invoices:</span>
@@ -71,7 +87,7 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
                     <div className="invoice-summary-payment-subheading">{mode.paymentMode}</div>
                 <div className="invoice-summary-payment-item">
                     <span>Total Amount:</span>
-                    <span className="invoice-summary-total">&#8377; {mode.totalPaymentSum}</span>
+                    <span className="invoice-summary-total">&#8377; {formatIndianNumber(mode.totalPaymentSum)}</span>
                 </div>
                 <div className="invoice-summary-payment-item">
                     <span>Total Invoices:</span>

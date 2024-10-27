@@ -25,6 +25,9 @@ const Invoice = () => {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
 
+    const [viewStartDate, setViewStartDate] = useState();
+    const [viewEndDate, setViewEndDate] = useState();
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
   
@@ -59,35 +62,49 @@ const Invoice = () => {
 
     const dateRangeSorting = (tab) => {
       setActiveTab(tab)
-      const now = new Date();
 
-      function setEndOfDay(date) {
-          return new Date(date.setUTCHours(23, 59, 59, 999)); // Set to UTC end of day
-      }
+function formatToUTC(date) {
+  return date.toISOString();
+}
 
-      function formatToUTC(date) {
-        return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().split('T')[0];
-      }
+// Helper function to format date to UTC with time set to 18:30:00
+function setTimeToUTC1830(date) {
+  date.setUTCHours(18, 30, 0, 0); // Set time to 18:30:00 UTC
+  return date;
+}
 
-      const startOfToday = new Date(now.setUTCHours(0, 0, 0, 0)); // UTC start of today
-      const endOfToday = setEndOfDay(new Date()); // UTC end of today
+// Helper function to get the start of the day in UTC based on IST
+function setStartOfDayUTC(date) {
+  const localDate = new Date(date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  localDate.setDate(localDate.getDate() - 1); // Move one day back
+  return setTimeToUTC1830(localDate);
+}
 
-      const startOfYesterday = new Date(now.setUTCDate(now.getUTCDate() - 1));
-      startOfYesterday.setUTCHours(0, 0, 0, 0);
-      const endOfYesterday = setEndOfDay(new Date(startOfYesterday));
+// Helper function to get the end of the day in UTC based on IST
+function setEndOfDayUTC(date) {
+  const localDate = new Date(date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  return setTimeToUTC1830(localDate);
+}
 
-      const startOfLast7Days = new Date(now.setUTCDate(now.getUTCDate() - 6));
-      startOfLast7Days.setUTCHours(0, 0, 0, 0);
-      const endOfLast7Days = setEndOfDay(new Date());
+// Main Code
+const now = new Date();
 
-      const startOfLast30Days = new Date(now.setUTCDate(now.getUTCDate() - 29));
-      startOfLast30Days.setUTCHours(0, 0, 0, 0);
-      const endOfLast30Days = setEndOfDay(new Date());
+const startOfToday = setStartOfDayUTC(new Date(now)); // Start of today in UTC based on IST
+const endOfToday = setEndOfDayUTC(new Date()); // End of today in UTC based on IST
 
-      const startOfLastYear = new Date(now.getUTCFullYear() - 1, 0, 1);
-      startOfLastYear.setUTCHours(0, 0, 0, 0);
-      const endOfLastYear = setEndOfDay(new Date(now.getUTCFullYear() - 1, 11, 31));
+const startOfYesterday = setStartOfDayUTC(new Date(now.setDate(now.getDate() - 1)));
+const endOfYesterday = startOfToday 
 
+const startOfLast7Days = setStartOfDayUTC(new Date(now.setDate(now.getDate() - 6)));
+const endOfLast7Days = setEndOfDayUTC(new Date());
+
+const startOfLast30Days = setStartOfDayUTC(new Date(now.setDate(now.getDate() - 29)));
+const endOfLast30Days = setEndOfDayUTC(new Date());
+
+const startOfLastYear = setStartOfDayUTC(new Date(now.getFullYear() - 1, 0, 1));
+const endOfLastYear = setEndOfDayUTC(new Date(now.getFullYear() - 1, 11, 31));
+
+setPage(1)
 
       if(tab === "today"){
         setStartDate(formatToUTC(startOfToday));
@@ -95,8 +112,7 @@ const Invoice = () => {
       }
 
       if(tab === "all"){
-        setStartDate("");
-        setEndDate("");
+        resetHandler();
       }
 
       if(tab === "yesterday"){
@@ -122,17 +138,51 @@ const Invoice = () => {
     }
 
     const customDates = () => {
-      if(!startDate || !endDate){
+      if(!viewStartDate || !viewEndDate){
         return toast.error("Invalid Dates")
       }
-      if(startDate >= endDate){
+      if(viewStartDate >= viewEndDate){
         return toast.error("Invalid Dates")
       }
-      dispatch(getInvoices(q,shopId,page,paymentMode,startDate,endDate));
+
+      function formatDateToUTC(date) {
+        return date.toISOString().slice(0, 19) + 'Z'; 
+    }
+
+    setPage(1);
+    
+    
+    const startDateObj = new Date(viewStartDate); 
+    const endDateObj = new Date(viewEndDate);     
+    
+    startDateObj.setUTCDate(startDateObj.getUTCDate() - 1); 
+    startDateObj.setUTCHours(18, 30, 0, 0); 
+    
+    
+    endDateObj.setUTCDate(endDateObj.getUTCDate() - 1);
+    endDateObj.setUTCHours(18, 30, 0, 0); 
+    
+    const formattedStartDate = formatDateToUTC(startDateObj); 
+    const formattedEndDate = formatDateToUTC(endDateObj);     
+    
+    setStartDate(formattedStartDate);
+    setEndDate(formattedEndDate);
+      dispatch(getInvoices(q,shopId,page,paymentMode, formattedStartDate,formattedEndDate));
     }
 
     useEffect(()=>{
-      dispatch(getInvoices(q,shopId,page,paymentMode,startDate,endDate));
+      if(activeTab === "all"){
+        dispatch(getInvoices(q,shopId,page,paymentMode, "",""));
+        return;
+      }
+      else if(activeTab === "custom" && startDate === "" && endDate === ""){
+        return;
+      }
+      else{
+        dispatch(getInvoices(q,shopId,page,paymentMode, startDate,endDate));
+
+      }
+      console.log(startDate)
       // eslint-disable-next-line
     },[dispatch,q,page,shopId,invoiceMessage,invoiceError,paymentMode,activeTab]);
 
@@ -179,17 +229,17 @@ const Invoice = () => {
                                   <input
                                 type='date' 
                                 label="From"
-                                value={startDate && startDate}
-                                onChange={(e)=>setStartDate(e.target.value)}
+                                value={viewStartDate && viewStartDate}
+                                onChange={(e)=>setViewStartDate(e.target.value)}
                                 />
                                 </div>
                                 <div>
                                   <p>To</p>
                                   <input
                                 type='date' 
-                                value={endDate && endDate}
+                                value={viewEndDate && viewEndDate}
                                 label="To"
-                                onChange={(e)=>setEndDate(e.target.value)}
+                                onChange={(e)=>setViewEndDate(e.target.value)}
                                 />
                                 </div>
                                 <button onClick={customDates}>Search</button>
@@ -220,8 +270,8 @@ const Invoice = () => {
                     <Tooltip title="Refresh"><RefreshIcon onClick={resetHandler} /></Tooltip>
                 </div>
             </div>
-            {(searchValue || paymentMode) && <div className='showing-result'>
-                        <p>Showing Result for : Invoices {paymentMode.length !== 0 &&  ` in ${paymentMode} payment mode ${searchValue} for ${startDate} to ${endDate}`}</p>
+            {(searchValue || paymentMode || startDate || endDate) && <div className='showing-result'>
+                        <p>Showing Result for : Invoices {paymentMode.length !== 0 &&  ` in ${paymentMode} payment mode ${searchValue} from ${startDate.toISOString()} to ${endDate}`}</p>
                       </div>}
             {invoiceLoading ?
               <TableLoader column={6} />
