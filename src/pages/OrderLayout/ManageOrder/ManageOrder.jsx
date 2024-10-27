@@ -6,7 +6,7 @@ import { Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, confirmOrder, deleteOrder, deleteOrderItem, getKots, rejectOrder } from '../../../redux/actions/orderAction';
-import { clearMessages as invoiceAction }  from '../../../redux/actions/invoiceActioncustomerAction'
+import { clearMessages as invoiceAction }  from '../../../redux/actions/invoiceAction'
 import { clearMessages as customerAction }  from '../../../redux/actions/customerAction'
 import toast from 'react-hot-toast';
 import ConfirmOrderModal from '../../../components/modals/ConfirmOrderModal/ConfirmOrderModal';
