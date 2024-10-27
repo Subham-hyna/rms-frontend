@@ -6,6 +6,8 @@ import { Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, clearMessages, confirmOrder, deleteOrder, deleteOrderItem, getKots, rejectOrder } from '../../../redux/actions/orderAction';
+import { clearMessages as invoiceAction }  from '../../../redux/actions/customerAction'
+import { clearMessages as customerAction }  from '../../../redux/actions/inventoryAction'
 import toast from 'react-hot-toast';
 import ConfirmOrderModal from '../../../components/modals/ConfirmOrderModal/ConfirmOrderModal';
 import PrintKotModal from '../../../components/modals/PrintKotModal/PrintKotModal';
@@ -16,6 +18,7 @@ import ConfirmationModal from '../../../components/modals/ConfirmationModal/Conf
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditOrderItemsModal from '../../../components/modals/EditOrderItemsModal/EditOrderItemsModal';
+import EditCustomerDetailsModal from '../../../components/modals/EditCustomerDetailsModal/EditCustomerDetailsModal';
 
 const ManageOrder = () => {
   // eslint-disable-next-line
@@ -26,6 +29,7 @@ const ManageOrder = () => {
   const { shop } = useSelector(state=>state.shop)
   const { invoiceMessage } = useSelector(state=>state.invoice)
   const { user } = useSelector(state=>state.user)
+  const { customerMessage } = useSelector(state=>state.customer)
 
   const { shopName ,shopId, q } = useParams();
   const dispatch = useDispatch();
@@ -84,7 +88,7 @@ const ManageOrder = () => {
       else if( activeTab === "DELIVERY"){
         dispatch(getKots(q,"","DELIVERY",shop._id))
       }
-    },[dispatch,q,activeTab,orderError,orderMessage,shop,invoiceMessage])
+    },[dispatch,q,activeTab,orderError,orderMessage,shop,invoiceMessage,customerMessage])
 
 useEffect(()=>{
   if((shopId.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user._id.toString()){
@@ -103,10 +107,14 @@ useEffect(()=>{
   }
   if(invoiceMessage){
     toast.success(invoiceMessage)
-    dispatch(clearMessages());
+    dispatch(invoiceAction());
+  }        
+  if(customerMessage){
+    toast.success(customerMessage);
+    dispatch(customerAction());
   }
   
-},[dispatch,orderError,orderMessage,invoiceMessage])
+},[dispatch,orderError,orderMessage,invoiceMessage,customerMessage])
 
   return (
     <main>
@@ -152,7 +160,7 @@ useEffect(()=>{
                                 <span className='kot-header-name'>
                                   <h1>Order #{k.tokenNo}</h1>
                                   <h4>{k.kotType === "DINEIN" ? `Dine in / Table No. ${k.tableId?.name}` : k.kotType}</h4>
-                                  {(k?.customerId?.name || k?.customerId?.phoneNo)  && <h5>{k.customerId?.name} {k.customerId?.phoneNo}</h5>}
+                                  {(k?.customerId?.name || k?.customerId?.phoneNo)  && <h5 style={{display:"flex", justifyContent:"flex-start", alignItems:"center", gap:"5px"}}>{k.customerId?.name} {k.customerId?.phoneNo}  <EditCustomerDetailsModal customer={k?.customerId}><EditIcon /></EditCustomerDetailsModal></h5>}
                                 </span>
                                 <span className='kot-header-status' style={k.status === "REQUESTED" ?{backgroundColor:"var(--orange)"}:{backgroundColor:"var(--green)"}}>
                                     {k.status}
