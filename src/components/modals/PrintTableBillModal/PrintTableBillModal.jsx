@@ -65,6 +65,7 @@ const PrintTableBillModal = ({table, children, className, style}) => {
       <div class="modal-print-bill-middle">
           <p><strong>Bill No:</strong> #{invoice?.invoiceNo}</p>
           <p><strong>Date:</strong> <span> {new Date(invoice?.createdAt).toLocaleString()}</span></p>
+          {invoice?.customerId && <p><strong>Customer Name:</strong> <span>{invoice?.customerId.name}</span></p>}
           {invoice?.customerId && <p><strong>Customer Phone:</strong> <span>{invoice?.customerId.phoneNo}</span></p>}
       </div>
   
