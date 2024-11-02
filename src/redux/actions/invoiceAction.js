@@ -114,6 +114,7 @@ export const getInvoices = (q = "",shopId,currentPage=1,paymentMode="",startDate
     }
 
     const { data } = await axios.get(link,config);
+    console.log(data)
 
     dispatch(allInvoicesSuccess(data));
   } catch (error) {
@@ -137,7 +138,7 @@ export const getSingleInvoice = (invoiceId) => async (dispatch) => {
 };
 
 // Get Invoice Summary
-export const getInvoiceSummary = (shopId,startDate,endDate) => async (dispatch) => {
+export const getInvoiceSummary = (shopId,startDate,endDate,password) => async (dispatch) => {
   try {
     dispatch(invoiceSummaryLoading());
 
@@ -151,7 +152,7 @@ export const getInvoiceSummary = (shopId,startDate,endDate) => async (dispatch) 
 
     let link = `${server}/invoices/get-invoiceSummary/${startDate}/${endDate}/${shopId}`;
 
-    const { data } = await axios.get(link,config);
+    const { data } = await axios.post(link,{password},config);
 
     dispatch(invoiceSummarySuccess(data));
   } catch (error) {

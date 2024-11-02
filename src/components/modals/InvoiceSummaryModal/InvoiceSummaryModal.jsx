@@ -7,22 +7,19 @@ import TableLoader from '../../ui/Loader/TableLoader/TableLoader';
 
 const InvoiceSummaryModal = ({startDate, endDate, children}) => {
     const [open, setOpen] = useState(false);
+    const [isAuthenticate, setIsAuthenticate] = useState(false);
+    const [password, setPassword] = useState("")
     const handleOpen = () => {
         setOpen(true)
-        if(!startDate || !endDate ){
-            const today = new Date();
-            const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1)
-            dispatch(getInvoiceSummary(shop._id,shop.createdAt,tomorrow))
-        }
-        else{
-            dispatch(getInvoiceSummary(shop._id,startDate,endDate))
-        }
     };
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setIsAuthenticate(false);
+        setPassword("");
+    };
 
     const { shop } = useSelector(state=>state.shop);
-    const { invoiceLoading, invoiceSummary, invoiceMessage } = useSelector(state=>state.invoice)
+    const { invoiceLoading, invoiceSummary, invoiceMessage, invoiceError } = useSelector(state=>state.invoice)
     const dispatch = useDispatch();
 
 
@@ -41,11 +38,33 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
         return new Intl.DateTimeFormat("en-IN", options).format(date);
     }
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+            if(!startDate || !endDate ){
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1)
+            dispatch(getInvoiceSummary(shop._id,shop.createdAt,tomorrow,password))
+        }
+        else{
+            dispatch(getInvoiceSummary(shop._id,startDate,endDate,password))
+        }
+
+        setIsAuthenticate(true);
+    }
+
     useEffect(()=>{
         if(invoiceMessage){
           dispatch(clearMessages());
+          setIsAuthenticate(true);
         }
-      },[dispatch,invoiceMessage])
+        if(invoiceError){
+            setIsAuthenticate(false);
+        }
+      },[dispatch,invoiceMessage,invoiceError])
+
+
+
 
   return (
     <>
@@ -56,6 +75,8 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
     open={open}
     onClose={handleClose}
     >
+        {isAuthenticate ? 
+        
         <div className='modal' style={{width:"500px"}}>
         <div className='modal-heading'>
             <p style={{fontSize:"30px", fontWeight:"600"}}>Invoice Summary</p>
@@ -103,6 +124,25 @@ const InvoiceSummaryModal = ({startDate, endDate, children}) => {
           </div>
         </div>
     </div>
+    :
+    
+    <div className='modal'>
+    <div className='modal-heading'>
+        <p>Enter Password</p>
+    </div>
+    <div className='modal-content'>
+        <form className='chnage-password-form' onSubmit={submitHandler}>
+            <div>
+                <p>Password</p>
+                <input type="password" onChange={(e)=>(setPassword(e.target.value))} value={password} />
+            </div>
+            <button type='submit' className='success-button'>{invoiceLoading?<span className='loader'></span>:"CONFIRM"}</button>
+        </form>
+
+        <button onClick={handleClose} className='close-button'>Close</button>
+    </div>
+</div>
+}
     </Modal>
     </>
   )
