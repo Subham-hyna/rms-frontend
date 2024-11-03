@@ -47,7 +47,7 @@ const OpenInvoice = () => {
                 <h1>{invoice?.shopId?.name}</h1>
                 <p>{invoice?.shopId?.address?.line1}, {invoice?.shopId?.address?.line2}, {invoice?.shopId?.address?.pincode}, {invoice?.shopId?.address?.state}</p>
                 <p>Phone: {invoice?.shopId?.phoneNo}</p>
-                <p>GSTIN: {invoice?.shopId?.gstIn}</p>
+                <p>{invoice?.shopId?.gstIn !== "undefined" && "GSTIN:"} {invoice?.shopId?.gstIn !== "undefined" && invoice?.shopId?.gstIn}</p>
             </div>
         
             <div class="modal-print-bill-middle">
@@ -62,7 +62,8 @@ const OpenInvoice = () => {
                         <tr>
                             <th>Item</th>
                             <th>Qty</th>
-                            <th>Price</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,12 +72,34 @@ const OpenInvoice = () => {
                             <td>{item.name}</td>
                             <td>{item.quantity}</td>
                             <td>Rs.{item.price}</td>
+                            <td>Rs.{item.price * item.quantity}</td>
                           </tr>
                         )}
                     </tbody>
                 </table>
             </div>
-        
+            <div className="modal-print-bill-summary">
+        <table>
+            <tbody>
+                <tr>
+                    <td><strong>Subtotal:</strong></td>
+                    <td>Rs. {invoice?.totalPayment + invoice?.discount - invoice?.packingFee - invoice?.deliveryCharges}</td>
+                </tr>
+                {invoice && invoice?.discount > 0 && <tr>
+                <td><strong>Discount({((invoice?.discount * 100)/(invoice?.totalPayment - invoice?.packingFee - invoice?.deliveryCharges + invoice?.discount)).toFixed(0)}%):</strong></td>
+                    <td>Rs. {invoice?.discount}</td>
+                </tr>}
+                {invoice && invoice?.packingFee > 0 && <tr>
+                    <td><strong>Packing Fee:</strong></td>
+                    <td>Rs. {invoice?.packingFee}</td>
+                </tr>}
+                {invoice && invoice?.deliveryCharges > 0 && <tr>
+                    <td><strong>Delivery Fee:</strong></td>
+                    <td>Rs. {invoice?.deliveryCharges}</td>
+                </tr>}
+            </tbody>
+        </table>
+    </div>               
             <div className="modal-print-bill-payment">
                 <span><strong>Total Amount({invoice?.totalItems} items)</strong></span>
                 <span><strong>Rs. {invoice?.totalPayment}</strong></span>
