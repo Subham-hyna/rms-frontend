@@ -7,11 +7,13 @@ import { billPaymentMode } from '../../../constanst';
 import toast from 'react-hot-toast';
 import TableLoader from '../../ui/Loader/TableLoader/TableLoader';
 import { useReactToPrint } from "react-to-print"
+import { useNavigate } from 'react-router-dom';
 
 const PrintKotBillModal = ({kotId, children}) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   const handleOnClick = () => {
     handleOpen();
@@ -102,11 +104,11 @@ const PrintKotBillModal = ({kotId, children}) => {
                     <td>Rs. {invoice?.discount}</td>
                 </tr>}
                 {invoice && invoice?.packingFee > 0 && <tr>
-                    <td><strong>Packing Fee:</strong></td>
+                    <td><strong>Packing Charge:</strong></td>
                     <td>Rs. {invoice?.packingFee}</td>
                 </tr>}
                 {invoice && invoice?.deliveryCharges > 0 && <tr>
-                    <td><strong>Delivery Fee:</strong></td>
+                    <td><strong>Delivery Charge:</strong></td>
                     <td>Rs. {invoice?.deliveryCharges}</td>
                 </tr>}
             </tbody>
@@ -126,6 +128,7 @@ const PrintKotBillModal = ({kotId, children}) => {
         <div className='modal-button-group'>
             <PaidBillModal invoice={invoice} >Paid</PaidBillModal>
             <button className='success-button' onClick={handleBillPrint} ><pre>Print Bill</pre></button>
+            <button className='success-button' onClick={()=>navigate(`/invoices/paid/${invoice._id}`)} ><pre>Send Bill</pre></button>
             <EditChargeModal invoice={invoice} style={{backgroundColor:"var(--green)"}} ><pre>Add Charges</pre></EditChargeModal>
             <button onClick={handleClose} className='close-button'>Close</button>
           </div>

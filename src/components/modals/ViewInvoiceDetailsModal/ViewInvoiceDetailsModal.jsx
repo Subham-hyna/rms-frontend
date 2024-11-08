@@ -92,11 +92,11 @@ const ViewInvoiceDetailsModal = ({invoice, children}) => {
                     <td>Rs. {invoice?.discount}</td>
                 </tr>}
                 {invoice && invoice?.packingFee > 0 && <tr>
-                    <td><strong>Packing Fee:</strong></td>
+                    <td><strong>Packing Charge:</strong></td>
                     <td>Rs. {invoice?.packingFee}</td>
                 </tr>}
                 {invoice && invoice?.deliveryCharges > 0 && <tr>
-                    <td><strong>Delivery Fee:</strong></td>
+                    <td><strong>Delivery Charge:</strong></td>
                     <td>Rs. {invoice?.deliveryCharges}</td>
                 </tr>}
             </tbody>

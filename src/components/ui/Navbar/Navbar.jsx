@@ -36,7 +36,7 @@ useEffect(()=>{
 },[requestedKots?.length,notification])
 
 useEffect(()=>{
-    if((shopId?.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user?._id.toString()){
+    if((shopId && shopId?.toString() !== shop?._id.toString()) || (shopName.toString() !==shop?.name.toString()) || shop?.ownerId.toString() !== user?._id.toString()){
         navigate("/404")
     }
   },[navigate,shopId,shopName,shop,user])
