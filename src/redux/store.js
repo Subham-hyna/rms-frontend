@@ -32,12 +32,12 @@ const store = configureStore({
 export default store;
   
 //Server 1 - Working
-// export const server = "https://rms-server-1-n6sd.onrender.com/api/v1";
+export const server = "https://rms-server-1-n6sd.onrender.com/api/v1";
 
 //Server 2 - Working
-export const server = "https://rms-server-2.onrender.com/api/v1";
+// export const server = "https://rms-server-2.onrender.com/api/v1";
 
-//Server 3
+//Server 3 - Working
 // export const server = "https://rms-server-3.onrender.com/api/v1";
 
 //Localhost - Working
